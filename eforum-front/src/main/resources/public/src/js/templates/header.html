@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/" style="font-size:50px">{{ title }}</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-left">
+				<li class="active"><a href="#/">首页</a></li>
+				<li><a href="#/about">关于</a></li>
+			</ul>
+			<form class="navbar-form navbar-right">
+				<button type="submit" class="btn btn-default" ng-click="login()">登录</button>
+				<button type="submit" class="btn btn-default" ng-click="reg()">注册</button>
+			</form>
+		</div>
+	</div>
+</nav>
