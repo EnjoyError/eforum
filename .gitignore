@@ -16,3 +16,4 @@
 /eforum-api/build
 /.gradle
 /eforum-mgt/build
+/eforum-front/src/main/resources/public/dist

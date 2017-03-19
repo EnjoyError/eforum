@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -8,7 +9,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.[hash].js'
     },
     module: {
     	loaders: [
@@ -21,7 +22,12 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'vendor.js'
+            filename: 'vendor.[hash].js'
+        }),
+        new HtmlWebpackPlugin({
+        	inject: 'head',
+        	filename: '../index.html',
+            template: 'template.html'
         })
     ]
 };

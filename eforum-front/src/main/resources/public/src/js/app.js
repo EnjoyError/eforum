@@ -1,3 +1,5 @@
+var angular = require('angular');
+require('angular-route');
 var app = angular.module('app', ['ngRoute']);
 
 app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {

@@ -2,12 +2,10 @@
 require('./css/bootstrap.css');
 require('./css/eforum.css');
 
-// 加载angular模块
-require('angular');
-require('angular-route');
-
 // 启动angular应用
 require('./js/app');
+
+require('./js/service/articleService');
 
 // 加载angular的自定义指令
 require('./js/directive/headerDirective');
