@@ -8,7 +8,7 @@ app.directive('articleItem', function() {
 		replace: true,
 		scope: {
 			title: '@',
-			content: '@',
+			description: '@',
 			url: '@'
 		},
 		link: function($scope, elm, attr, controller) {

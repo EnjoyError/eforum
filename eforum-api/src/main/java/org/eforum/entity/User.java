@@ -6,17 +6,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * 用户
+ */
 @Entity(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
+	/**
+	 * 登录账号
+	 */
 	@Column
 	private String name;
+	/**
+	 * 登录密码
+	 */
 	@Column
 	private String password;
-	
+	/**
+	 * 用户昵称
+	 */
+	@Column(name = "nick_name")
+	private String nickName;
+
 	public Long getId() {
 		return id;
 	}
@@ -39,5 +53,13 @@ public class User {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 }

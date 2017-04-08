@@ -21,7 +21,8 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 		controller: 'aboutController'
 	});
 	$routeProvider.when('/article/:id', {
-		templateUrl: 'views/article.html'
+		templateUrl: 'views/article.html',
+		controller: 'articleController'
 	});
 	$routeProvider.when('/login', {
 		templateUrl: 'views/login.html',
