@@ -8,7 +8,7 @@ module.exports = {
         vendor: ['angular', 'angular-route']
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, '..', 'public', 'dist'),
         filename: 'bundle.[hash].js'
     },
     module: {

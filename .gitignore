@@ -17,3 +17,11 @@
 /.gradle
 /eforum-mgt/build
 /eforum-front/src/main/resources/public/dist
+/.idea
+/build
+/logs
+/eforum-front/src/main/resources/webjar/node_modules
+/eforum-front/src/main/resources/public/index.html
+/eforum-mgt/eforum-mgt.iml
+/eforum-front/eforum-front.iml
+/eforum-api/eforum-api.iml
