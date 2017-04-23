@@ -1,3 +1,5 @@
+var angular = require('angular');
+require('angular-route');
 var app = angular.module('app', ['ngRoute']);
 
 app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
@@ -19,7 +21,8 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 		controller: 'aboutController'
 	});
 	$routeProvider.when('/article/:id', {
-		templateUrl: 'views/article.html'
+		templateUrl: 'views/article.html',
+		controller: 'articleController'
 	});
 	$routeProvider.when('/login', {
 		templateUrl: 'views/login.html',
