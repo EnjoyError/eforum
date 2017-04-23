@@ -8,11 +8,11 @@ app.directive('eforumHeader', function($location) {
 		replace: true,
 		link: function($scope, elm, attr, controller) {
 			$scope.title = 'eforum';
-			
+
 			$scope.login = function() {
 				$location.path('/login');
 			}
-			
+
 			$scope.reg = function() {
 				$location.path('/reg');
 			}

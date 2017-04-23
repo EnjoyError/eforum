@@ -18,8 +18,8 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: 'war'
     apply plugin: 'java'
+    apply plugin: 'war'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
     apply plugin: 'org.springframework.boot'
@@ -45,7 +45,7 @@ subprojects {
         mysqlVersion = '5.1.38'
         swagger2Version = '2.6.1'
         fastjsonVersion = '1.2.24'
-        shiroVersion = '1.3.2'
+        shiroVersion = '1.4.0-RC2'
     }
 
     [compileJava, compileTestJava]*.options.collect { options ->
@@ -71,7 +71,7 @@ subprojects {
         compile "io.springfox:springfox-swagger2:$swagger2Version"
         compile "io.springfox:springfox-swagger-ui:$swagger2Version"
         compile "com.alibaba:fastjson:$fastjsonVersion"
-        compile "org.apache.shiro:shiro-spring:$shiroVersion"
+        compile "org.apache.shiro:shiro-all:$shiroVersion"
         runtime "mysql:mysql-connector-java:$mysqlVersion"
         testCompile "junit:junit:$junitVersion"
 	}
