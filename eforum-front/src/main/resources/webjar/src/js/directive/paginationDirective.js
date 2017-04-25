@@ -1,5 +1,5 @@
 var app = require('../app');
-var tpl = require('../templates/header.html');
+var tpl = require('../templates/pagination.html');
 
 app.directive('pagination', function($location) {
 	return {

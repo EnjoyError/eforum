@@ -4,7 +4,7 @@
 	        <h3 class="panel-title">最新文章 </h3>
 	    </div>
 	    <div class="panel-body">
-    		<article-item ng-repeat="x in articleList" 
+    		<article-item ng-repeat="x in articleList"
     			title="{{x.title}}"
 				description="{{x.description}}"
 	    		url="#/article/{{x.id}}">
@@ -12,15 +12,14 @@
 	    </div>
 	</div>
 
-	<div>
+	<div ng-if="pageCount > 0">
 		<ul class="pagination">
-			<li><a ng-click="previous()">&laquo;</a></li>
-			<li class="active"><a href="#/">1</a></li>
-			<li class="disabled"><a href="#/">2</a></li>
-			<li><a href="#/">3</a></li>
-			<li><a href="#/">4</a></li>
-			<li><a href="#/">5</a></li>
-			<li><a ng-click="next()">&raquo;</a></li>
+			<li ng-class="{disabled: currPageIndex == 0}"><a ng-click="previous()">&laquo;</a></li>
+			<li ng-repeat="page in pageList"
+				ng-class="{active: isActivePage(page)}">
+				<a ng-click="selectPage(page)">{{ page }}</a>
+			</li>
+			<li ng-class="{disabled: currPageIndex == pageCount - 1}"><a ng-click="next()">&raquo;</a></li>
 		</ul>
 	</div>
 </div>
