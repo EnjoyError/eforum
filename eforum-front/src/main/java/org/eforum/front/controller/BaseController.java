@@ -3,7 +3,7 @@ package org.eforum.front.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.eforum.constant.ErrorCode;
+import org.eforum.constant.StatusCode;
 import org.eforum.exception.ServiceException;
 import org.eforum.produces.ResultJson;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ public class BaseController {
 		if (e instanceof ServiceException) {
 			result.setCode(((ServiceException)e).getCode());
 		} else {
-			result.setCode(ErrorCode.OTHER);
+			result.setCode(StatusCode.SC_INTERNAL_SERVER_ERROR);
 		}
 		return result;
 	}

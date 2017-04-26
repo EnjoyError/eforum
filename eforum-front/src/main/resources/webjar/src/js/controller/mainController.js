@@ -8,7 +8,6 @@ app.controller('mainController', function($scope, articleService) {
 	    var PAGE_SIZE = 5;
 	    var promise = articleService.listArticle(pageIndex, PAGE_SIZE);
         promise.then(function(result) {
-            debugger;
             $scope.articleList = result.data;
             $scope.pageCount = result.pageCount;
             $scope.pageList = [];

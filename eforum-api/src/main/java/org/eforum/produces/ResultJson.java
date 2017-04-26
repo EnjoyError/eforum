@@ -3,7 +3,7 @@ package org.eforum.produces;
 public class ResultJson {
 	private boolean success;
 	private String message;
-	private String code;
+	private int code;
 	
 	public ResultJson() {
 	}
@@ -13,7 +13,7 @@ public class ResultJson {
 		this.message = message;
 	}
 	
-	public ResultJson(boolean success, String message, String code) {
+	public ResultJson(boolean success, String message, int code) {
 		this.success = success;
 		this.message = message;
 		this.code = code;
@@ -35,11 +35,11 @@ public class ResultJson {
 		this.message = message;
 	}
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 }
