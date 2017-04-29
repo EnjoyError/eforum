@@ -1,20 +1,20 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) DEFAULT NULL COMMENT '用户名',
   `password` varchar(50) DEFAULT NULL COMMENT '密码',
-  `nick_name` varchar(255) DEFAULT NULL,
+  `nick_name` varchar(255) DEFAULT NULL COMMENT '用户密码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `nick_name` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL COMMENT '管理员账号',
+  `nick_name` varchar(255) DEFAULT NULL COMMENT '管理员名称',
+  `password` varchar(255) DEFAULT NULL COMMENT '管理员密码',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -25,12 +25,13 @@ INSERT INTO `eforum`.`admin` (`id`, `name`, `nick_name`, `password`) VALUES ('1'
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `content` varchar(255) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL COMMENT '文章内容',
+  `create_time` datetime DEFAULT NULL COMMENT '文章创建时间',
+  `title` varchar(255) DEFAULT NULL COMMENT '文章标题',
+  `description` varchar(255) DEFAULT NULL COMMENT '文章描述',
+  `weight` int(11) DEFAULT NULL COMMENT '权重',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `article` (`id`, `content`, `create_time`, `title`, `description`) VALUES ('1', 'Spring是一个开源框架，Spring是于2003 年兴起的一个轻量级的Java 开发框架。', '2017-03-08 23:14:13', 'spring', 'spring介绍');
 INSERT INTO `article` (`id`, `content`, `create_time`, `title`, `description`) VALUES ('2', 'Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，它将POJO与数据库表建立映射关系，是一个全自动的orm框架，hibernate可以自动生成SQL语句，自动执行，使得Java程序员可以随心所欲的使用对象编程思维来操纵数据库。', '2017-03-08 23:14:13', 'hibernate', 'hibernate介绍');

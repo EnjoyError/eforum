@@ -4,10 +4,10 @@
 	        <h3 class="panel-title">最新文章 </h3>
 	    </div>
 	    <div class="panel-body">
-    		<article-item ng-repeat="x in articleList"
-    			title="{{x.title}}"
-				description="{{x.description}}"
-	    		url="#/article/{{x.id}}">
+    		<article-item ng-repeat="article in articleList"
+    			title="{{ article.title }}"
+				description="{{ article.description }}"
+	    		url="#/article/{{ article.id }}">
 	    	</article-item>
 	    </div>
 	</div>
@@ -29,19 +29,9 @@
 		<a href="#/" class="list-group-item active">
 			<h4 class="list-group-item-heading">推荐文章</h4>
 		</a>
-		<a href="#/" class="list-group-item">
+		<a href="#/article/{{ article.id }}" class="list-group-item" ng-repeat="article in suggestionArticleList">
 			<p class="list-group-item-text">
-				测试数据
-			</p>
-		</a>
-		<a href="#/" class="list-group-item">
-			<p class="list-group-item-text">
-				测试数据
-			</p>
-		</a>
-		<a href="#/" class="list-group-item">
-			<p class="list-group-item-text">
-				测试数据
+				{{ article.title }}
 			</p>
 		</a>
 	</div>

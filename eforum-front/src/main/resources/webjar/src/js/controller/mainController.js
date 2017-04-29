@@ -4,7 +4,7 @@ app.controller('mainController', function($scope, articleService) {
     $scope.pageCount = 0;
     $scope.currPageIndex = 0;
 
-	$scope.listArticle = function(pageIndex) {
+	function listArticle(pageIndex) {
 	    var PAGE_SIZE = 5;
 	    var promise = articleService.listArticle(pageIndex, PAGE_SIZE);
         promise.then(function(result) {
@@ -27,26 +27,35 @@ app.controller('mainController', function($scope, articleService) {
         });
 	}
 
+	function suggestionArticleList() {
+	    var promise = articleService.listSuggestionArticle();
+	    promise.then(function(result) {
+	        $scope.suggestionArticleList = result;
+	    }, function(result) {
+	    });
+	}
+
 	$scope.previous = function() {
 	    if ($scope.currPageIndex > 0)
 	        $scope.currPageIndex--;
-	    $scope.listArticle($scope.currPageIndex);
+	    listArticle($scope.currPageIndex);
 	}
 
 	$scope.next = function() {
 	    if ($scope.currPageIndex < $scope.pageCount - 1)
 	        $scope.currPageIndex++;
-	    $scope.listArticle($scope.currPageIndex);
+	    listArticle($scope.currPageIndex);
 	}
 
 	$scope.selectPage = function(pageIndex) {
 	    $scope.currPageIndex = pageIndex - 1;
-	    $scope.listArticle($scope.currPageIndex);
+	    listArticle($scope.currPageIndex);
 	}
 
 	$scope.isActivePage = function(pageIndex) {
 	    return pageIndex - 1 == $scope.currPageIndex;
 	}
 
-	$scope.listArticle($scope.currPageIndex);
+	listArticle($scope.currPageIndex);
+	suggestionArticleList();
 });

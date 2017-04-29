@@ -34,8 +34,7 @@ public class BaseController {
 	
 	@InitBinder  
 	public void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    dateFormat.setLenient(false);
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 }
