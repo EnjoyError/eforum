@@ -1,6 +1,7 @@
 package org.eforum.front.config;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfiguration {
-    private static final Logger LOG = LoggerFactory.getLogger(ShiroConfiguration.class);
+    private final Logger LOG = LoggerFactory.getLogger(ShiroConfiguration.class);
 
     @Bean
     public EhCacheManager cacheManager() {
@@ -33,6 +34,11 @@ public class ShiroConfiguration {
 
     @Bean
     public WebSecurityManager securityManager(AuthorizingRealm realm) {
+        LOG.info("配置凭证匹配器");
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        realm.setCredentialsMatcher(hashedCredentialsMatcher);
+
         LOG.info("配置shiro安全管理器");
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(realm);

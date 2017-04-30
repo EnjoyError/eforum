@@ -12,12 +12,22 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public User getUser(Long id) {
+	public User findUserById(Long id) {
 		return userRepository.findOne(id);
+	}
+
+	@Override
+	public User findUserByName(String username) {
+		return userRepository.findByName(username);
 	}
 
 	@Override
 	public User saveUser(User user) {
 		return userRepository.save(user);
+	}
+
+	@Override
+	public User findLoginUser(String username, String password) {
+		return userRepository.findByNameAndPassword(username, password);
 	}
 }

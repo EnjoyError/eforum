@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 public class BaseController {
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 	
 	@ExceptionHandler
 	@ResponseBody
 	public Object exceptionHandler(Exception e) {
-		log.error(e.getMessage(), e);
+		LOG.error(e.getMessage(), e);
 		ResultJson result = new ResultJson();
 		result.setSuccess(false);
 		result.setMessage(e.getMessage());

@@ -1,5 +1,7 @@
 package org.eforum.produces;
 
+import org.eforum.constant.StatusCode;
+
 public class ResultJson {
 	private boolean success;
 	private String message;
@@ -11,6 +13,7 @@ public class ResultJson {
 	public ResultJson(boolean success, String message) {
 		this.success = success;
 		this.message = message;
+		this.code = StatusCode.SC_OK;
 	}
 	
 	public ResultJson(boolean success, String message, int code) {

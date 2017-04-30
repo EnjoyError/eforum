@@ -18,7 +18,7 @@ public class FrontWebMvcConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		LOG.info("配置fastJsonHttpMessageConverters");
+		LOG.info("配置fastJson");
 		FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
 		FastJsonConfig fastJsonConfig = new FastJsonConfig();
 		fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
