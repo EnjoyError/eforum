@@ -15,8 +15,4 @@ import io.swagger.annotations.ApiOperation;
 public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
-	
-	public Object save(User user) {
-		return null;
-	}
 }
