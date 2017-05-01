@@ -25,7 +25,7 @@ RestTemplate.fn.post = function(url, params) {
     this.$http({
         method: 'POST',
         url: url,
-        params: params
+        data: params
     }).success(function(data, status, headers, config) {
         deferred.resolve(data);
     }).error(function(data, status, headers, config) {

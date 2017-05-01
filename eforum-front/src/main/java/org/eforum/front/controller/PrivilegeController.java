@@ -8,6 +8,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.eforum.entity.User;
+import org.eforum.front.param.UserParam;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
 import org.slf4j.Logger;
@@ -27,8 +28,11 @@ public class PrivilegeController extends BaseController {
 
     @ApiOperation(value = "权限接口", notes = "用户登录", code = 200, produces = "application/json")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Object login(Model model, @RequestBody User user) {
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), user.getPassword());
+    public Object login(Model model, @RequestBody UserParam userParam) {
+        UsernamePasswordToken token = new UsernamePasswordToken(userParam.getName(), userParam.getPassword());
+        if (userParam.isRememberMe()) {
+            token.setRememberMe(true);
+        }
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
@@ -45,8 +49,8 @@ public class PrivilegeController extends BaseController {
             LOG.error("未知错误", e);
             return new ResultJson(false, e.getMessage());
         }
-        User findUser = userService.findUserByName(user.getName());
-        subject.getSession().setAttribute("frontUser", user);
+        User findUser = userService.findUserByName(userParam.getName());
+        subject.getSession().setAttribute("frontUser", userParam);
         return new ResultJson(true, "登录成功");
     }
 

@@ -33,16 +33,16 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 		controller: 'regController'
 	});
 	
-	$routeProvider.when('/panel/message', {
-		templateUrl: 'views/panel/message.html',
+	$routeProvider.when('/dashboard/message', {
+		templateUrl: 'views/dashboard/message.html',
 		controller: 'messageController'
 	});
-	$routeProvider.when('/panel/favorite', {
-		templateUrl: 'views/panel/favorite.html',
+	$routeProvider.when('/dashboard/favorite', {
+		templateUrl: 'views/dashboard/favorite.html',
 		controller: 'favoriteController'
 	});
-	$routeProvider.when('/panel/password', {
-		templateUrl: 'views/panel/password.html',
+	$routeProvider.when('/dashboard/password', {
+		templateUrl: 'views/dashboard/password.html',
 		controller: 'passwordController'
 	});
 }]);

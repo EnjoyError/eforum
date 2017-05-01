@@ -6,6 +6,7 @@ require('./css/eforum.css');
 require('./js/app');
 
 require('./js/service/articleService');
+require('./js/service/userService');
 
 // 加载angular自定义指令
 require('./js/directive/headerDirective');
