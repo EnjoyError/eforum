@@ -15,4 +15,12 @@ app.service('userService', function($http, $q) {
 	this.logout = function() {
 	    return rest.post('/logout');
 	}
+
+	this.addUser = function(name, email, password) {
+	    return rest.post('/user', {
+	        name: name,
+	        email: email,
+	        password: password
+	    });
+	}
 });

@@ -20,3 +20,6 @@ require('./js/controller/aboutController')
 require('./js/controller/loginController');
 require('./js/controller/regController');
 require('./js/controller/articleController');
+require('./js/controller/messageController');
+require('./js/controller/favoriteController');
+require('./js/controller/passwordController');

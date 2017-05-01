@@ -1,7 +1,8 @@
-package org.eforum.front.param;
+package org.eforum.param;
 
 public class UserParam {
     private String name;
+    private String email;
     private String password;
     private boolean rememberMe;
 
@@ -11,6 +12,14 @@ public class UserParam {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

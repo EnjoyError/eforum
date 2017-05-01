@@ -1,5 +1,7 @@
 package org.eforum.exception;
 
+import org.eforum.constant.StatusCode;
+
 /**
  * 服务异常
  */
@@ -16,6 +18,7 @@ public class ServiceException extends RuntimeException {
 
 	public ServiceException(String message, Throwable e) {
 		super(message, e);
+		this.code = StatusCode.SC_INTERNAL_SERVER_ERROR;
 	}
 	
 	public ServiceException(String message, int code) {

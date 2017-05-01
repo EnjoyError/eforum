@@ -1,10 +1,12 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(20) DEFAULT NULL COMMENT '用户名',
+  `email` varchar(200) DEFAULT NULL COMMENT '电子邮箱',
   `password` varchar(50) DEFAULT NULL COMMENT '密码',
-  `nick_name` varchar(255) DEFAULT NULL COMMENT '用户密码',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_name` (`name`) USING HASH,
+  UNIQUE KEY `index_email` (`email`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -13,12 +15,12 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL COMMENT '管理员账号',
-  `nick_name` varchar(255) DEFAULT NULL COMMENT '管理员名称',
   `password` varchar(255) DEFAULT NULL COMMENT '管理员密码',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_name` (`name`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `eforum`.`admin` (`id`, `name`, `nick_name`, `password`) VALUES ('1', 'admin', '管理员', 'e10adc3949ba59abbe56e057f20f883e');
+INSERT INTO `admin` (`id`, `name`, `password`) VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e');
 
 
 

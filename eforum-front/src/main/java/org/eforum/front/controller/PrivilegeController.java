@@ -8,7 +8,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.eforum.entity.User;
-import org.eforum.front.param.UserParam;
+import org.eforum.param.UserParam;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
 import org.slf4j.Logger;
