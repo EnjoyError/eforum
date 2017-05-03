@@ -34,4 +34,10 @@ public class ArticleController extends BaseController {
 	public Object find(@PathVariable("id") Long id) {
 		return articleService.findArticleById(id);
 	}
+
+	@ApiOperation(value = "文章接口", notes = "获取推荐文章", code = 200, produces = "application/json")
+	@RequestMapping(value = "/article/suggestion", method = RequestMethod.GET)
+	public Object suggestion(int pageSize) {
+		return articleService.findSuggestionArticle(pageSize);
+	}
 }

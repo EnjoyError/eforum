@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ArticleServiceImpl implements ArticleService {
 	@Autowired
@@ -21,5 +23,15 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article findArticleById(Long id) {
 		return articleRepository.findOne(id);
+	}
+
+	@Override
+	public List<Article> findSuggestionArticle(int pageSize) {
+		PageRequest pageRequest = new PageRequest(0, pageSize);
+		Page<Article> page = articleRepository.findAll((root, query, cb) -> {
+			query.orderBy(cb.asc(root.get("weight").as(Integer.class)));
+			return query.getRestriction();
+		}, pageRequest);
+		return page.getContent();
 	}
 }

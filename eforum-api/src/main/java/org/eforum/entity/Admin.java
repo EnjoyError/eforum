@@ -21,11 +21,6 @@ public class Admin {
      */
     @Column
     private String password;
-    /**
-     * 管理员昵称
-     */
-    @Column
-    private String nickName;
 
     public Long getId() {
         return id;
@@ -49,13 +44,5 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 }

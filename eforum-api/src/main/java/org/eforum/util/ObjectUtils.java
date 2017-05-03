@@ -2,7 +2,7 @@ package org.eforum.util;
 
 import java.math.BigDecimal;
 
-public class GV {
+public class ObjectUtils {
 	/**
 	 * 字符串
 	 */

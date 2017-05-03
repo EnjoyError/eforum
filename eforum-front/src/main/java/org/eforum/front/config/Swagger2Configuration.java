@@ -20,7 +20,7 @@ public class Swagger2Configuration {
 	
 	@Bean
 	public Docket restApi() {
-		LOG.info("初始化Swagger2");
+		LOG.info("配置Swagger2");
 		return new Docket(DocumentationType.SWAGGER_2)
 				.groupName("eforum")
 				.genericModelSubstitutes(DeferredResult.class)

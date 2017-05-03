@@ -34,6 +34,11 @@ public class Article {
 	@Column(name = "create_time")
 	@Temporal(TemporalType.DATE)
 	private Date createTime;
+	/**
+	 * 权重
+	 */
+	@Column
+	private Integer weight;
 	
 	public Long getId() {
 		return id;
@@ -73,5 +78,13 @@ public class Article {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Integer getWeight() {
+		return weight;
+	}
+
+	public void setWeight(Integer weight) {
+		this.weight = weight;
 	}
 }

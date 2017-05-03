@@ -6,6 +6,7 @@ require('./css/eforum.css');
 require('./js/app');
 
 require('./js/service/articleService');
+require('./js/service/userService');
 
 // 加载angular自定义指令
 require('./js/directive/headerDirective');
@@ -19,3 +20,6 @@ require('./js/controller/aboutController')
 require('./js/controller/loginController');
 require('./js/controller/regController');
 require('./js/controller/articleController');
+require('./js/controller/messageController');
+require('./js/controller/favoriteController');
+require('./js/controller/passwordController');
