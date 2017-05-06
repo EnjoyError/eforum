@@ -1,11 +1,13 @@
 package org.eforum.exception;
 
+import org.eforum.constant.StatusCode;
+
 /**
  * 服务异常
  */
 public class ServiceException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-	private String code;
+	private int code;
 	
 	public ServiceException() {
 	}
@@ -16,23 +18,24 @@ public class ServiceException extends RuntimeException {
 
 	public ServiceException(String message, Throwable e) {
 		super(message, e);
+		this.code = StatusCode.SC_INTERNAL_SERVER_ERROR;
 	}
 	
-	public ServiceException(String message, String code) {
+	public ServiceException(String message, int code) {
 		super(message);
-		setCode(code);
+		this.code = code;
 	}
 	
-	public ServiceException(String message, String code, Throwable e) {
+	public ServiceException(String message, int code, Throwable e) {
 		super(message, e);
-		setCode(code);
+		this.code = code;
 	}
 	
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 	
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 }
