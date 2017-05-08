@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 public class BaseController {
-	private static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(BaseController.class);
 	
 	@ExceptionHandler
 	@ResponseBody

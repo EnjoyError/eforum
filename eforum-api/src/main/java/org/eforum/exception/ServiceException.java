@@ -14,6 +14,7 @@ public class ServiceException extends RuntimeException {
 	
 	public ServiceException(String message) {
 		super(message);
+		this.code = StatusCode.SC_OK;
 	}
 
 	public ServiceException(String message, Throwable e) {
