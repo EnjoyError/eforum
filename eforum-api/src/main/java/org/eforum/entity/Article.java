@@ -14,6 +14,12 @@ public class Article {
 	@Column
 	private Long id;
 	/**
+	 * 用户主键
+	 */
+	@JoinColumn(name = "user_id")
+	@ManyToOne(targetEntity = User.class)
+	private User user;
+	/**
 	 * 文章标题
 	 */
 	@Column
@@ -87,4 +93,13 @@ public class Article {
 	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 }
