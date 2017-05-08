@@ -19,9 +19,9 @@ public class ArticleController extends BaseController {
 	
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article", method = RequestMethod.GET)
-	public Object list(int pageNumber, int pageSize) {
+	public Object listArticle(Integer pageNumber, Integer pageSize) {
 		PageVo<Article> pageVo = new PageVo<>();
-		Page<Article> page = articleService.paginate(pageNumber, pageSize);
+		Page<Article> page = articleService.listArticle(pageNumber, pageSize);
 		pageVo.setData(page.getContent());
 		pageVo.setPageCount(page.getTotalPages());
 		pageVo.setPageSize(pageSize);
@@ -31,13 +31,19 @@ public class ArticleController extends BaseController {
 	
 	@ApiOperation(value = "文章接口", notes = "获取文章", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
-	public Object find(@PathVariable("id") Long id) {
+	public Object findArticle(@PathVariable("id") Long id) {
 		return articleService.findArticleById(id);
 	}
 
 	@ApiOperation(value = "文章接口", notes = "获取推荐文章", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/suggestion", method = RequestMethod.GET)
-	public Object suggestion(int pageSize) {
+	public Object findSuggestionArticle(int pageSize) {
 		return articleService.findSuggestionArticle(pageSize);
+	}
+
+	@ApiOperation(value = "文章接口", notes = "获取文章评论", code = 200, produces = "application/json")
+	@RequestMapping(value = "/article/{articleId}/comment", method = RequestMethod.GET)
+	public Object listComment(@PathVariable("articleId") Long articleId, Integer pageNumber, Integer pageSize) {
+		return null;
 	}
 }
