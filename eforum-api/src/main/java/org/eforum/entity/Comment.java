@@ -1,77 +1,103 @@
 package org.eforum.entity;
 
-import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 评论
  */
 @Entity(name = "comment")
 public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private Long id;
-    /**
-     * 文章主键
-     */
-    @Column(name = "article_id")
-    private Long articleId;
-    /**
-     * 用户主键
-     */
-    @Column(name = "user_id")
-    private Long userId;
-    /**
-     * 评论内容
-     */
-    @Column
-    private String content;
-    /**
-     * 创建时间
-     */
-    @Column(name = "create_time")
-    @Temporal(TemporalType.DATE)
-    private Date createTime;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
+	private Long id;
+	/**
+	 * 文章主键
+	 */
+	@JoinColumn(name = "article_id")
+	@ManyToOne(targetEntity = Article.class)
+	private Article article;
+	/**
+	 * 用户主键
+	 */
+	@JoinColumn(name = "user_id")
+	@ManyToOne(targetEntity = User.class)
+	private User user;
+	/**
+	 * 评论内容
+	 */
+	@Column
+	private String content;
+	/**
+	 * 创建时间
+	 */
+	@Column(name = "create_time")
+	@Temporal(TemporalType.DATE)
+	private Date createTime;
 
-    public Long getId() {
-        return id;
-    }
+	/**
+	 * 所属主评论
+	 */
+	@ManyToOne(targetEntity = Comment.class)
+	@JoinColumn(name = "main_comment_id")
+	private Comment mainComment;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getArticleId() {
-        return articleId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
-    }
+	public Article getArticle() {
+		return article;
+	}
 
-    public Long getUserId() {
-        return userId;
-    }
+	public void setArticle(Article article) {
+		this.article = article;
+	}
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Comment getMainComment() {
+		return mainComment;
+	}
+
+	public void setMainComment(Comment mainComment) {
+		this.mainComment = mainComment;
+	}
+
 }
