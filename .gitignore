@@ -25,3 +25,6 @@
 /eforum-mgt/eforum-mgt.iml
 /eforum-front/eforum-front.iml
 /eforum-api/eforum-api.iml
+.DS_Store
+/.gitignore
+/.project
