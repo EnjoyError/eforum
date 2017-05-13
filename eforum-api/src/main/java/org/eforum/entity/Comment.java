@@ -2,15 +2,7 @@ package org.eforum.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  * 评论
@@ -44,7 +36,6 @@ public class Comment {
 	@Column(name = "create_time")
 	@Temporal(TemporalType.DATE)
 	private Date createTime;
-
 	/**
 	 * 所属主评论
 	 */

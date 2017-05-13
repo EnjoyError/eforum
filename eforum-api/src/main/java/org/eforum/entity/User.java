@@ -1,5 +1,7 @@
 package org.eforum.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class User {
 	 * 登录密码
 	 */
 	@Column
+	@JSONField(serialize = false)
 	private String password;
 
 	public Long getId() {

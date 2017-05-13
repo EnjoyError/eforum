@@ -20,4 +20,11 @@ app.service('articleService', function($http, $q) {
 	        pageSize: 5
 	    });
 	}
+
+	this.listComment = function(articleId, pageNumber, pageSize) {
+	    return rest.get('/article/' + articleId + '/comment', {
+	        pageNumber: pageNumber,
+            pageSize: pageSize
+	    });
+	}
 });

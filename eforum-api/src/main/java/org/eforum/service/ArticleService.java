@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface ArticleService {
-	Page<Article> paginate(int pageNumber, int pageSize);
+	Page<Article> listArticle(int pageNumber, int pageSize);
 	
 	Article findArticleById(Long id);
 
