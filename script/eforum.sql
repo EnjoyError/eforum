@@ -55,7 +55,7 @@ CREATE TABLE `comment` (
   `article_id` bigint(20) DEFAULT NULL COMMENT '文章主键',
   `main_comment_id` bigint(20) DEFAULT NULL COMMENT '所属主评论主键',
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户主键',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `eforum`.`comment` (`id`, `content`, `create_time`, `article_id`, `main_comment_id`, `user_id`) VALUES ('1', '评论xxx', '2017-05-09', '1', NULL, '1');
