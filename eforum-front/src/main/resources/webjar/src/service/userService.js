@@ -1,11 +1,8 @@
 var app = require('../app');
-var RestTemplate = require('../rest/restTemplate');
 
-app.service('userService', function($http, $q) {
-    var rest = new RestTemplate($http, $q);
-
+app.service('userService', function($http, $q, restService) {
 	this.login = function(name, password, rememberMe) {
-	    return rest.post('/login', {
+	    return restService.post('/login', {
 	        name: name,
             password: password,
             rememberMe: rememberMe
@@ -13,11 +10,11 @@ app.service('userService', function($http, $q) {
 	}
 
 	this.logout = function() {
-	    return rest.post('/logout');
+	    return restService.post('/logout');
 	}
 
 	this.addUser = function(name, email, password) {
-	    return rest.post('/user', {
+	    return restService.post('/user', {
 	        name: name,
 	        email: email,
 	        password: password
