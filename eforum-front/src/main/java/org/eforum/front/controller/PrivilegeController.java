@@ -50,7 +50,7 @@ public class PrivilegeController extends BaseController {
             return new ResultJson(false, e.getMessage());
         }
         User findUser = userService.findUserByName(userParam.getName());
-        subject.getSession().setAttribute("frontUser", userParam);
+        subject.getSession().setAttribute("frontUser", findUser);
         return new ResultJson(true, "登录成功");
     }
 
