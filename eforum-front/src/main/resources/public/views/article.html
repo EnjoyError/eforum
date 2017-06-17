@@ -10,29 +10,9 @@
 	
 	<div>
 		<ul class="list-group">
-		    <li class="list-group-item">
-		    	<span>路人A</span>
-		    	<p>评论xxx</p>
-			</li>
-			<li class="list-group-item">
-		    	<span>路人A</span>
-		    	<p>评论xxx</p>
-			</li>
-			<li class="list-group-item">
-		    	<span>路人A</span>
-		    	<p>评论xxx</p>
-			</li>
-			<li class="list-group-item">
-		    	<span>路人A</span>
-		    	<p>评论xxx</p>
-			</li>
-			<li class="list-group-item">
-		    	<span>路人A</span>
-		    	<p>评论xxx</p>
-			</li>
-			<li class="list-group-item">
-		    	<span>路人A</span>
-		    	<p>评论xxx</p>
+		    <li class="list-group-item" ng-repeat="comment in commentList">
+		    	<span>{{ comment.user.name }}</span>
+		    	<p>{{ comment.content }}</p>
 			</li>
 			<li class="list-group-item">
 				<div class="form-group">
@@ -42,38 +22,27 @@
 			</li>
 		</ul>
     </div>
-    
-    <div>
+
+	<div ng-if="pageCount > 0">
 		<ul class="pagination">
-			<li><a ng-click="previous()">&laquo;</a></li>
-		    <li class="active"><a href="#/article/1">1</a></li>
-		    <li class="disabled"><a href="#/article/2">2</a></li>
-		    <li><a href="#/article/3">3</a></li>
-		    <li><a href="#/article/4">4</a></li>
-		    <li><a href="#/article/5">5</a></li>
-		    <li><a ng-click="next();">&raquo;</a></li>
+			<li ng-class="{disabled: currPageIndex == 0}"><a ng-click="previous()">&laquo;</a></li>
+			<li ng-repeat="page in pageList"
+				ng-class="{active: isActivePage(page)}">
+				<a ng-click="selectPage(page)">{{ page }}</a>
+			</li>
+			<li ng-class="{disabled: currPageIndex == pageCount - 1}"><a ng-click="next()">&raquo;</a></li>
 		</ul>
 	</div>
 </div>
 
 <div class="col-md-3">
 	<div class="list-group">
-		<a href="#/article/1" class="list-group-item active">
+		<a href="#/" class="list-group-item active">
 			<h4 class="list-group-item-heading">推荐文章</h4>
 		</a>
-		<a href="#/article/2" class="list-group-item">
+		<a href="#/article/{{ article.id }}" class="list-group-item" ng-repeat="article in suggestionArticleList">
 			<p class="list-group-item-text">
-				测试数据
-			</p>
-		</a>
-		<a href="#/article/3" class="list-group-item">
-			<p class="list-group-item-text">
-				测试数据
-			</p>
-		</a>
-		<a href="#/article/4" class="list-group-item">
-			<p class="list-group-item-text">
-				测试数据
+				{{ article.title }}
 			</p>
 		</a>
 	</div>

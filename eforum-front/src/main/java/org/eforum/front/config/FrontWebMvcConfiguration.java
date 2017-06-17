@@ -22,6 +22,8 @@ public class FrontWebMvcConfiguration extends WebMvcConfigurerAdapter {
 		FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
 		FastJsonConfig fastJsonConfig = new FastJsonConfig();
 		fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
+		// 关闭fastjson的循环引用
+		fastJsonConfig.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
 		fastConverter.setFastJsonConfig(fastJsonConfig);
 		converters.add(fastConverter);
 		super.configureMessageConverters(converters);

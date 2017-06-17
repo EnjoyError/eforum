@@ -16,7 +16,7 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleRepository articleRepository;
 	
 	@Override
-	public Page<Article> paginate(int pageNumber, int pageSize) {
+	public Page<Article> listArticle(int pageNumber, int pageSize) {
 		return articleRepository.findAll(new PageRequest(pageNumber, pageSize));
 	}
 
