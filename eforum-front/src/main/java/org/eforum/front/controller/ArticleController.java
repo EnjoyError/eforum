@@ -2,12 +2,15 @@ package org.eforum.front.controller;
 
 import org.eforum.entity.Article;
 import org.eforum.entity.Comment;
+import org.eforum.front.util.ConvertUtil;
+import org.eforum.front.vo.ArticleVo;
 import org.eforum.produces.PageVo;
 import org.eforum.service.ArticleService;
 import org.eforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +59,14 @@ public class ArticleController extends BaseController {
 		pageVo.setPageSize(pageSize);
 		pageVo.setPageIndex(pageNumber + 1);
 		return pageVo;
+	}
+	
+	@ApiOperation(value = "文章接口", notes = "发布帖子", produces = "application/json")
+	@RequestMapping(value = "/article/publish")
+	public Object publishArticle(@RequestBody ArticleVo articleVo){
+		Article article = ConvertUtil.convertVoToEntity(articleVo, Article.class);
+		article = articleService.saveOrUpdate(article);
+		articleVo = ConvertUtil.convertEntityToVo(article, ArticleVo.class);
+		return articleVo;
 	}
 }

@@ -1,18 +1,20 @@
 package org.eforum.front.controller;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
-import org.eforum.param.UserParam;
+import org.eforum.front.vo.UserVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -23,11 +25,11 @@ public class UserController extends BaseController {
 
 	@ApiOperation(value = "用户接口", notes = "新增用户", code = 200, produces = "application/json")
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public Object addUser(@RequestBody UserParam userParam) {
+	public Object addUser(@RequestBody UserVo userVo) {
 		User user = new User();
 		try {
-			BeanUtils.copyProperties(user, userParam);
-			user.setPassword(DigestUtils.md5Hex(userParam.getPassword()));
+			BeanUtils.copyProperties(user, userVo);
+			user.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
 			userService.addUser(user);
 		} catch (Exception e) {
 			throw new ServiceException("保存用户信息出错", e);

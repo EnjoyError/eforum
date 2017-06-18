@@ -1,18 +1,15 @@
 package org.eforum.entity;
 
-import java.util.Date;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * 文章
  */
 @Entity(name = "article")
-public class Article {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
-	private Long id;
+public class Article extends BaseEntity{
 	/**
 	 * 用户主键
 	 */
@@ -35,25 +32,11 @@ public class Article {
 	@Column
 	private String content;
 	/**
-	 * 创建时间
-	 */
-	@Column(name = "create_time")
-	@Temporal(TemporalType.DATE)
-	private Date createTime;
-	/**
 	 * 权重
 	 */
 	@Column
 	private Integer weight;
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -76,14 +59,6 @@ public class Article {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
 	}
 
 	public Integer getWeight() {

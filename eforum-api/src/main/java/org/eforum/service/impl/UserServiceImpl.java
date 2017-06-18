@@ -62,9 +62,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void changePassword(User user, String newPassword) {
-		if (null == user) {
-			throw new ServiceException("请先登入！");
-		}
 		if (StringUtils.isNullOrEmpty(newPassword)) {
 			throw new ServiceException("新密码不能为空!");
 		}

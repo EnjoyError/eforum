@@ -6,11 +6,7 @@ import javax.persistence.*;
  * 管理员
  */
 @Entity(name = "admin")
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private Long id;
+public class Admin extends BaseEntity{
     /**
      * 登录账号
      */
@@ -21,14 +17,6 @@ public class Admin {
      */
     @Column
     private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

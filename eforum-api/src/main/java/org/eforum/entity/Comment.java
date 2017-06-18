@@ -1,18 +1,15 @@
 package org.eforum.entity;
 
-import java.util.Date;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * 评论
  */
 @Entity(name = "comment")
-public class Comment {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
-	private Long id;
+public class Comment extends BaseEntity{
 	/**
 	 * 文章主键
 	 */
@@ -31,25 +28,11 @@ public class Comment {
 	@Column
 	private String content;
 	/**
-	 * 创建时间
-	 */
-	@Column(name = "create_time")
-	@Temporal(TemporalType.DATE)
-	private Date createTime;
-	/**
 	 * 所属主评论
 	 */
 	@ManyToOne(targetEntity = Comment.class)
 	@JoinColumn(name = "main_comment_id")
 	private Comment mainComment;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Article getArticle() {
 		return article;
@@ -73,14 +56,6 @@ public class Comment {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
 	}
 
 	public Comment getMainComment() {

@@ -1,6 +1,5 @@
 package org.eforum.front.controller;
 
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -8,7 +7,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.eforum.entity.User;
-import org.eforum.param.UserParam;
+import org.eforum.front.vo.UserVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
 import org.slf4j.Logger;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 public class PrivilegeController extends BaseController {
     private static final Logger LOG = LoggerFactory.getLogger(PrivilegeController.class);
@@ -28,9 +29,9 @@ public class PrivilegeController extends BaseController {
 
     @ApiOperation(value = "权限接口", notes = "用户登录", code = 200, produces = "application/json")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Object login(Model model, @RequestBody UserParam userParam) {
-        UsernamePasswordToken token = new UsernamePasswordToken(userParam.getName(), userParam.getPassword());
-        if (userParam.isRememberMe()) {
+    public Object login(Model model, @RequestBody UserVo userVo) {
+        UsernamePasswordToken token = new UsernamePasswordToken(userVo.getName(), userVo.getPassword());
+        if (userVo.isRememberMe()) {
             token.setRememberMe(true);
         }
         Subject subject = SecurityUtils.getSubject();
@@ -49,8 +50,8 @@ public class PrivilegeController extends BaseController {
             LOG.error("未知错误", e);
             return new ResultJson(false, e.getMessage());
         }
-        User findUser = userService.findUserByName(userParam.getName());
-        subject.getSession().setAttribute("frontUser", userParam);
+        User findUser = userService.findUserByName(userVo.getName());
+        subject.getSession().setAttribute("frontUser", findUser);
         return new ResultJson(true, "登录成功");
     }
 

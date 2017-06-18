@@ -1,8 +1,10 @@
 package org.eforum.service.impl;
 
 import org.eforum.entity.Article;
+import org.eforum.exception.ServiceException;
 import org.eforum.repository.ArticleRepository;
 import org.eforum.service.ArticleService;
+import org.eforum.util.EntityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,5 +35,21 @@ public class ArticleServiceImpl implements ArticleService {
 			return query.getRestriction();
 		}, pageRequest);
 		return page.getContent();
+	}
+
+	@Override
+	public Article saveOrUpdate(Article article) {
+		Article willSaveArticle = null;
+		if (!article.isNew()) {
+			willSaveArticle = articleRepository.findOne(article.getId());
+			if (null == willSaveArticle) {
+				throw new ServiceException("未找到id为【" + article.getId() + "】的帖子");
+			}
+			EntityUtil.copyPropertiesOfEntity(article, willSaveArticle);
+		} else {
+			willSaveArticle = article;
+		}
+		articleRepository.save(willSaveArticle);
+		return willSaveArticle;
 	}
 }
