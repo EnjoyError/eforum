@@ -3,7 +3,8 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: {
+	devtool: 'source-map',//配置生成Source Maps，选择合适的选项
+	entry: {
         main: path.join(__dirname, 'src', 'main.js'),
         vendor: ['angular', 'angular-route']
     },

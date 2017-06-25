@@ -1,8 +1,8 @@
 var app = require('../app');
 var RestTemplate = require('../rest/restTemplate');
 
-app.service('articleService', function($http, $q) {
-    var rest = new RestTemplate($http, $q);
+app.service('articleService', function($http) {
+    var rest = new RestTemplate($http);
 
 	this.listArticle = function(pageNumber, pageSize) {
 	    return rest.get('/article', {

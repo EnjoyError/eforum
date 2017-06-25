@@ -4,19 +4,19 @@ import org.eforum.constant.StatusCode;
 
 public class ResultJson {
 	private boolean success;
-	private String message;
+	private Object message;
 	private int code;
 	
 	public ResultJson() {
 	}
 	
-	public ResultJson(boolean success, String message) {
+	public ResultJson(boolean success, Object message) {
 		this.success = success;
 		this.message = message;
 		this.code = StatusCode.SC_OK;
 	}
 	
-	public ResultJson(boolean success, String message, int code) {
+	public ResultJson(boolean success, Object message, int code) {
 		this.success = success;
 		this.message = message;
 		this.code = code;
@@ -29,12 +29,12 @@ public class ResultJson {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-
-	public String getMessage() {
+	
+	public Object getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(Object message) {
 		this.message = message;
 	}
 

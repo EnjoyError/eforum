@@ -15,6 +15,8 @@ require('./js/directive/articleItemDirective');
 require('./js/directive/sidebarDirective');
 
 // 加载angular控制器
+require('./js/controller/appController');
+require('./js/controller/headerController');
 require('./js/controller/mainController');
 require('./js/controller/aboutController')
 require('./js/controller/loginController');

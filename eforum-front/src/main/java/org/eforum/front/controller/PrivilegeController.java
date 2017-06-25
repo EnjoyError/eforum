@@ -1,5 +1,8 @@
 package org.eforum.front.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -52,7 +55,9 @@ public class PrivilegeController extends BaseController {
         }
         User findUser = userService.findUserByName(userVo.getName());
         subject.getSession().setAttribute("frontUser", findUser);
-        return new ResultJson(true, "登录成功");
+        Map<String,String> messageMap = new HashMap<String,String>();
+        messageMap.put("username",(String)subject.getPrincipal());
+        return new ResultJson(true, messageMap);
     }
 
     @ApiOperation(value = "权限接口", notes = "用户注销", code = 200, produces = "application/json")
