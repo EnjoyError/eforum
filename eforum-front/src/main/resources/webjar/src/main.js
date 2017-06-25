@@ -25,3 +25,4 @@ require('./js/controller/articleController');
 require('./js/controller/messageController');
 require('./js/controller/favoriteController');
 require('./js/controller/passwordController');
+require('./js/controller/articleListController');

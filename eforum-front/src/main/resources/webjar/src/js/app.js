@@ -2,6 +2,11 @@ var angular = require('angular');
 require('angular-route');
 var app = angular.module('app', ['ngRoute']);
 
+//angularjs 1.6.0 以上版本需要配置,否则路由无法正常使用
+app.config(["$locationProvider",function($locationProvider){
+	$locationProvider.hashPrefix("");
+}]);
+
 app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
 	// 禁用route缓存
 	if (!$httpProvider.defaults.headers.get) {
@@ -44,6 +49,10 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 	$routeProvider.when('/dashboard/password', {
 		templateUrl: 'views/dashboard/password.html',
 		controller: 'passwordController'
+	});
+	$routeProvider.when('/articleList', {
+		templateUrl: 'views/articleList.html',
+		controller: 'articleListController'
 	});
 }]);
 
