@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
  * 文章
  */
 @Entity(name = "article")
-public class Article extends BaseEntity{
+public class Article extends BaseEntity {
 	/**
 	 * 用户主键
 	 */
@@ -29,14 +29,14 @@ public class Article extends BaseEntity{
 	/**
 	 * 文章内容
 	 */
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String content;
 	/**
 	 * 权重
 	 */
 	@Column
 	private Integer weight;
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -76,5 +76,5 @@ public class Article extends BaseEntity{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 }

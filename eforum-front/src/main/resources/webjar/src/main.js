@@ -26,3 +26,4 @@ require('./js/controller/messageController');
 require('./js/controller/favoriteController');
 require('./js/controller/passwordController');
 require('./js/controller/articleListController');
+require('./js/controller/pubArticleController');

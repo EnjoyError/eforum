@@ -1,11 +1,10 @@
-<div class="col-md-9">
+<div class="col-md-9" ng-controller="articleListController">
 	<a class="list-group-item active">
 		灌水区，大水比，不来一帖？
 	</a>
 	<a href="#" class="list-group-item">24*7 支持</a>
-	<a href="#" class="list-group-item">免费 Window 空间托管</a>
-	<a href="#" class="list-group-item">图像的数量</a>
-	<a href="#" class="list-group-item">每年更新成本</a>
+<!-- 	<div  data-ng-bind-html="articleList"></div> -->
+	<a ng-repeat="x in articleList" class="list-group-item" ng-click="viewArticle(x.id)">{{x.title}}</a>
 	<a class="list-group-item active">
 		灌水区
 	</a>

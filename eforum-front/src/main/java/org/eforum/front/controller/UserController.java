@@ -39,17 +39,13 @@ public class UserController extends BaseController {
 
 	@ApiOperation(value = "用户接口", notes = "获取用户文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/user/{userId}/article", method = RequestMethod.POST)
-	public Object listArticle(@PathVariable("userId") Long userId,
-							  Integer pageNumber,
-							  Integer pageSize) {
+	public Object listArticle(@PathVariable("userId") Long userId, Integer pageNumber, Integer pageSize) {
 		return null;
 	}
 
 	@ApiOperation(value = "用户接口", notes = "获取用户评论列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/user/{userId}/comment", method = RequestMethod.POST)
-	public Object listComment(@PathVariable("userId") Long userId,
-							  Integer pageNumber,
-							  Integer pageSize) {
+	public Object listComment(@PathVariable("userId") Long userId, Integer pageNumber, Integer pageSize) {
 		return null;
 	}
 

@@ -5,6 +5,7 @@ import org.eforum.entity.Comment;
 import org.eforum.front.util.ConvertUtil;
 import org.eforum.front.vo.ArticleVo;
 import org.eforum.produces.PageVo;
+import org.eforum.produces.ResultJson;
 import org.eforum.service.ArticleService;
 import org.eforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +26,22 @@ public class ArticleController extends BaseController {
 	private CommentService commentService;
 	
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
-	@RequestMapping(value = "/article", method = RequestMethod.GET)
+	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
 	public Object listArticle(Integer pageNumber, Integer pageSize) {
 		Page<Article> page = articleService.listArticle(pageNumber, pageSize);
 		PageVo<Article> pageVo = new PageVo<>();
 		pageVo.setData(page.getContent());
-		pageVo.setPageCount(page.getTotalPages());
 		pageVo.setPageSize(pageSize);
-		pageVo.setPageIndex(pageNumber + 1);
-		return pageVo;
+		pageVo.setPageCount(page.getTotalPages());
+		pageVo.setPageIndex(pageNumber);
+		return new ResultJson(true, pageVo);
 	}
 	
 	@ApiOperation(value = "文章接口", notes = "获取文章", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
 	public Object findArticle(@PathVariable("id") Long id) {
-		return articleService.findArticleById(id);
+		Article article = articleService.findArticleById(id);
+		return new ResultJson(true, article);
 	}
 
 	@ApiOperation(value = "文章接口", notes = "获取推荐文章", code = 200, produces = "application/json")
@@ -66,7 +68,6 @@ public class ArticleController extends BaseController {
 	public Object publishArticle(@RequestBody ArticleVo articleVo){
 		Article article = ConvertUtil.convertVoToEntity(articleVo, Article.class);
 		article = articleService.saveOrUpdate(article);
-		articleVo = ConvertUtil.convertEntityToVo(article, ArticleVo.class);
-		return articleVo;
+		return new ResultJson(true, String.valueOf(article.getId()));
 	}
 }

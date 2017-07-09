@@ -1,9 +1,9 @@
 package org.eforum.service;
 
+import java.util.List;
+
 import org.eforum.entity.Article;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface ArticleService {
 	Page<Article> listArticle(int pageNumber, int pageSize);

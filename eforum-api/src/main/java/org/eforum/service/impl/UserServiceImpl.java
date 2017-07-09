@@ -7,12 +7,18 @@ import org.eforum.service.UserService;
 import org.eforum.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
+@EnableTransactionManagement(proxyTargetClass = true)
 public class UserServiceImpl implements UserService {
-	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	public void setUserRepository(UserRepository userRepository){
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public User findUserById(Long id) {
@@ -30,7 +36,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public User addUser(User user) {
 		String username = user.getName();
 		String email = user.getEmail();
@@ -45,6 +50,7 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException("该email已被使用!");
 		}
 		existUser = userRepository.findByName(username);
+		
 		if (null != existUser) {
 			throw new ServiceException("该用户名已被使用!");
 		}

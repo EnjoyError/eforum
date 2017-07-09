@@ -39,6 +39,10 @@ app.directive('eforumHeader', function($location, userService) {
 			$scope.myCenter = function() {
 				$location.path("/dashboard/message");
 			};
+			
+			$scope.toEditArticlePage = function() {
+				$location.path("/pubArticle")
+			}
 		}
 	}
 });

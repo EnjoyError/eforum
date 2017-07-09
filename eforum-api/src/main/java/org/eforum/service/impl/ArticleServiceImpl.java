@@ -1,5 +1,7 @@
 package org.eforum.service.impl;
 
+import java.util.List;
+
 import org.eforum.entity.Article;
 import org.eforum.exception.ServiceException;
 import org.eforum.repository.ArticleRepository;
@@ -10,8 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ArticleServiceImpl implements ArticleService {
 	@Autowired
@@ -19,12 +19,16 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Override
 	public Page<Article> listArticle(int pageNumber, int pageSize) {
-		return articleRepository.findAll(new PageRequest(pageNumber, pageSize));
+		return articleRepository.findAll(new PageRequest(pageNumber - 1, pageSize));
 	}
 
 	@Override
 	public Article findArticleById(Long id) {
-		return articleRepository.findOne(id);
+		Article article = articleRepository.findOne(id);
+		if(null == article){
+			throw new ServiceException("未找到该帖子，或者该帖子已被删除！");
+		}
+		return article;
 	}
 
 	@Override

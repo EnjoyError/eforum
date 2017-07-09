@@ -25,9 +25,13 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 		templateUrl: 'views/about.html',
 		controller: 'aboutController'
 	});
-	$routeProvider.when('/article/:id', {
+	$routeProvider.when('/article', {
 		templateUrl: 'views/article.html',
 		controller: 'articleController'
+	});
+	$routeProvider.when('/pubArticle', {
+		templateUrl: 'views/editArticle.html',
+		controller: 'pubArticleController'
 	});
 	$routeProvider.when('/login', {
 		templateUrl: 'views/login.html',
