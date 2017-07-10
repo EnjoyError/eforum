@@ -1,3 +1,4 @@
+
 var app = require('../app');
 
 app.controller('pubArticleController', function($scope, $location, articleService) {
@@ -24,8 +25,31 @@ app.controller('pubArticleController', function($scope, $location, articleServic
 		placeholder:'请输入文章内容',
 		height: 300,
 		dialogsFade: true,
-		dialogsInBody : true
+		dialogsInBody : true,
+		callbacks:{
+			onImageUpload : sendImage
+		}
 	});
+	
+
+	function sendImage(files, editor, $editable) {
+		var promise = articleService.uploadImages(files);
+		promise.then(function(result) {
+            if (result.data.success) {
+            	var imageUrls = result.data.message;
+            	for (i in imageUrls) {
+					$('.summernote').summernote('editor.insertImage',
+							imageUrls[i]);
+				}
+            } else {
+            	console.log(result.data.message);
+            }
+        }, function(result) {
+        	alert("执行到这里" + result);
+        },function(result){
+        	alert("执行到这里   1" + result);
+        });
+	};
 });
 
 

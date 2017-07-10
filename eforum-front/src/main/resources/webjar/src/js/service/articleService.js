@@ -41,4 +41,14 @@ app.service('articleService', function($http) {
 		}
 		return articleList.data;
 	}
+	
+	this.uploadImages = function(images){
+		var fd = new FormData();
+        for (var i=0; i<images.length; i++) {
+            fd.append("images", images[i]);
+        }
+		return rest.postForMultipart('article/uploadImages',{
+			images : fd
+		});
+	}
 });

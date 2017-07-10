@@ -22,5 +22,18 @@ RestTemplate.fn.post = function(url, params) {
     });
     return promise;
 }
+	
+RestTemplate.fn.postForMultipart = function(url, params) {
+    params = params || {};
+    var promise = this.$http({
+        method: 'POST',
+        url: url,
+        data: params,
+        headers : {
+        	   "Content-Type" : "multipart/form-data"
+        	}
+    });
+    return promise;
+}
 
 module.exports = RestTemplate;
