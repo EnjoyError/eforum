@@ -20,7 +20,11 @@ app.controller('pubArticleController', function($scope, $location, articleServic
 		
 	};
 	$('#summernote').summernote({
-		lang : 'zh-CN'
+		lang : 'zh-CN',
+		placeholder:'请输入文章内容',
+		height: 300,
+		dialogsFade: true,
+		dialogsInBody : true
 	});
 });
 

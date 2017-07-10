@@ -7,3 +7,7 @@ body {
 .eforum-main {
   margin-top: 80px;
 }
+
+.view-article-content>p>img {
+	max-width: 100%;
+}
