@@ -2,6 +2,8 @@ package org.eforum.front.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.eforum.entity.Article;
 import org.eforum.entity.Comment;
 import org.eforum.front.util.ConvertUtil;
@@ -12,6 +14,7 @@ import org.eforum.service.ArticleService;
 import org.eforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,8 +80,14 @@ public class ArticleController extends BaseController {
 
 	@ApiOperation(value = "文章接口", notes = "上传图片", produces = "application/json")
 	@RequestMapping(value = "/article/uploadImages")
+	@Transactional
 	public Object uploadImages(@RequestParam("images") MultipartFile[] images) {
-		List<String> imageNames = articleService.saveImagesOfArticle(images);
-		return new ResultJson(true, imageNames);
+		List<String> imageRequertPaths = articleService.saveImagesOfArticle(images);
+		return new ResultJson(true, imageRequertPaths);
+	}
+	
+	@RequestMapping(value = "/article/image/{imageName:.*}", method = RequestMethod.GET)
+	public void downloadImage(@PathVariable("imageName")String imageName,HttpServletResponse response){
+		articleService.downloadImageOfArticle(imageName,response);
 	}
 }

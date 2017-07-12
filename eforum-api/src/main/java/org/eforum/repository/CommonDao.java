@@ -3,6 +3,7 @@ package org.eforum.repository;
 import java.util.List;
 
 import org.eforum.entity.BaseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 一些公用操作的dao
@@ -25,6 +26,7 @@ public interface CommonDao {
 	 * 
 	 * @param entity
 	 */
+	@Transactional
 	public <T extends BaseEntity> void save(T entity);
 
 	/**

@@ -1,5 +1,6 @@
 package org.eforum.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -18,4 +19,12 @@ public interface FileService {
 	 * @return 返回保存文件ID
 	 */
 	public List<String> saveImages(MultipartFile[] images);
+
+	/**
+	 * 下载图片
+	 * 
+	 * @param imageName
+	 * @return
+	 */
+	public File getImageFileByName(String imageName);
 }

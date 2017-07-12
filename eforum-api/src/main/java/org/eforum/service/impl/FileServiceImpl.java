@@ -24,7 +24,7 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public List<String> saveImages(MultipartFile[] images) {
 		if (null == images || images.length < 1) {
-			throw new ServiceException("要保存的图片未见为空");
+			throw new ServiceException("要保存的图片文件为空");
 		}
 		List<String> fileNames = new ArrayList<String>();
 		for (MultipartFile image : images) {
@@ -33,6 +33,19 @@ public class FileServiceImpl implements FileService {
 		}
 
 		return fileNames;
+	}
+
+	/**
+	 * 获取文件存储路径
+	 * 
+	 * @return
+	 */
+	private String getImagePath() {
+		String hql = "FROM GlobalParam gp WHERE gp.key = :key";
+		GlobalParam gp = (GlobalParam) commonDao.findUniqueByHql(hql, "key", Constants.IMAGE_DIR);
+		String imagePath = gp.getValue();
+		imagePath = imagePath.replace("/", File.separator);
+		return imagePath;
 	}
 
 	/**
@@ -46,9 +59,7 @@ public class FileServiceImpl implements FileService {
 		String randomStr = CommonUtils.generateRandomStr();// 使用randomStr作为新文件名
 		String extensionName = getFileExtensionName(originalFileName);
 		String fileName = randomStr + extensionName;
-		String hql = "FROM GlobalParam gp WHERE gp.key = :key";
-		GlobalParam gp = (GlobalParam) commonDao.findUniqueByHql(hql, "key", Constants.IMAGE_DIR);
-		String imagePath = gp.getValue();
+		String imagePath = getImagePath();
 		File imageDir = new File(imagePath);
 		if (!imageDir.exists()) {
 			imageDir.mkdirs();
@@ -85,5 +96,16 @@ public class FileServiceImpl implements FileService {
 			throw new ServiceException("文件扩展名不正确");
 		}
 		return extensionName;
+	}
+
+	@Override
+	public File getImageFileByName(String imageName) {
+		String imagePath = getImagePath();
+		imagePath = imagePath + File.separator + imageName;
+		File image = new File(imagePath);
+		if (!image.exists()) {
+			throw new ServiceException("未找到该图片[" + imageName + "]");
+		}
+		return image;
 	}
 }

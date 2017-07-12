@@ -1,8 +1,17 @@
 package org.eforum.service.impl;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.eforum.entity.Article;
+import org.eforum.entity.constant.Constants;
 import org.eforum.exception.ServiceException;
 import org.eforum.repository.ArticleRepository;
 import org.eforum.service.ArticleService;
@@ -64,6 +73,30 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<String> saveImagesOfArticle(MultipartFile[] images) {
 		List<String> imageNames = fileService.saveImages(images);
-		return imageNames;
+		List<String> imageRequestPaths = new ArrayList<String>();
+		for (String imageName : imageNames) {
+			imageRequestPaths.add(Constants.IMAGE_REQUEST_PATH + imageName);
+		}
+		return imageRequestPaths;
+	}
+
+	@Override
+	public void downloadImageOfArticle(String imageName, HttpServletResponse response) {
+		File file = fileService.getImageFileByName(imageName);
+		try {
+			InputStream is = new FileInputStream(file);
+			OutputStream os = new BufferedOutputStream(response.getOutputStream());
+			byte[] data = new byte[1024];
+			int length;
+			while ((length = is.read(data)) != -1) {
+				os.write(data, 0, length);
+			}
+			is.close();
+			os.flush();
+			os.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
 	}
 }
