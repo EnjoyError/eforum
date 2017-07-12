@@ -23,17 +23,16 @@ RestTemplate.fn.post = function(url, params) {
     return promise;
 }
 	
-RestTemplate.fn.postForMultipart = function(url, params) {
-    params = params || {};
-    var promise = this.$http({
-        method: 'POST',
-        url: url,
-        data: params,
-        headers : {
-        	   "Content-Type" : "multipart/form-data"
-        	}
-    });
-    return promise;
+RestTemplate.fn.uploadFile = function(url,data,successCallback,errorCallback) {
+	 $.ajax({
+	        url : url,
+	        type : 'POST',
+	        data : data,
+	        processData : false,
+	        contentType : false,
+	        success : successCallback,
+	        error : errorCallback
+	    });
 }
 
 module.exports = RestTemplate;

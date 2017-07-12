@@ -1,5 +1,7 @@
 package org.eforum.front.controller;
 
+import java.util.List;
+
 import org.eforum.entity.Article;
 import org.eforum.entity.Comment;
 import org.eforum.front.util.ConvertUtil;
@@ -26,7 +28,7 @@ public class ArticleController extends BaseController {
 	private ArticleService articleService;
 	@Autowired
 	private CommentService commentService;
-	
+
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
 	public Object listArticle(Integer pageNumber, Integer pageSize) {
@@ -38,7 +40,7 @@ public class ArticleController extends BaseController {
 		pageVo.setPageIndex(pageNumber);
 		return new ResultJson(true, pageVo);
 	}
-	
+
 	@ApiOperation(value = "文章接口", notes = "获取文章", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
 	public Object findArticle(@PathVariable("id") Long id) {
@@ -64,30 +66,19 @@ public class ArticleController extends BaseController {
 		pageVo.setPageIndex(pageNumber + 1);
 		return pageVo;
 	}
-	
+
 	@ApiOperation(value = "文章接口", notes = "发布帖子", produces = "application/json")
 	@RequestMapping(value = "/article/publish")
-	public Object publishArticle(@RequestBody ArticleVo articleVo){
+	public Object publishArticle(@RequestBody ArticleVo articleVo) {
 		Article article = ConvertUtil.convertVoToEntity(articleVo, Article.class);
 		article = articleService.saveOrUpdate(article);
 		return new ResultJson(true, String.valueOf(article.getId()));
 	}
-	
+
 	@ApiOperation(value = "文章接口", notes = "上传图片", produces = "application/json")
 	@RequestMapping(value = "/article/uploadImages")
-	public Object uploadImages(@RequestParam("images") MultipartFile[] images){
-		System.out.println(images);
-		return null;
+	public Object uploadImages(@RequestParam("images") MultipartFile[] images) {
+		List<String> imageNames = articleService.saveImagesOfArticle(images);
+		return new ResultJson(true, imageNames);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -23,33 +23,30 @@ app.controller('pubArticleController', function($scope, $location, articleServic
 	$('#summernote').summernote({
 		lang : 'zh-CN',
 		placeholder:'请输入文章内容',
-		height: 300,
+		minHeight: 300,
 		dialogsFade: true,
 		dialogsInBody : true,
 		callbacks:{
-			onImageUpload : sendImage
+			onImageUpload : sendFile
 		}
 	});
 	
-
-	function sendImage(files, editor, $editable) {
-		var promise = articleService.uploadImages(files);
-		promise.then(function(result) {
-            if (result.data.success) {
-            	var imageUrls = result.data.message;
+	function sendFile(files){
+		articleService.uploadImages(files,function(result){
+            if (result.success) {
+            	var imageUrls = result.message;
             	for (i in imageUrls) {
-					$('.summernote').summernote('editor.insertImage',
-							imageUrls[i]);
+					$('#summernote').summernote('insertImage',
+							imageUrls[i],'img');
 				}
             } else {
-            	console.log(result.data.message);
+            	console.log(result.message);
             }
-        }, function(result) {
-        	alert("执行到这里" + result);
-        },function(result){
-        	alert("执行到这里   1" + result);
-        });
+		},function(result){
+			alert("执行到这里" + result);
+		});
 	};
+
 });
 
 

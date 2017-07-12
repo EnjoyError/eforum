@@ -6,17 +6,21 @@ import org.eforum.entity.Article;
 import org.eforum.exception.ServiceException;
 import org.eforum.repository.ArticleRepository;
 import org.eforum.service.ArticleService;
+import org.eforum.service.FileService;
 import org.eforum.util.EntityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleRepository articleRepository;
-	
+	@Autowired
+	private FileService fileService;
+
 	@Override
 	public Page<Article> listArticle(int pageNumber, int pageSize) {
 		return articleRepository.findAll(new PageRequest(pageNumber - 1, pageSize));
@@ -25,7 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article findArticleById(Long id) {
 		Article article = articleRepository.findOne(id);
-		if(null == article){
+		if (null == article) {
 			throw new ServiceException("未找到该帖子，或者该帖子已被删除！");
 		}
 		return article;
@@ -55,5 +59,11 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		articleRepository.save(willSaveArticle);
 		return willSaveArticle;
+	}
+
+	@Override
+	public List<String> saveImagesOfArticle(MultipartFile[] images) {
+		List<String> imageNames = fileService.saveImages(images);
+		return imageNames;
 	}
 }

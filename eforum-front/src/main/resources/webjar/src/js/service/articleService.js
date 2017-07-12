@@ -42,13 +42,11 @@ app.service('articleService', function($http) {
 		return articleList.data;
 	}
 	
-	this.uploadImages = function(images){
+	this.uploadImages = function(images,successCallback,errorCallback){
 		var fd = new FormData();
         for (var i=0; i<images.length; i++) {
             fd.append("images", images[i]);
         }
-		return rest.postForMultipart('article/uploadImages',{
-			images : fd
-		});
+		rest.uploadFile('article/uploadImages',fd,successCallback,errorCallback);
 	}
 });
