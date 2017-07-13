@@ -9,6 +9,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.eforum.constant.Constants;
 import org.eforum.entity.User;
 import org.eforum.front.vo.UserVo;
 import org.eforum.produces.ResultJson;
@@ -54,7 +55,7 @@ public class PrivilegeController extends BaseController {
             return new ResultJson(false, e.getMessage());
         }
         User findUser = userService.findUserByName(userVo.getName());
-        subject.getSession().setAttribute("frontUser", findUser);
+        subject.getSession().setAttribute(Constants.CURRENT_USER_IN_SESSION, findUser);
         Map<String,String> messageMap = new HashMap<String,String>();
         messageMap.put("username",(String)subject.getPrincipal());
         return new ResultJson(true, messageMap);

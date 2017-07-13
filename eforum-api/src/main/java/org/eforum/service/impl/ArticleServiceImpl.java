@@ -10,8 +10,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.eforum.constant.Constants;
 import org.eforum.entity.Article;
-import org.eforum.entity.constant.Constants;
 import org.eforum.exception.ServiceException;
 import org.eforum.repository.ArticleRepository;
 import org.eforum.service.ArticleService;

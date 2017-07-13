@@ -4,14 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eforum.constant.Constants;
+import org.eforum.constant.FileType;
 import org.eforum.entity.FileInfo;
 import org.eforum.entity.GlobalParam;
-import org.eforum.entity.constant.Constants;
-import org.eforum.entity.constant.FileType;
 import org.eforum.exception.ServiceException;
 import org.eforum.repository.CommonDao;
 import org.eforum.service.FileService;
 import org.eforum.util.CommonUtils;
+import org.eforum.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -88,11 +89,14 @@ public class FileServiceImpl implements FileService {
 	 * @return
 	 */
 	private String getFileExtensionName(String originalFileName) {
-		if (null == originalFileName || originalFileName.length() < 3) {
+		if (StringUtils.isNullOrEmpty(originalFileName)) {
 			throw new ServiceException("文件名不正确");
 		}
+		if (!originalFileName.contains(".")) {
+			return Constants.DEFAULT_FILE_EXTENSION_NAME;
+		}
 		String extensionName = originalFileName.substring(originalFileName.lastIndexOf("."));
-		if (null == extensionName || extensionName.length() < 2) {
+		if (null == extensionName) {
 			throw new ServiceException("文件扩展名不正确");
 		}
 		return extensionName;

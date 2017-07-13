@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.eforum.constant.Constants;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
 import org.eforum.front.vo.UserVo;
@@ -53,7 +54,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/user/changePassword", method = RequestMethod.POST)
 	public Object changePassword(String newPassword) {
 		Subject subject = SecurityUtils.getSubject();
-		User user = (User) subject.getSession().getAttribute("frontUser");
+		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
 		newPassword = DigestUtils.md5Hex(newPassword);
 		userService.changePassword(user, newPassword);
 		return new ResultJson(true, "修改密码成功");
