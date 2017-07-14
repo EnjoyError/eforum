@@ -17,6 +17,7 @@ import org.eforum.repository.ArticleRepository;
 import org.eforum.service.ArticleService;
 import org.eforum.service.FileService;
 import org.eforum.util.EntityUtil;
+import org.eforum.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -57,6 +58,9 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article saveOrUpdate(Article article) {
 		Article willSaveArticle = null;
+		if (StringUtils.isNullOrEmpty(article.getTitle()) || StringUtils.isNullOrEmpty(article.getContent())) {
+			throw new ServiceException("标题或内容不能是空的！");
+		}
 		if (!article.isNew()) {
 			willSaveArticle = articleRepository.findOne(article.getId());
 			if (null == willSaveArticle) {
