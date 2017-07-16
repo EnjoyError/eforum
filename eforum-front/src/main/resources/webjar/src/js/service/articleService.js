@@ -8,7 +8,7 @@ app.service('articleService', function($http) {
 	    return rest.get('/article/getArticleList', {
 	        pageNumber: pageNumber,
             pageSize: pageSize
-	    })
+	    });
 	}
 
 	this.getArticleById = function(id) {

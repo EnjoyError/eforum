@@ -28,15 +28,15 @@ public class CommonDaoImpl implements CommonDao {
 	}
 
 	@Override
-	public List<BaseEntity> findByHql(String hql, String paramKey, Object paramValue) {
+	public List<? extends Object> findByHql(String hql, String paramKey, Object paramValue) {
 		Query query = entityManager.createQuery(hql);
 		query.setParameter(paramKey, paramValue);
 		return query.getResultList();
 	}
 
 	@Override
-	public BaseEntity findUniqueByHql(String hql, String paramKey, Object paramValue) {
-		List<BaseEntity> entitys = findByHql(hql, paramKey, paramValue);
+	public Object findUniqueByHql(String hql, String paramKey, Object paramValue) {
+		List<Object> entitys = (List<Object>) findByHql(hql, paramKey, paramValue);
 		if (null == entitys || entitys.size() < 1) {
 			throw new ServiceException("查询结果为空");
 		}

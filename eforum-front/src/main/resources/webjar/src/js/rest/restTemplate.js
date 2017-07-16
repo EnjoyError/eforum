@@ -22,6 +22,19 @@ RestTemplate.fn.post = function(url, params) {
     });
     return promise;
 }
+
+RestTemplate.fn.postForForm = function(url, params) {
+    params = params || {};
+    var promise = this.$http({
+        method: 'POST',
+        headers:{
+        	"Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        url: url,
+        data: $.param(params)
+    });
+    return promise;
+}
 	
 RestTemplate.fn.uploadFile = function(url,data,successCallback,errorCallback) {
 	 $.ajax({

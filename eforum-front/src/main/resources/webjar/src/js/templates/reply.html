@@ -1,0 +1,25 @@
+<div>
+	<div id="summernote"></div>
+	<div ng-controller="replyController">
+		<div class="eforum-view-article-reply">
+			<div>
+				<button ng-click="commitReply()">回复</button>
+			</div>
+		</div>
+		<br> <br>
+		<div class="eforum-view-article-view-reply" ng-repeat="x in replys" >
+			<div class="eforum-view-article-view-reply-panel panel">
+				<div class="eforum-view-article-tile panel-heading">
+					<div
+						class="eforum-view-article-view-reply-head eforum-item-group-text row topic">
+						<p class="col-xs-1" class="list-group-item-text">{{x.createUser.name}}</p>
+						<p class="col-xs-11" class="list-group-item-text">回复于
+							{{x.createTime}}</p>
+					</div>
+				</div>
+				<div class="eforum-view-article-view-reply-text panel-body" data-ng-bind-html="x.content">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

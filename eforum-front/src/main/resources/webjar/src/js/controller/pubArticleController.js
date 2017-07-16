@@ -22,7 +22,7 @@ app.controller('pubArticleController', function($scope, $location, articleServic
 	};
 	$('#summernote').summernote({
 		lang : 'zh-CN',
-		placeholder:'请输入文章内容',
+		placeholder:'在这里输入文章内容',
 		minHeight: 300,
 		dialogsFade: true,
 		dialogsInBody : true,

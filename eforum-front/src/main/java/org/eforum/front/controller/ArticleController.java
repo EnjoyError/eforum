@@ -56,7 +56,7 @@ public class ArticleController extends BaseController {
 	public Object findSuggestionArticle(int pageSize) {
 		return articleService.findSuggestionArticle(pageSize);
 	}
-
+	
 	@ApiOperation(value = "文章接口", notes = "获取文章评论", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/{articleId}/comment", method = RequestMethod.GET)
 	public Object listComment(@PathVariable("articleId") Long articleId, Integer pageNumber, Integer pageSize) {

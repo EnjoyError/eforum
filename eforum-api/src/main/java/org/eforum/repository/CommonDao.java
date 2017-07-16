@@ -36,7 +36,7 @@ public interface CommonDao {
 	 * @param paramKey
 	 * @param paramValue
 	 */
-	public List<BaseEntity> findByHql(String hql, String paramKey, Object paramValue);
+	public List<? extends Object> findByHql(String hql, String paramKey, Object paramValue);
 
 	/**
 	 * 根据hql查找唯一的结果，如果为空或者多余一条结果，则抛出异常
@@ -45,5 +45,5 @@ public interface CommonDao {
 	 * @param paramKey
 	 * @param paramValue
 	 */
-	public BaseEntity findUniqueByHql(String hql, String paramKey, Object paramValue);
+	public Object findUniqueByHql(String hql, String paramKey, Object paramValue);
 }
