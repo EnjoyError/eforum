@@ -25,9 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class ArticleServiceImpl implements ArticleService {
-	@Autowired
-	private ArticleRepository articleRepository;
+public class ArticleServiceImpl extends BaseServiceImpl implements ArticleService {
 	@Autowired
 	private FileService fileService;
 
@@ -58,7 +56,8 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article saveOrUpdate(Article article) {
 		Article willSaveArticle = null;
-		if (StringUtils.isNullOrEmpty(article.getTitle()) || StringUtils.isNullOrEmpty(article.getContent())) {
+		if (StringUtils.isNullOrEmpty(article.getTitle()) || StringUtils.isNullOrEmpty(article.getContent())
+				|| "<p><br></p>".equals(article.getContent())) {
 			throw new ServiceException("标题或内容不能是空的！");
 		}
 		if (!article.isNew()) {

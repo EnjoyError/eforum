@@ -2,8 +2,8 @@
 	<div class="col-md-9">
 		<div class="panel panel-primary">
 			<div class="eforum-view-article-tile panel-heading">
-				<p hidden>{{articleId}}</p>
-				<h4 class="panel-title">{{title}}</h4>
+				<p hidden>{{article.id}}</p>
+				<h4 class="panel-title">{{article.title}}</h4>
 				<div class="eforum-item-group-text row topic">
 					<p class="col-xs-2" class="list-group-item-text">创建者 {{article.createUser.name}}</p>
 					<p class="col-xs-4" class="list-group-item-text">更新于 {{article.lastUpdateTime}}</p>
@@ -13,7 +13,7 @@
 			</div>
 			<div>
 				<div class="panel-body view-article-content"
-					data-ng-bind-html="content"></div>
+					data-ng-bind-html="article.content"></div>
 			</div>
 		</div>
 		<br> <br>

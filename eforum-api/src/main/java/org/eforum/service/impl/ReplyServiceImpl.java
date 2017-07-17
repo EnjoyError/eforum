@@ -21,7 +21,7 @@ public class ReplyServiceImpl extends BaseServiceImpl implements ReplyService {
 		if (null == articleId) {
 			throw new ServiceException("所属帖子ID不能为空!");
 		}
-		if (StringUtils.isNullOrEmpty(replyContent)) {
+		if (StringUtils.isNullOrEmpty(replyContent) || "<p><br></p>".equals(replyContent)) {
 			throw new ServiceException("回复内容不能为空！");
 		}
 		Article article = articleService.findArticleById(articleId);
