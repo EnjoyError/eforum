@@ -13,14 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.eforum.constant.Constants;
 import org.eforum.entity.Article;
 import org.eforum.exception.ServiceException;
-import org.eforum.repository.ArticleRepository;
 import org.eforum.service.ArticleService;
 import org.eforum.service.FileService;
 import org.eforum.util.EntityUtil;
 import org.eforum.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,14 +26,15 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 	@Autowired
 	private FileService fileService;
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Page<Article> listArticle(int pageNumber, int pageSize) {
-		return articleRepository.findAll(new PageRequest(pageNumber - 1, pageSize));
+	public List<Article> listArticle(int pageNumber, int pageSize) {
+		return dao.pagingQuery(Article.class, pageNumber, pageSize);
 	}
 
 	@Override
 	public Article findArticleById(Long id) {
-		Article article = articleRepository.findOne(id);
+		Article article = dao.get(Article.class, id);
 		if (null == article) {
 			throw new ServiceException("未找到该帖子，或者该帖子已被删除！");
 		}
@@ -45,12 +43,7 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 
 	@Override
 	public List<Article> findSuggestionArticle(int pageSize) {
-		PageRequest pageRequest = new PageRequest(0, pageSize);
-		Page<Article> page = articleRepository.findAll((root, query, cb) -> {
-			query.orderBy(cb.asc(root.get("weight").as(Integer.class)));
-			return query.getRestriction();
-		}, pageRequest);
-		return page.getContent();
+		return null;
 	}
 
 	@Override
@@ -61,7 +54,7 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 			throw new ServiceException("标题或内容不能是空的！");
 		}
 		if (!article.isNew()) {
-			willSaveArticle = articleRepository.findOne(article.getId());
+			willSaveArticle = dao.get(Article.class, article.getId());
 			if (null == willSaveArticle) {
 				throw new ServiceException("未找到id为【" + article.getId() + "】的帖子");
 			}
@@ -69,7 +62,7 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 		} else {
 			willSaveArticle = article;
 		}
-		articleRepository.save(willSaveArticle);
+		dao.save(willSaveArticle);
 		return willSaveArticle;
 	}
 

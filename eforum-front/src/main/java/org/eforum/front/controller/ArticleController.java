@@ -35,11 +35,10 @@ public class ArticleController extends BaseController {
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
 	public Object listArticle(Integer pageNumber, Integer pageSize) {
-		Page<Article> page = articleService.listArticle(pageNumber, pageSize);
+		List<Article> page = articleService.listArticle(pageNumber, pageSize);
 		PageVo<Article> pageVo = new PageVo<>();
-		pageVo.setData(page.getContent());
+		pageVo.setData(page);
 		pageVo.setPageSize(pageSize);
-		pageVo.setPageCount(page.getTotalPages());
 		pageVo.setPageIndex(pageNumber);
 		return new ResultJson(true, pageVo);
 	}

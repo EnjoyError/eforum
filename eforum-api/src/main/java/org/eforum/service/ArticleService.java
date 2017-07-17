@@ -5,11 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eforum.entity.Article;
-import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ArticleService {
-	Page<Article> listArticle(int pageNumber, int pageSize);
+	List<Article> listArticle(int pageNumber, int pageSize);
 
 	Article findArticleById(Long id);
 

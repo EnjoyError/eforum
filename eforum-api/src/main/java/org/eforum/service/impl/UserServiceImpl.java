@@ -1,38 +1,34 @@
 package org.eforum.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
-import org.eforum.repository.UserRepository;
 import org.eforum.service.UserService;
 import org.eforum.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-@EnableTransactionManagement(proxyTargetClass = true)
-public class UserServiceImpl implements UserService {
-	private UserRepository userRepository;
-	@Autowired
-	public void setUserRepository(UserRepository userRepository){
-		this.userRepository = userRepository;
-	}
+public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 	@Override
 	public User findUserById(Long id) {
-		return userRepository.findOne(id);
+		return dao.get(User.class, id);
 	}
 
 	@Override
 	public User findUserByName(String username) {
-		return userRepository.findByName(username);
+		String hql = "obj.name = :name";
+		return dao.findUniqueByHql(User.class, hql, "name", username);
 	}
 
 	@Override
 	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		String hql = "obj.email = :email";
+		return dao.findUniqueByHql(User.class, hql, "email", email);
 	}
 
 	@Override
@@ -45,21 +41,26 @@ public class UserServiceImpl implements UserService {
 		if (StringUtils.isNullOrEmpty(username)) {
 			throw new ServiceException("用户名必填!");
 		}
-		User existUser = userRepository.findByEmail(email);
+		User existUser = findUserByEmail(email);
 		if (null != existUser) {
 			throw new ServiceException("该email已被使用!");
 		}
-		existUser = userRepository.findByName(username);
-		
+		existUser = findUserByName(username);
+
 		if (null != existUser) {
 			throw new ServiceException("该用户名已被使用!");
 		}
-		return userRepository.save(user);
+		dao.save(user);
+		return user;
 	}
 
 	@Override
 	public User findLoginUser(String username, String password) {
-		User user = userRepository.findByNameAndPassword(username, password);
+		String hql = "obj.name = :name AND obj.password = :password";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("name", username);
+		map.put("password", password);
+		User user = dao.findUniqueByHql(User.class, hql, map);
 		if (null == user) {
 			throw new ServiceException("密码错误或用户名不存在");
 		}
@@ -71,8 +72,8 @@ public class UserServiceImpl implements UserService {
 		if (StringUtils.isNullOrEmpty(newPassword)) {
 			throw new ServiceException("新密码不能为空!");
 		}
-		user = userRepository.findOne(user.getId());
+		user = dao.get(User.class, user.getId());
 		user.setPassword(newPassword);
-		userRepository.save(user);
+		dao.save(user);
 	}
 }
