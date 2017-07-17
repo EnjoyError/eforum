@@ -29,7 +29,8 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Article> listArticle(int pageNumber, int pageSize) {
-		return dao.pagingQuery(Article.class, pageNumber, pageSize);
+		String hql = "FROM Article art WHERE 1=1 ORDER BY art.lastUpdateTime DESC";
+		return dao.pagingQuery(hql, pageNumber, pageSize);
 	}
 
 	@Override

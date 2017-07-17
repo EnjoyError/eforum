@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.eforum.entity.Reply;
 
+import vo.ArticleVo;
+
 public interface ReplyService {
 
 	public void commitReply(Long articleId, String replyContent);
@@ -11,5 +13,7 @@ public interface ReplyService {
 	public List<Reply> getReplyByArticleId(Long articleId);
 
 	public Long getReplyCountByArticleId(Long articleId);
+
+	public void refreshReplyCount(List<ArticleVo> vos);
 
 }

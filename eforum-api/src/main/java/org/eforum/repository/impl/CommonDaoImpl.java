@@ -63,13 +63,18 @@ public class CommonDaoImpl implements CommonDao {
 	}
 
 	@Override
-	public List pagingQuery(Class clazz, int pageNumber, int pageSize) {
-		String hql = "FROM " + clazz.getName() + " obj WHERE 1=1";
+	public List pagingQuery(String hql, int pageNumber, int pageSize) {
 		Query query = entityManager.createQuery(hql);
 		query.setFirstResult(pageNumber - 1);
 		query.setMaxResults(pageSize);
 		query.getResultList();
 		return query.getResultList();
+	}
+
+	@Override
+	public List pagingQuery(Class clazz, int pageNumber, int pageSize) {
+		String hql = "FROM " + clazz.getName() + " obj WHERE 1=1";
+		return pagingQuery(hql, pageNumber, pageSize);
 	}
 
 	@Override

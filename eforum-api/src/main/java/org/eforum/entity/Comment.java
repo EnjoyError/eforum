@@ -4,11 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * 评论
  */
-@Entity(name = "comment")
+@Entity(name = "Comment")
+@Table(name = "COMMENT")
 public class Comment extends BaseEntity{
 	/**
 	 * 文章主键

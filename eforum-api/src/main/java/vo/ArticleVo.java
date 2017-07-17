@@ -1,6 +1,8 @@
-package org.eforum.front.vo;
+package vo;
 
 import java.util.Date;
+
+import org.eforum.entity.User;
 
 /**
  * 帖子Vo
@@ -29,6 +31,45 @@ public class ArticleVo {
 	 * 创建时间
 	 */
 	private Date createTime;
+
+	/**
+	 * 最后更新时间
+	 */
+	private Date lastUpdateTime;
+
+	/**
+	 * 创建人
+	 */
+	private User createUser;
+
+	/**
+	 * 总回复数
+	 */
+	private Long replyCount;
+
+	public Long getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(Long replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	public User getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(User createUser) {
+		this.createUser = createUser;
+	}
 
 	public Long getId() {
 		return id;

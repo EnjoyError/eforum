@@ -11,6 +11,8 @@ import org.eforum.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vo.ArticleVo;
+
 @Service
 public class ReplyServiceImpl extends BaseServiceImpl implements ReplyService {
 	@Autowired
@@ -50,5 +52,13 @@ public class ReplyServiceImpl extends BaseServiceImpl implements ReplyService {
 		String hql = "SELECT COUNT(*) FROM Reply reply WHERE reply.article.id = :id";
 		Long replyCount = (Long) dao.findUniqueByHql(hql, "id", articleId);
 		return replyCount;
+	}
+
+	@Override
+	public void refreshReplyCount(List<ArticleVo> vos) {
+		for (ArticleVo vo : vos) {
+			Long count = getReplyCountByArticleId(vo.getId());
+			vo.setReplyCount(count);
+		}
 	}
 }

@@ -112,4 +112,15 @@ public interface CommonDao {
 	 * @return
 	 */
 	public List<? extends BaseEntity> findByHql(Class<?> clazz, String whereSub, Map<String, Object> condition);
+
+	/**
+	 * 分页查询
+	 * 
+	 * @param hql
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public List pagingQuery(String hql, int pageNumber, int pageSize);
 }

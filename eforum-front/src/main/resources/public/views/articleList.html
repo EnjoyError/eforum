@@ -13,13 +13,13 @@
 					创建者 {{x.createUser.name}}
 				</p>
 				<p class="col-xs-4" class="list-group-item-text">
-					更新于 {{x.lastUpdateTime}}
+					更新于 {{x.lastUpdateTime|date:"yyyy-MM-dd HH:mm:ss"}}
 				</p>
 				<p class="col-xs-4" class="list-group-item-text">
-					创建于 {{x.createTime}}
+					创建于 {{x.createTime|date:"yyyy-MM-dd HH:mm:ss"}}
 				</p>
 				<p class="col-xs-2" class="list-group-item-text">
-					432 条回复
+					{{x.replyCount}} 条回复
 				</p>
 		</div>
 	</div>
