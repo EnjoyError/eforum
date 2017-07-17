@@ -15,20 +15,8 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
     });
 	
 	$scope.viewArticle = function(id){
-		var promise = articleService.getArticleById(id);
-		promise.then(function(result) {
-	        if (result.data.success) {
-	        	var article = result.data.message;
-	            $location.path('/article').search({
-	            	article : article
-	            });
-	        } else {
-	            alert(result.data.message);
-	        }
-	    }, function(result) {
-	    	alert("执行到这里" + result);
-	    },function(result){
-	    	alert("执行到这里   1" + result);
-	    });
+		 $location.path('/article').search({
+         	id : id
+         });
 	}
 });

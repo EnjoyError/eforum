@@ -1,6 +1,6 @@
 var app = require('../app');
 
-app.controller('replyController', function($scope, $sce, $routeParams, replyService, articleService) {
+app.controller('replyController', function($scope, $sce, $window, $routeParams, replyService, articleService) {
 	$scope.commitReply = function(){
 		var replyContent = $('#summernote').summernote('code');
 		var articleId = $scope.$parent.articleId;
@@ -8,7 +8,8 @@ app.controller('replyController', function($scope, $sce, $routeParams, replyServ
 		promise.then(function(result) {
             if (result.data.success) {
             	alert("回复成功");
-//            	$location.path("/articleList");
+            	refreshReply($scope,$sce);
+            	var replyContent = $('#summernote').summernote('code',"");
             } else {
                 alert(result.data.message);
             }
@@ -17,23 +18,27 @@ app.controller('replyController', function($scope, $sce, $routeParams, replyServ
         },function(result){
         	alert("执行到这里   1" + result);
         });
-	};
+	}
 	
-	var promise = replyService.getReplyByArticleId($scope.$parent.article.id);
-	promise.then(function(result) {
-        if (result.data.success) {
-        	$scope.replys = result.data.message;
-        	angular.forEach($scope.replys,function(reply){
-        		reply.content = $sce.trustAsHtml(reply.content);
-        	});
-        } else {
-            alert(result.data.message);
-        }
-    }, function(result) {
-    	alert("执行到这里" + result);
-    },function(result){
-    	alert("执行到这里   1" + result);
-    });
+	var refreshReply = function($scope,$sce){
+		var promise = replyService.getReplyByArticleId($scope.$parent.articleId);
+		promise.then(function(result) {
+	        if (result.data.success) {
+	        	$scope.replys = result.data.message;
+	        	angular.forEach($scope.replys,function(reply){
+	        		reply.content = $sce.trustAsHtml(reply.content);
+	        	});
+	        } else {
+	            alert(result.data.message);
+	        }
+	    }, function(result) {
+	    	alert("执行到这里" + result);
+	    },function(result){
+	    	alert("执行到这里   1" + result);
+	    });
+	}
+	
+	refreshReply($scope,$sce);
 	
 	$('#summernote').summernote({
 		lang : 'zh-CN',
