@@ -5,15 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eforum.entity.Article;
-import org.eforum.entity.Comment;
 import org.eforum.front.util.ConvertUtil;
 import org.eforum.front.vo.ArticleVo;
 import org.eforum.produces.PageVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.ArticleService;
-import org.eforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,8 +26,6 @@ import io.swagger.annotations.ApiOperation;
 public class ArticleController extends BaseController {
 	@Autowired
 	private ArticleService articleService;
-	@Autowired
-	private CommentService commentService;
 
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
@@ -55,19 +50,6 @@ public class ArticleController extends BaseController {
 	public Object findSuggestionArticle(int pageSize) {
 		return articleService.findSuggestionArticle(pageSize);
 	}
-	
-	@ApiOperation(value = "文章接口", notes = "获取文章评论", code = 200, produces = "application/json")
-	@RequestMapping(value = "/article/{articleId}/comment", method = RequestMethod.GET)
-	public Object listComment(@PathVariable("articleId") Long articleId, Integer pageNumber, Integer pageSize) {
-		Article article = articleService.findArticleById(articleId);
-		Page<Comment> page = commentService.listCommentByArticle(article, pageNumber, pageSize);
-		PageVo<Comment> pageVo = new PageVo<>();
-		pageVo.setData(page.getContent());
-		pageVo.setPageCount(page.getTotalPages());
-		pageVo.setPageSize(pageSize);
-		pageVo.setPageIndex(pageNumber + 1);
-		return pageVo;
-	}
 
 	@ApiOperation(value = "文章接口", notes = "发布帖子", produces = "application/json")
 	@RequestMapping(value = "/article/publish")
@@ -84,9 +66,9 @@ public class ArticleController extends BaseController {
 		List<String> imageRequertPaths = articleService.saveImagesOfArticle(images);
 		return new ResultJson(true, imageRequertPaths);
 	}
-	
+
 	@RequestMapping(value = "/article/image/{imageName:.*}", method = RequestMethod.GET)
-	public void downloadImage(@PathVariable("imageName")String imageName,HttpServletResponse response){
-		articleService.downloadImageOfArticle(imageName,response);
+	public void downloadImage(@PathVariable("imageName") String imageName, HttpServletResponse response) {
+		articleService.downloadImageOfArticle(imageName, response);
 	}
 }
