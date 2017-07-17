@@ -1,5 +1,6 @@
 package org.eforum.repository.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -7,7 +8,11 @@ import java.util.Map.Entry;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.eforum.constant.Constants;
 import org.eforum.entity.BaseEntity;
+import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
 import org.eforum.repository.CommonDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +31,15 @@ public class CommonDaoImpl implements CommonDao {
 
 	@Override
 	public void save(BaseEntity entity) {
+		Subject subject = SecurityUtils.getSubject();
+		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
+		Date date = new Date();
+		if (entity.isNew()) {
+			entity.setCreateTime(date);
+			entity.setCreateUser(user);
+		}
+		entity.setLastUpdateTime(date);
+		entity.setLastUpdateUser(user);
 		entityManager.persist(entity);
 	}
 
