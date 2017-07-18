@@ -33,14 +33,7 @@ public class CommonDaoImpl implements CommonDao {
 	public void save(BaseEntity entity) {
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
-		Date date = new Date();
-		if (entity.isNew()) {
-			entity.setCreateTime(date);
-			entity.setCreateUser(user);
-		}
-		entity.setLastUpdateTime(date);
-		entity.setLastUpdateUser(user);
-		entityManager.persist(entity);
+		save(entity, user);
 	}
 
 	@Override
@@ -53,11 +46,11 @@ public class CommonDaoImpl implements CommonDao {
 	@Override
 	public Object findUniqueByHql(String hql, String paramKey, Object paramValue) {
 		List<Object> entitys = (List<Object>) findByHql(hql, paramKey, paramValue);
-		if (null == entitys || entitys.size() < 1) {
-			throw new ServiceException("查询结果为空");
-		}
 		if (entitys.size() > 1) {
 			throw new ServiceException("查询结果不唯一");
+		}
+		if (entitys.size() == 0) {
+			return null;
 		}
 		return entitys.get(0);
 	}
@@ -73,25 +66,26 @@ public class CommonDaoImpl implements CommonDao {
 
 	@Override
 	public List pagingQuery(Class clazz, int pageNumber, int pageSize) {
-		String hql = "FROM " + clazz.getName() + " obj WHERE 1=1";
+		String hql = "FROM " + clazz.getSimpleName() + " obj WHERE 1=1";
 		return pagingQuery(hql, pageNumber, pageSize);
 	}
 
 	@Override
 	public <T extends BaseEntity> T findUniqueByHql(Class<T> clazz, String whereSub, String paramKey,
 			Object paramValue) {
-		String hql = "FROM " + clazz.getName() + " obj WHERE " + whereSub;
+		String hql = "FROM " + clazz.getSimpleName() + " obj WHERE " + whereSub;
+
 		return (T) findUniqueByHql(hql, paramKey, paramValue);
 	}
 
 	@Override
 	public BaseEntity findUniqueByHql(String hql, Map<String, Object> condition) {
 		List<? extends BaseEntity> entitys = findByHql(hql, condition);
-		if (null == entitys || entitys.size() < 1) {
-			throw new ServiceException("查询结果为空");
-		}
 		if (entitys.size() > 1) {
 			throw new ServiceException("查询结果不唯一");
+		}
+		if (entitys.size() == 0) {
+			return null;
 		}
 		return entitys.get(0);
 	}
@@ -107,14 +101,26 @@ public class CommonDaoImpl implements CommonDao {
 
 	@Override
 	public List<? extends BaseEntity> findByHql(Class<?> clazz, String whereSub, Map<String, Object> condition) {
-		String hql = "FROM " + clazz.getName() + " obj WHERE " + whereSub;
+		String hql = "FROM " + clazz.getSimpleName() + " obj WHERE " + whereSub;
 		return findByHql(hql, condition);
 	}
 
 	@Override
 	public <T extends BaseEntity> T findUniqueByHql(Class<T> clazz, String whereSub, Map<String, Object> condition) {
-		String hql = "FROM " + clazz.getName() + " obj WHERE " + whereSub;
+		String hql = "FROM " + clazz.getSimpleName() + " obj WHERE " + whereSub;
 		return (T) findUniqueByHql(hql, condition);
+	}
+
+	@Override
+	public <T extends BaseEntity> void save(T entity, User user) {
+		Date date = new Date();
+		if (entity.isNew()) {
+			entity.setCreateTime(date);
+			entity.setCreateUser(user);
+		}
+		entity.setLastUpdateTime(date);
+		entity.setLastUpdateUser(user);
+		entityManager.persist(entity);
 	}
 
 }

@@ -26,12 +26,14 @@ public class ReplyController extends BaseController {
 	}
 
 	@RequestMapping("/getReplyByArticleId")
+	@Transactional
 	public Object getReplyByArticleId(@RequestParam(value = "articleId") Long articleId) {
 		List<Reply> replys = replyService.getReplyByArticleId(articleId);
 		return new ResultJson(true, replys);
 	}
 
 	@RequestMapping("/getReplyCountByArticleId")
+	@Transactional
 	public Object getReplyCountByArticleId(@RequestParam(value = "articleId") Long articleId) {
 		Long replyCount = replyService.getReplyCountByArticleId(articleId);
 		return new ResultJson(true, replyCount);

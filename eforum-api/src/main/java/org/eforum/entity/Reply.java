@@ -3,6 +3,7 @@ package org.eforum.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,6 +22,7 @@ public class Reply extends BaseEntity {
 	/**
 	 * 文章内容
 	 */
+	@Lob 
 	@Column(columnDefinition = "TEXT")
 	private String content;
 

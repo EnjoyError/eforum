@@ -11,6 +11,7 @@ import org.eforum.front.vo.UserVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,15 +27,17 @@ public class UserController extends BaseController {
 
 	@ApiOperation(value = "用户接口", notes = "新增用户", code = 200, produces = "application/json")
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@Transactional
 	public Object addUser(@RequestBody UserVo userVo) {
 		User user = new User();
 		try {
 			BeanUtils.copyProperties(user, userVo);
-			user.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-			userService.addUser(user);
 		} catch (Exception e) {
 			throw new ServiceException("保存用户信息出错", e);
 		}
+		user.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+		userService.addUser(user);
+
 		return new ResultJson(true, "保存用户信息成功");
 	}
 
@@ -52,6 +55,7 @@ public class UserController extends BaseController {
 
 	@ApiOperation(value = "用户接口", notes = "修改密码", code = 200, produces = "application/json")
 	@RequestMapping(value = "/user/changePassword", method = RequestMethod.POST)
+	@Transactional
 	public Object changePassword(String newPassword) {
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);

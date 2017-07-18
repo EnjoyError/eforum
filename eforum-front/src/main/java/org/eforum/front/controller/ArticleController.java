@@ -34,6 +34,7 @@ public class ArticleController extends BaseController {
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
+	@Transactional
 	public Object listArticle(Integer pageNumber, Integer pageSize) {
 		List<Article> page = articleService.listArticle(pageNumber, pageSize);
 		List<ArticleVo> vos = ConvertUtil.convertEntityToVo(page, ArticleVo.class);
@@ -47,6 +48,7 @@ public class ArticleController extends BaseController {
 
 	@ApiOperation(value = "文章接口", notes = "获取文章", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
+	@Transactional
 	public Object findArticle(@PathVariable("id") Long id) {
 		Article article = articleService.findArticleById(id);
 		return new ResultJson(true, article);
@@ -54,6 +56,7 @@ public class ArticleController extends BaseController {
 
 	@ApiOperation(value = "文章接口", notes = "获取推荐文章", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/suggestion", method = RequestMethod.GET)
+	@Transactional
 	public Object findSuggestionArticle(int pageSize) {
 		return articleService.findSuggestionArticle(pageSize);
 	}
@@ -76,6 +79,7 @@ public class ArticleController extends BaseController {
 	}
 
 	@RequestMapping(value = "/article/image/{imageName:.*}", method = RequestMethod.GET)
+	@Transactional
 	public void downloadImage(@PathVariable("imageName") String imageName, HttpServletResponse response) {
 		articleService.downloadImageOfArticle(imageName, response);
 	}

@@ -45,6 +45,26 @@ app.controller('replyController', function($scope, $sce, $window, $routeParams, 
 		placeholder:'在这里输入你的回复',
 		minHeight: 100,
 		dialogsFade: true,
-		dialogsInBody : true
+		dialogsInBody : true,
+		callbacks:{
+			onImageUpload : sendFile
+		}
 	});
+	
+	function sendFile(files){
+		articleService.uploadImages(files,function(result){
+            if (result.success) {
+            	var imageUrls = result.message;
+            	for (i in imageUrls) {
+					$('#summernote').summernote('insertImage',
+							imageUrls[i],'img');
+				}
+            } else {
+            	console.log(result.message);
+            }
+		},function(result){
+			alert("执行到这里" + result);
+		});
+	}
+	
 });

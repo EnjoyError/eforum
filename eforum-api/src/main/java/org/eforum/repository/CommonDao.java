@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eforum.entity.BaseEntity;
+import org.eforum.entity.User;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -29,6 +30,14 @@ public interface CommonDao {
 	 */
 	@Transactional
 	public <T extends BaseEntity> void save(T entity);
+
+	/**
+	 * 使用指定的用户保存entity
+	 * 
+	 * @param entity
+	 * @param user
+	 */
+	public <T extends BaseEntity> void save(T entity, User user);
 
 	/**
 	 * 根据hql查找

@@ -17,6 +17,7 @@ import org.eforum.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ public class PrivilegeController extends BaseController {
 
     @ApiOperation(value = "权限接口", notes = "用户登录", code = 200, produces = "application/json")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @Transactional
     public Object login(Model model, @RequestBody UserVo userVo) {
         UsernamePasswordToken token = new UsernamePasswordToken(userVo.getName(), userVo.getPassword());
         if (userVo.isRememberMe()) {

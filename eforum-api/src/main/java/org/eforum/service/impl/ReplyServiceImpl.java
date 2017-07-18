@@ -2,8 +2,12 @@ package org.eforum.service.impl;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.eforum.constant.Constants;
 import org.eforum.entity.Article;
 import org.eforum.entity.Reply;
+import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
 import org.eforum.service.ArticleService;
 import org.eforum.service.ReplyService;
@@ -33,7 +37,14 @@ public class ReplyServiceImpl extends BaseServiceImpl implements ReplyService {
 		Reply reply = new Reply();
 		reply.setContent(replyContent);
 		reply.setArticle(article);
-		dao.save(reply);
+		Subject subject = SecurityUtils.getSubject();
+		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
+		if (null == user) {
+			user = dao.get(User.class, 1L);
+			dao.save(reply, user);
+		} else {
+			dao.save(reply);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
