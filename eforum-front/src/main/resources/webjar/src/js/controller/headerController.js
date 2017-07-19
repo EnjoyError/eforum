@@ -13,4 +13,27 @@ app.controller('headerController', function($scope, $location) {
 			$scope.username = null;
 		}
 	});
+	
+	//监听路由时间刷新head样式
+	$scope.$on("$routeChangeStart", function(event, next, current){
+			if(next.$$route.originalPath == "/" || next.$$route.originalPath == ""){
+				cleanActive($scope);
+				$scope.main = "active";
+			}
+			if(next.$$route.originalPath == "/about"){
+				cleanActive($scope);
+				$scope.about = "active";
+			}
+			if(next.$$route.originalPath == "/articleList"){
+				cleanActive($scope);
+				$scope.articleList = "active";
+			}
+		}
+	);
+	
+	function cleanActive($scope){
+		$scope.main = "";
+		$scope.about = "";
+		$scope.articleList = "";
+	}
 });
