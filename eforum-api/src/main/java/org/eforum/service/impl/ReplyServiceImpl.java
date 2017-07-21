@@ -45,6 +45,7 @@ public class ReplyServiceImpl extends BaseServiceImpl implements ReplyService {
 		} else {
 			dao.save(reply);
 		}
+		articleService.refreshLastUpdateTimeForAll(articleId, reply.getLastUpdateTime());
 	}
 
 	@SuppressWarnings("unchecked")

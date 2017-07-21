@@ -35,7 +35,7 @@ public class ArticleVo {
 	/**
 	 * 最后更新时间
 	 */
-	private Date lastUpdateTime;
+	private Date lastUpdateTimeForAll;
 
 	/**
 	 * 创建人
@@ -47,20 +47,20 @@ public class ArticleVo {
 	 */
 	private Long replyCount;
 
+	public Date getLastUpdateTimeForAll() {
+		return lastUpdateTimeForAll;
+	}
+
+	public void setLastUpdateTimeForAll(Date lastUpdateTimeForAll) {
+		this.lastUpdateTimeForAll = lastUpdateTimeForAll;
+	}
+
 	public Long getReplyCount() {
 		return replyCount;
 	}
 
 	public void setReplyCount(Long replyCount) {
 		this.replyCount = replyCount;
-	}
-
-	public Date getLastUpdateTime() {
-		return lastUpdateTime;
-	}
-
-	public void setLastUpdateTime(Date lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
 	}
 
 	public User getCreateUser() {

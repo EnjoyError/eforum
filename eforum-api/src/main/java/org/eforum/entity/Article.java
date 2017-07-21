@@ -1,11 +1,15 @@
 package org.eforum.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 文章
@@ -40,6 +44,19 @@ public class Article extends BaseEntity {
 	 */
 	@Column
 	private Integer weight;
+	
+	/** 最后修改时间，包括评论，当有新的评论时，该时间也会更新 */
+	@Column(name = "LAST_UPDATE_TIME_FOR_ALL")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastUpdateTimeForAll;
+	
+	public Date getLastUpdateTimeForAll() {
+		return lastUpdateTimeForAll;
+	}
+
+	public void setLastUpdateTimeForAll(Date lastUpdateTimeForAll) {
+		this.lastUpdateTimeForAll = lastUpdateTimeForAll;
+	}
 
 	public String getTitle() {
 		return title;

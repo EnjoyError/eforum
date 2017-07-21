@@ -132,4 +132,12 @@ public interface CommonDao {
 	 */
 	@SuppressWarnings("rawtypes")
 	public List pagingQuery(String hql, int pageNumber, int pageSize);
+
+	/**
+	 * 执行hql
+	 * 
+	 * @param hql
+	 * @param map
+	 */
+	public void execute(String hql, Map<String, Object> map);
 }

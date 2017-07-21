@@ -1,5 +1,6 @@
 package org.eforum.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -37,4 +38,12 @@ public interface ArticleService {
 	 * @param response
 	 */
 	void downloadImageOfArticle(String imageName, HttpServletResponse response);
+
+	/**
+	 * 刷新修改时间
+	 * 
+	 * @param articleId
+	 * @param lastUpdateTime
+	 */
+	void refreshLastUpdateTimeForAll(Long articleId, Date lastUpdateTime);
 }

@@ -123,4 +123,15 @@ public class CommonDaoImpl implements CommonDao {
 		entityManager.persist(entity);
 	}
 
+	@Override
+	public void execute(String hql, Map<String, Object> map) {
+		Query query = entityManager.createQuery(hql);
+		if (null != map) {
+			for (Entry<String, Object> entry : map.entrySet()) {
+				query.setParameter(entry.getKey(), entry.getValue());
+			}
+		}
+		query.executeUpdate();
+	}
+
 }

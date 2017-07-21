@@ -6,7 +6,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,7 +32,7 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Article> listArticle(int pageNumber, int pageSize) {
-		String hql = "FROM Article art WHERE 1=1 ORDER BY art.lastUpdateTime DESC";
+		String hql = "FROM Article art WHERE 1=1 ORDER BY art.lastUpdateTimeForAll DESC";
 		return dao.pagingQuery(hql, pageNumber, pageSize);
 	}
 
@@ -54,6 +57,7 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 				|| "<p><br></p>".equals(article.getContent())) {
 			throw new ServiceException("标题或内容不能是空的！");
 		}
+		article.setLastUpdateTimeForAll(new Date());
 		if (!article.isNew()) {
 			willSaveArticle = dao.get(Article.class, article.getId());
 			if (null == willSaveArticle) {
@@ -95,5 +99,14 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 			e.printStackTrace();
 
 		}
+	}
+
+	@Override
+	public void refreshLastUpdateTimeForAll(Long articleId, Date lastUpdateTime) {
+		String hql = "UPDATE Article art SET art.lastUpdateTimeForAll = :lastUpdateTimeForAll WHERE art.id = :id";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lastUpdateTimeForAll", lastUpdateTime);
+		map.put("id", articleId);
+		dao.execute(hql, map);
 	}
 }
