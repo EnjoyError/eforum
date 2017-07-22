@@ -66,4 +66,34 @@ app.run(function($rootScope) {
 	});
 });
 
+//自定义过滤器，用来对帖子列表时间进行转换
+app.filter('myDate', function($filter) { //可以注入依赖
+    return function(lastUpdateTimeForAll,currentTime) {
+    	var subTime = currentTime - lastUpdateTimeForAll;
+    	var day20  = 20*24*60*60*1000;	//20天
+    	var day1 = 24*60*60*1000;		//1天
+    	var hour1 = 60*60*1000;			//1小时
+    	var min1 = 60*1000;				//1分钟
+    	var viewTime = "";				//需要显示的时间
+    	if(subTime >= day20){
+    		viewTime = $filter('date')(lastUpdateTimeForAll, "yyyy-MM-dd hh:mm:ss"); 
+    		return viewTime;
+    	}
+    	if(subTime >= day1){
+    		viewTime = Math.floor(subTime/day1);
+    		return  viewTime + " 天前"
+    	}
+    	if(subTime >= hour1){
+    		viewTime = Math.floor(subTime/hour1);
+    		return  viewTime + " 小时前"
+    	}
+    	if(subTime >= min1){
+    		viewTime = Math.floor(subTime/min1);
+    		return  viewTime + " 分钟前"
+    	}
+    	viewTime = "刚刚";
+        return viewTime;
+    }
+});
+
 module.exports = app;

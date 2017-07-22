@@ -46,6 +46,19 @@ public class ArticleVo {
 	 * 总回复数
 	 */
 	private Long replyCount;
+	
+	/**
+	 * 当前系统时间
+	 */
+	private Date currentTime = new Date();
+
+	public Date getCurrentTime() {
+		return currentTime;
+	}
+
+	public void setCurrentTime(Date currentTime) {
+		this.currentTime = currentTime;
+	}
 
 	public Long getReplyCount() {
 		return replyCount;
