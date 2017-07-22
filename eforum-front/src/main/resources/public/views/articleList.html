@@ -13,7 +13,7 @@
 					创建者 {{x.createUser.name}}
 				</p>
 				<p class="col-xs-4" class="list-group-item-text">
-					更新于 {{x.lastUpdateTime|date:"yyyy-MM-dd HH:mm:ss"}}
+					更新于 {{x.lastUpdateTime|myDate:x.currentTime}}
 				</p>
 				<p class="col-xs-4" class="list-group-item-text">
 					创建于 {{x.createTime|date:"yyyy-MM-dd HH:mm:ss"}}
