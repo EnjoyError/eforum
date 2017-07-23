@@ -2,8 +2,18 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="eforum-view-article-tile panel-heading">
-				<p hidden>{{article.id}}</p>
-				<h2>{{article.title}}</h2>
+				<div class="row">
+					<div class="col-xs-10">
+						<p hidden>{{article.id}}</p>
+						<h2>{{article.title}}</h2>
+					</div>
+					<div class="col-xs-2">
+						<h2>
+							<img ng-if="article.topGrade > 0" alt="精华" src="article/image/zdt.png">
+							<img ng-if="article.isEssence" alt="精华" src="article/image/jht.png">
+						</h2>
+					</div>
+				</div>
 				<div class="eforum-item-group-text row topic">
 					<p class="col-xs-2" class="list-group-item-text">作者 {{article.createUser.name}}</p>
 					<p class="col-xs-8" class="list-group-item-text">发布时间 {{article.createTime|date:"yyyy-MM-dd HH:mm:ss"}}</p>

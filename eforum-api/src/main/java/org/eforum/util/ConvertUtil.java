@@ -1,4 +1,4 @@
-package org.eforum.front.util;
+package org.eforum.util;
 
 import java.util.ArrayList;
 import java.util.List;

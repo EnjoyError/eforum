@@ -46,11 +46,33 @@ public class ArticleVo {
 	 * 总回复数
 	 */
 	private Long replyCount;
-	
+
 	/**
 	 * 当前系统时间
 	 */
 	private Date currentTime = new Date();
+
+	/** 置顶等级,越大等级越高 */
+	private Integer topGrade = 0;
+
+	/** 是否精华 */
+	private Boolean isEssence = Boolean.FALSE;
+
+	public Integer getTopGrade() {
+		return topGrade;
+	}
+
+	public void setTopGrade(Integer topGrade) {
+		this.topGrade = topGrade;
+	}
+
+	public Boolean getIsEssence() {
+		return isEssence;
+	}
+
+	public void setIsEssence(Boolean isEssence) {
+		this.isEssence = isEssence;
+	}
 
 	public Date getCurrentTime() {
 		return currentTime;

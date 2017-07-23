@@ -36,7 +36,7 @@ public class Article extends BaseEntity {
 	/**
 	 * 文章内容
 	 */
-	@Lob 
+	@Lob
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	/**
@@ -44,12 +44,36 @@ public class Article extends BaseEntity {
 	 */
 	@Column
 	private Integer weight;
-	
+
 	/** 最后修改时间，包括评论，当有新的评论时，该时间也会更新 */
 	@Column(name = "LAST_UPDATE_TIME_FOR_ALL")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUpdateTimeForAll;
-	
+
+	/** 置顶等级,越大等级越高 */
+	@Column(name = "TOP_GRADE")
+	private Integer topGrade = 0;
+
+	/** 是否精华 */
+	@Column(name = "IS_ESSENCE")
+	private Boolean isEssence = Boolean.FALSE;
+
+	public Boolean getIsEssence() {
+		return isEssence;
+	}
+
+	public void setIsEssence(Boolean isEssence) {
+		this.isEssence = isEssence;
+	}
+
+	public Integer getTopGrade() {
+		return topGrade;
+	}
+
+	public void setTopGrade(Integer topGrade) {
+		this.topGrade = topGrade;
+	}
+
 	public Date getLastUpdateTimeForAll() {
 		return lastUpdateTimeForAll;
 	}

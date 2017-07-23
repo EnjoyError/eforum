@@ -70,10 +70,14 @@ public class PrivilegeController extends BaseController {
 
 	@ApiOperation(value = "权限接口", notes = "用户注销", code = 200, produces = "application/json")
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public Object logout() {
+	public Object logout(HttpServletResponse response) {
 		Subject subject = SecurityUtils.getSubject();
 		subject.getSession().removeAttribute(Constants.CURRENT_USER_IN_SESSION);
 		subject.logout();
+		Cookie cookie = new Cookie("username", (String) subject.getPrincipal());
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
 		return new ResultJson(true, "注销成功");
 	}
 }

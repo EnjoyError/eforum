@@ -1,6 +1,6 @@
 var app = require('../app');
 
-app.controller('loginController', function($scope, $location, userService) {
+app.controller('loginController', function($scope, $location, userService, $cookieStore) {
     $scope.name = '';
     $scope.password = '';
     $scope.rememberMe = '';

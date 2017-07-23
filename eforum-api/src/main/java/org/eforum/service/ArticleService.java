@@ -6,10 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eforum.entity.Article;
+import org.eforum.produces.PageVo;
 import org.springframework.web.multipart.MultipartFile;
 
+import vo.ArticleVo;
+
 public interface ArticleService {
-	List<Article> listArticle(int pageNumber, int pageSize);
+	PageVo<ArticleVo> listArticle(int pageNumber, int pageSize);
 
 	Article findArticleById(Long id);
 

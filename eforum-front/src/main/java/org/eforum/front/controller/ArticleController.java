@@ -5,11 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eforum.entity.Article;
-import org.eforum.front.util.ConvertUtil;
 import org.eforum.produces.PageVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.ArticleService;
 import org.eforum.service.ReplyService;
+import org.eforum.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,18 +31,12 @@ public class ArticleController extends BaseController {
 	@Autowired
 	private ReplyService replyService;
 
-	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
 	@Transactional
 	public Object listArticle(Integer pageNumber, Integer pageSize) {
-		List<Article> page = articleService.listArticle(pageNumber, pageSize);
-		List<ArticleVo> vos = ConvertUtil.convertEntityToVo(page, ArticleVo.class);
-		replyService.refreshReplyCount(vos);
-		PageVo<ArticleVo> pageVo = new PageVo<>();
-		pageVo.setData(vos);
-		pageVo.setPageSize(pageSize);
-		pageVo.setPageIndex(pageNumber);
+		PageVo<ArticleVo> pageVo = articleService.listArticle(pageNumber, pageSize);
+		replyService.refreshReplyCount(pageVo.getData());
 		return new ResultJson(true, pageVo);
 	}
 

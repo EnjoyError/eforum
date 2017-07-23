@@ -1,6 +1,7 @@
 // 加载css
 require('./css/bootstrap.css');
 require('./css/eforum.css');
+require('./js/ngImgCrop/ng-img-crop.css');
 
 // 启动angular应用
 require('./js/app');
@@ -26,7 +27,7 @@ require('./js/controller/regController');
 require('./js/controller/articleController');
 require('./js/controller/messageController');
 require('./js/controller/favoriteController');
-require('./js/controller/passwordController');
+require('./js/controller/personalInformationController');
 require('./js/controller/articleListController');
 require('./js/controller/pubArticleController');
 require('./js/controller/replyController');

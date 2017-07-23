@@ -14,7 +14,9 @@ import org.eforum.constant.Constants;
 import org.eforum.entity.BaseEntity;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
+import org.eforum.produces.PageVo;
 import org.eforum.repository.CommonDao;
+import org.eforum.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +41,9 @@ public class CommonDaoImpl implements CommonDao {
 	@Override
 	public List<? extends Object> findByHql(String hql, String paramKey, Object paramValue) {
 		Query query = entityManager.createQuery(hql);
-		query.setParameter(paramKey, paramValue);
+		if(null != paramKey){
+			query.setParameter(paramKey, paramValue);
+		}
 		return query.getResultList();
 	}
 
@@ -58,7 +62,7 @@ public class CommonDaoImpl implements CommonDao {
 	@Override
 	public List pagingQuery(String hql, int pageNumber, int pageSize) {
 		Query query = entityManager.createQuery(hql);
-		query.setFirstResult(pageNumber - 1);
+		query.setFirstResult((pageNumber - 1) * pageSize);
 		query.setMaxResults(pageSize);
 		query.getResultList();
 		return query.getResultList();
@@ -134,4 +138,25 @@ public class CommonDaoImpl implements CommonDao {
 		query.executeUpdate();
 	}
 
+	@Override
+	public <T> PageVo<T> pagingQueryAndPackage(Class<T> clazz, int pageNumber, int pageSize) {
+		// TODO 待实现
+		return null;
+	}
+
+	@Override
+	public <T> PageVo<T> pagingQueryAndPackage(String hql, int pageNumber, int pageSize, Class<T> voClass) {
+		List list = pagingQuery(hql, pageNumber, pageSize);
+		String countHql = "SELECT COUNT(*) " + hql;
+		Long count = (Long) findUniqueByHql(countHql, null, null);
+		long pageCount = (count / pageSize) + ((count % pageSize) == 0 ? 0 : 1);
+		PageVo<T> pageVo = new PageVo<T>();
+		List<T> vos = ConvertUtil.convertEntityToVo(list, voClass);
+		pageVo.setData(vos);
+		pageVo.setPageIndex(pageNumber);
+		pageVo.setPageSize(pageSize);
+		pageVo.setDataCount(count);
+		pageVo.setPageCount(pageCount);
+		return pageVo;
+	}
 }

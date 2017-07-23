@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eforum.entity.BaseEntity;
 import org.eforum.entity.User;
+import org.eforum.produces.PageVo;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -95,7 +96,7 @@ public interface CommonDao {
 			Object paramValue);
 
 	/**
-	 * 分页查询
+	 * 分页查询,未经过包装
 	 * 
 	 * @param clazz
 	 * @param pageNumber
@@ -104,6 +105,16 @@ public interface CommonDao {
 	 */
 	@SuppressWarnings("rawtypes")
 	public List pagingQuery(Class clazz, int pageNumber, int pageSize);
+
+	/**
+	 * 分页查询，并包装
+	 * 
+	 * @param clazz
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public <T> PageVo<T> pagingQueryAndPackage(Class<T> clazz, int pageNumber, int pageSize);
 
 	/**
 	 * 根据条件查询
@@ -132,6 +143,16 @@ public interface CommonDao {
 	 */
 	@SuppressWarnings("rawtypes")
 	public List pagingQuery(String hql, int pageNumber, int pageSize);
+
+	/**
+	 * 分页查询,并包装
+	 * 
+	 * @param hql
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	public <T> PageVo<T> pagingQueryAndPackage(String hql, int pageNumber, int pageSize, Class<T> voClass);
 
 	/**
 	 * 执行hql

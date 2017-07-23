@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.eforum.constant.Constants;
 import org.eforum.entity.Article;
 import org.eforum.exception.ServiceException;
+import org.eforum.produces.PageVo;
 import org.eforum.service.ArticleService;
 import org.eforum.service.FileService;
 import org.eforum.util.EntityUtil;
@@ -24,16 +25,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import vo.ArticleVo;
+
 @Service
 public class ArticleServiceImpl extends BaseServiceImpl implements ArticleService {
 	@Autowired
 	private FileService fileService;
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Article> listArticle(int pageNumber, int pageSize) {
-		String hql = "FROM Article art WHERE 1=1 ORDER BY art.lastUpdateTimeForAll DESC";
-		return dao.pagingQuery(hql, pageNumber, pageSize);
+	public PageVo<ArticleVo> listArticle(int pageNumber, int pageSize) {
+		String hql = "FROM Article art WHERE 1=1 ORDER BY art.topGrade DESC, art.lastUpdateTimeForAll DESC";
+		return dao.pagingQueryAndPackage(hql, pageNumber, pageSize, ArticleVo.class);
 	}
 
 	@Override
