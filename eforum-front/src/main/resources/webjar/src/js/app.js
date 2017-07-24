@@ -2,7 +2,8 @@ var angular = require('angular');
 require('angular-route');
 require('angular-cookies');
 require('./paging/tm.pagination');
-var app = angular.module('app', ['ngRoute','ngCookies','tm.pagination']);
+require('./crop/ng-img-crop');
+var app = angular.module('app', ['ngRoute','ngCookies','tm.pagination', 'ngImgCrop']);
 //angularjs 1.6.0 以上版本需要配置,否则路由无法正常使用
 app.config(["$locationProvider",function($locationProvider){
 	$locationProvider.hashPrefix("");

@@ -1,7 +1,7 @@
 // 加载css
 require('./css/bootstrap.css');
 require('./css/eforum.css');
-require('./js/ngImgCrop/ng-img-crop.css');
+require('./js/crop/ng-img-crop.css');
 
 // 启动angular应用
 require('./js/app');
@@ -9,6 +9,7 @@ require('./js/app');
 require('./js/service/articleService');
 require('./js/service/userService');
 require('./js/service/replyService');
+require('./js/service/fileService');
 
 // 加载angular自定义指令
 require('./js/directive/headerDirective');

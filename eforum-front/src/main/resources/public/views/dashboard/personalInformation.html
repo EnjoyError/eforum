@@ -6,13 +6,20 @@
 		<div class="page-header">
 		    <h1>修改密码</h1>
 		</div>
-		<div>
-			<div>Select an image file: <input type="file" id="fileInput" /></div>
-			  <div class="cropArea">
+		
+		<div class="row">  
+	        <div class="col-xs-8" ng-click="viewArticle(x.id)">
+				<div>选择文件 裁剪合适的大小然后点击上传: <input class="btn btn-default" type="file" id="fileInput" /></div>
+				<button class="btn btn-default" ng-click="uploadImage()">上传</button>
+			  	<div class="cropArea">
 			    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
-			  </div>
-			  <div>Cropped Image:</div>
+			  	</div>
+			</div>
+			<div class="col-xs-4">
+				<br>
+				<div>效果:</div>
 			  <div><img ng-src="{{myCroppedImage}}" /></div>
-		</div>
+			</div>
+		</div> 
 	</div>
 </div>
