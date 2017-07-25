@@ -12,6 +12,7 @@ import org.eforum.exception.ServiceException;
 import org.eforum.repository.CommonDao;
 import org.eforum.service.FileService;
 import org.eforum.util.CommonUtils;
+import org.eforum.util.FileUtil;
 import org.eforum.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,14 +37,10 @@ public class FileServiceImpl implements FileService {
 		return fileNames;
 	}
 
-	/**
-	 * 获取文件存储路径
-	 * 
-	 * @return
-	 */
-	private String getImagePath() {
+	@Override
+	public String getFileSavePath(String key) {
 		String hql = "FROM GlobalParam gp WHERE gp.key = :key";
-		GlobalParam gp = (GlobalParam) commonDao.findUniqueByHql(hql, "key", Constants.IMAGE_DIR);
+		GlobalParam gp = (GlobalParam) commonDao.findUniqueByHql(hql, "key", key);
 		String imagePath = gp.getValue();
 		imagePath = imagePath.replace("/", File.separator);
 		return imagePath;
@@ -60,7 +57,7 @@ public class FileServiceImpl implements FileService {
 		String randomStr = CommonUtils.generateRandomStr();// 使用randomStr作为新文件名
 		String extensionName = getFileExtensionName(originalFileName);
 		String fileName = randomStr + extensionName;
-		String imagePath = getImagePath();
+		String imagePath = getFileSavePath(Constants.IMAGE_DIR);
 		File imageDir = new File(imagePath);
 		if (!imageDir.exists()) {
 			imageDir.mkdirs();
@@ -103,13 +100,37 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public File getImageFileByName(String imageName) {
-		String imagePath = getImagePath();
-		imagePath = imagePath + File.separator + imageName;
-		File image = new File(imagePath);
-		if (!image.exists()) {
-			throw new ServiceException("未找到该图片[" + imageName + "]");
+	public boolean deleteFileIfExist(String path) {
+		File file = new File(path);
+		if (file.exists()) {
+			return file.delete();
 		}
-		return image;
+		return false;
+	}
+
+	@Override
+	public boolean saveBase64ImageFile(String base64Str, String path) {
+		return FileUtil.generateImage(base64Str, path);
+	}
+
+	@Override
+	public File getFile(String fileType, String fileName) {
+		String filePath = getFileSavePath(fileType);
+		filePath = filePath + File.separator + fileName;
+		File file = new File(filePath);
+		if (!file.exists()) {
+			throw new ServiceException("未找到该文件[" + fileName + "]");
+		}
+		return file;
+	}
+
+	@Override
+	public boolean mkDirIfNoExist(String dirType) {
+		String dirPath = getFileSavePath(dirType);
+		File file = new File(dirPath);
+		if (!file.exists()) {
+			return file.mkdirs();
+		}
+		return false;
 	}
 }

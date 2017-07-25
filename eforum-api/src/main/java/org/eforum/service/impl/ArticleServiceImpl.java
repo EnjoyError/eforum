@@ -85,7 +85,7 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 
 	@Override
 	public void downloadImageOfArticle(String imageName, HttpServletResponse response) {
-		File file = fileService.getImageFileByName(imageName);
+		File file = fileService.getFile(Constants.IMAGE_DIR, imageName);
 		try {
 			InputStream is = new FileInputStream(file);
 			OutputStream os = new BufferedOutputStream(response.getOutputStream());

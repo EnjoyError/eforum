@@ -124,7 +124,7 @@ public class CommonDaoImpl implements CommonDao {
 		}
 		entity.setLastUpdateTime(date);
 		entity.setLastUpdateUser(user);
-		entityManager.persist(entity);
+		entityManager.merge(entity);
 	}
 
 	@Override

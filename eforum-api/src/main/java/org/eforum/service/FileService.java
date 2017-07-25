@@ -21,10 +21,45 @@ public interface FileService {
 	public List<String> saveImages(MultipartFile[] images);
 
 	/**
-	 * 下载图片
+	 * 获取文件
 	 * 
-	 * @param imageName
+	 * @param fileType
+	 *            文件存储类型
+	 * @param fileName
 	 * @return
 	 */
-	public File getImageFileByName(String imageName);
+	public File getFile(String fileType, String fileName);
+
+	/**
+	 * 获取文件的存储路径
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public String getFileSavePath(String key);
+
+	/**
+	 * 如果文件存在则删除
+	 * 
+	 * @param path
+	 *            绝对路径
+	 */
+	public boolean deleteFileIfExist(String path);
+
+	/**
+	 * 保存base64图片文件
+	 * 
+	 * @param base64Str
+	 * @param path
+	 * @return
+	 */
+	public boolean saveBase64ImageFile(String base64Str, String path);
+
+	/**
+	 * 创建文件夹
+	 * 
+	 * @param dirPath
+	 * @return
+	 */
+	public boolean mkDirIfNoExist(String dirType);
 }

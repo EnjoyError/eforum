@@ -1,5 +1,7 @@
 package org.eforum.front.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
@@ -62,5 +64,23 @@ public class UserController extends BaseController {
 		newPassword = DigestUtils.md5Hex(newPassword);
 		userService.changePassword(user, newPassword);
 		return new ResultJson(true, "修改密码成功");
+	}
+
+	@RequestMapping(value = "/user/uploadHeadPortrait", method = RequestMethod.POST)
+	@Transactional
+	public Object uploadHeadPortrait(String base64Str) {
+		Subject subject = SecurityUtils.getSubject();
+		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
+		user = userService.findUserById(user.getId());
+		userService.uploadHeadPortrait(user, base64Str);
+		return new ResultJson(true, "上传成功");
+	}
+
+	@RequestMapping(value = "/user/downloadheadPortrait", method = RequestMethod.GET)
+	@Transactional
+	public void downloadheadPortrait(HttpServletResponse response) {
+		Subject subject = SecurityUtils.getSubject();
+		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
+		userService.downloadheadPortrait(user, response);
 	}
 }

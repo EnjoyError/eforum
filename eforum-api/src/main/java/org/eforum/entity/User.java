@@ -11,7 +11,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  */
 @Entity(name = "User")
 @Table(name = "USER")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 	/**
 	 * 登录账号
 	 */
@@ -28,6 +28,18 @@ public class User extends BaseEntity{
 	@Column
 	@JSONField(serialize = false)
 	private String password;
+
+	/** 头像文件名。例如 1000.jpg */
+	@Column(name = "HEAD_PORTRAIT_FILE_NAME")
+	private String headPortraitFileName;
+
+	public String getHeadPortraitFileName() {
+		return headPortraitFileName;
+	}
+
+	public void setHeadPortraitFileName(String headPortraitFileName) {
+		this.headPortraitFileName = headPortraitFileName;
+	}
 
 	public String getName() {
 		return name;
