@@ -3,8 +3,7 @@ package org.eforum.service;
 import java.util.List;
 
 import org.eforum.entity.Reply;
-
-import vo.ArticleVo;
+import org.eforum.vo.ArticleVo;
 
 public interface ReplyService {
 

@@ -1,4 +1,4 @@
-package vo;
+package org.eforum.vo;
 
 /**
  * 用户VO

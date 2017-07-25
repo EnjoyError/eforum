@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,17 +35,24 @@ public class BaseEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;
 	/**
-	 * 最后修改者
+	 * 最后修改者id
 	 */
-	@JoinColumn(name = "LAST_UPDATE_USER_ID")
-	@ManyToOne(targetEntity = User.class)
-	private User lastUpdateUser;
+	@Column(name = "LAST_UPDATE_USER_ID")
+	private Long lastUpdateUserId;
 	/**
-	 * 创建者
+	 * 最后修改者姓名
 	 */
-	@JoinColumn(name = "CREATE_USER_ID")
-	@ManyToOne(targetEntity = User.class)
-	private User createUser;
+	@Column(name = "LAST_UPDATE_USER_NAME")
+	private String lastUpdateUserName;
+	/**
+	 * 创建者Id
+	 */
+	@Column(name = "CREATE_USER_ID")
+	private Long createUserId;
+
+	/** 创建者姓名 */
+	@Column(name = "CREATE_USER_NAME")
+	private String createUserName;
 
 	public Long getId() {
 		return id;
@@ -73,22 +78,38 @@ public class BaseEntity {
 		this.createTime = createTime;
 	}
 
-	public User getLastUpdateUser() {
-		return lastUpdateUser;
+	public Long getLastUpdateUserId() {
+		return lastUpdateUserId;
 	}
 
-	public void setLastUpdateUser(User lastUpdateUser) {
-		this.lastUpdateUser = lastUpdateUser;
+	public void setLastUpdateUserId(Long lastUpdateUserId) {
+		this.lastUpdateUserId = lastUpdateUserId;
 	}
 
-	public User getCreateUser() {
-		return createUser;
+	public String getLastUpdateUserName() {
+		return lastUpdateUserName;
 	}
 
-	public void setCreateUser(User createUser) {
-		this.createUser = createUser;
+	public void setLastUpdateUserName(String lastUpdateUserName) {
+		this.lastUpdateUserName = lastUpdateUserName;
 	}
-	
+
+	public Long getCreateUserId() {
+		return createUserId;
+	}
+
+	public void setCreateUserId(Long createUserId) {
+		this.createUserId = createUserId;
+	}
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
 	/**
 	 * 判断该entity是否为新建的，该方法通过id是否为空来做判断的， 如果entity被手工赋予一个id的话，则该方法的判断结果将不准确。
 	 * 

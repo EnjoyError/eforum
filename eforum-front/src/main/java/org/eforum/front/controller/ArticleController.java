@@ -10,6 +10,7 @@ import org.eforum.produces.ResultJson;
 import org.eforum.service.ArticleService;
 import org.eforum.service.ReplyService;
 import org.eforum.util.ConvertUtil;
+import org.eforum.vo.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.ApiOperation;
-import vo.ArticleVo;
 
 @RestController
 public class ArticleController extends BaseController {

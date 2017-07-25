@@ -62,7 +62,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		if (null != existUser) {
 			throw new ServiceException("该用户名已被使用!");
 		}
-		dao.save(user);
+		dao.save(user, user);
 		return user;
 	}
 
@@ -92,8 +92,8 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	@Override
 	public void uploadHeadPortrait(User user, String base64Str) {
 		String fileExtensionName = base64Str.substring(base64Str.indexOf("/") + 1, base64Str.indexOf(";"));
-		String path = fileService.getFileSavePath(Constants.HEAD_PORTRAIT_DIR) + File.separator + user.getId()
-				+ "." + fileExtensionName;
+		String path = fileService.getFileSavePath(Constants.HEAD_PORTRAIT_DIR) + File.separator + user.getId() + "."
+				+ fileExtensionName;
 		fileService.deleteFileIfExist(path);
 		fileService.mkDirIfNoExist(Constants.HEAD_PORTRAIT_DIR);
 		base64Str = base64Str.substring(base64Str.indexOf(",") + 1);
@@ -122,7 +122,6 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			os.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 }

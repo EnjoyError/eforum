@@ -1,4 +1,4 @@
-package vo;
+package org.eforum.vo;
 
 import java.util.Date;
 
@@ -38,9 +38,12 @@ public class ArticleVo {
 	private Date lastUpdateTimeForAll;
 
 	/**
-	 * 创建人
+	 * 创建人Id
 	 */
-	private User createUser;
+	private Long createUserId;
+
+	/** 创建人姓名 */
+	private String createUserName;
 
 	/**
 	 * 总回复数
@@ -98,12 +101,20 @@ public class ArticleVo {
 		this.replyCount = replyCount;
 	}
 
-	public User getCreateUser() {
-		return createUser;
+	public Long getCreateUserId() {
+		return createUserId;
 	}
 
-	public void setCreateUser(User createUser) {
-		this.createUser = createUser;
+	public void setCreateUserId(Long createUserId) {
+		this.createUserId = createUserId;
+	}
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
 	}
 
 	public Long getId() {

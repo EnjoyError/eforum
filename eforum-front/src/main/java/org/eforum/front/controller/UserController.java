@@ -76,7 +76,7 @@ public class UserController extends BaseController {
 		return new ResultJson(true, "上传成功");
 	}
 
-	@RequestMapping(value = "/user/downloadheadPortrait", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/downloadheadPortrait/*", method = RequestMethod.GET)
 	@Transactional
 	public void downloadheadPortrait(HttpServletResponse response) {
 		Subject subject = SecurityUtils.getSubject();

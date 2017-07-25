@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eforum.entity.Article;
 import org.eforum.produces.PageVo;
+import org.eforum.vo.ArticleVo;
 import org.springframework.web.multipart.MultipartFile;
-
-import vo.ArticleVo;
 
 public interface ArticleService {
 	PageVo<ArticleVo> listArticle(int pageNumber, int pageSize);

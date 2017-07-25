@@ -120,10 +120,12 @@ public class CommonDaoImpl implements CommonDao {
 		Date date = new Date();
 		if (entity.isNew()) {
 			entity.setCreateTime(date);
-			entity.setCreateUser(user);
+			entity.setCreateUserId(user.getId());
+			entity.setCreateUserName(user.getName());
 		}
 		entity.setLastUpdateTime(date);
-		entity.setLastUpdateUser(user);
+		entity.setLastUpdateUserId(user.getId());
+		entity.setLastUpdateUserName(user.getName());
 		entityManager.merge(entity);
 	}
 

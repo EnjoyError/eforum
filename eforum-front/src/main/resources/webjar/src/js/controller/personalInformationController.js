@@ -1,6 +1,6 @@
 var app = require('../app');
 var angular = require('angular');
-app.controller('personalInformationController', function($scope,fileService) {
+app.controller('personalInformationController', function($scope,fileService,$window) {
 	$scope.myImage = '';
 	$scope.myCroppedImage = '';
 	$scope.uploadImage = function(){
@@ -25,6 +25,7 @@ app.controller('personalInformationController', function($scope,fileService) {
 		promise.then(function(result) {
 	        if (result.data.success) {
 	        	alert("上传成功");
+	        	$window.location.reload();
 	        } else {
 	            alert(result.data.message);
 	        }

@@ -21,11 +21,10 @@ import org.eforum.service.ArticleService;
 import org.eforum.service.FileService;
 import org.eforum.util.EntityUtil;
 import org.eforum.util.StringUtils;
+import org.eforum.vo.ArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import vo.ArticleVo;
 
 @Service
 public class ArticleServiceImpl extends BaseServiceImpl implements ArticleService {
