@@ -29,6 +29,7 @@ require('./js/controller/articleController');
 require('./js/controller/messageController');
 require('./js/controller/favoriteController');
 require('./js/controller/personalInformationController');
+require('./js/controller/headPortraitController');
 require('./js/controller/articleListController');
 require('./js/controller/pubArticleController');
 require('./js/controller/replyController');

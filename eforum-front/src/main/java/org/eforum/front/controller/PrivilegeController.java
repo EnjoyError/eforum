@@ -63,8 +63,10 @@ public class PrivilegeController extends BaseController {
 		subject.getSession().setAttribute(Constants.CURRENT_USER_IN_SESSION, findUser);
 		Map<String, String> messageMap = new HashMap<String, String>();
 		messageMap.put("username", (String) subject.getPrincipal());
-		Cookie cookie = new Cookie("username", (String) subject.getPrincipal());
-		response.addCookie(cookie);
+		Cookie usernameCookie = new Cookie("username", (String) subject.getPrincipal());
+		Cookie userIdCookie = new Cookie("userId", String.valueOf(findUser.getId()));
+		response.addCookie(usernameCookie);
+		response.addCookie(userIdCookie);
 		return new ResultJson(true, messageMap);
 	}
 
@@ -74,10 +76,14 @@ public class PrivilegeController extends BaseController {
 		Subject subject = SecurityUtils.getSubject();
 		subject.getSession().removeAttribute(Constants.CURRENT_USER_IN_SESSION);
 		subject.logout();
-		Cookie cookie = new Cookie("username", (String) subject.getPrincipal());
-		cookie.setMaxAge(0);
-		cookie.setPath("/");
-		response.addCookie(cookie);
+		Cookie usernameCookie = new Cookie("username", (String) subject.getPrincipal());
+		usernameCookie.setMaxAge(0);
+		usernameCookie.setPath("/");
+		Cookie userIdCookie = new Cookie("userId", "");
+		userIdCookie.setMaxAge(0);
+		userIdCookie.setPath("/");
+		response.addCookie(usernameCookie);
+		response.addCookie(userIdCookie);
 		return new ResultJson(true, "注销成功");
 	}
 }

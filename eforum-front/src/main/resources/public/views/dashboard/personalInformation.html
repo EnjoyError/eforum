@@ -1,25 +1,95 @@
-<div class="row" ng-controller="personalInformationController">
+<div class="row">
 	<div class="col-md-2">
 		<sidebar></sidebar>
 	</div>
 	<div class="col-md-10">
-		<div class="page-header">
-		    <h1>修改密码</h1>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">个人信息</h3>
+			</div>
+			<div class="panel-body">
+				<form class="form-horizontal col-md-6 col-md-offset-3">
+					<fieldset>
+						<div class="row">
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">姓名</label>
+								<div class="controls">
+									<input placeholder="在这里输入姓名" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">手机</label>
+								<div class="controls">
+									<input placeholder="在这里输入手机" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">地址</label>
+								<div class="controls">
+									<input placeholder="在这里输入地址" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">邮箱</label>
+								<div class="controls">
+									<input placeholder="在这里输入邮箱" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="control-group col-md-5">
+
+								<label class="control-label" for="input01">签名</label>
+								<div class="controls">
+									<input placeholder="在这里输入签名" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+							<div class="control-group col-md-5">
+								<label class="control-label">性别</label>
+								<div class="controls row">
+									<label class="radio col-md-4 col-md-offset-2">
+        								<input value="男" name="gender" checked="checked" type="radio">
+        								<p>男</p>
+      								</label>
+									<label class="radio col-md-4">
+        								<input value="女" name="gender" type="radio">
+        								<p>女</p>
+      								</label>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="control-group  col-md-offset-5">
+							<label class="control-label"></label>
+
+							<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-default">保存</button>
+							</div>
+						</div>
+
+					</fieldset>
+				</form>
+			</div>
 		</div>
-		
-		<div class="row">  
-	        <div class="col-xs-8" ng-click="viewArticle(x.id)">
-				<div>选择文件 裁剪合适的大小然后点击上传: <input class="btn btn-default" type="file" id="fileInput" /></div>
-				<button class="btn btn-default" ng-click="uploadImage()">上传</button>
-			  	<div class="cropArea">
-			    <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
-			  	</div>
-			</div>
-			<div class="col-xs-4">
-				<br>
-				<div>效果:</div>
-			  <div><img ng-src="{{myCroppedImage}}" /></div>
-			</div>
-		</div> 
 	</div>
 </div>

@@ -99,7 +99,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		base64Str = base64Str.substring(base64Str.indexOf(",") + 1);
 		boolean hasSaved = fileService.saveBase64ImageFile(base64Str, path);
 		if (hasSaved) {
-			user.setHeadPortraitFileName(user.getId() + fileExtensionName);
+			user.setHeadPortraitFileName(user.getId() + "." + fileExtensionName);
 			dao.save(user);
 		} else {
 			throw new ServiceException("上传头像失败!");

@@ -56,6 +56,10 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 		templateUrl: 'views/dashboard/personalInformation.html',
 		controller: 'personalInformationController'
 	});
+	$routeProvider.when('/dashboard/headPortrait', {
+		templateUrl: 'views/dashboard/headPortrait.html',
+		controller: 'headPortraitController'
+	});
 	$routeProvider.when('/articleList', {
 		templateUrl: 'views/articleList.html',
 		controller: 'articleListController'

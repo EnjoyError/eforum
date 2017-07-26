@@ -1,11 +1,11 @@
 @charset "utf-8";
 
 body {
-  background: #ffffff;
+	background: #ffffff;
 }
 
 .eforum-main {
-  margin-top: 80px;
+	margin-top: 80px;
 }
 
 .view-article-content>p>img {
@@ -13,7 +13,7 @@ body {
 }
 
 .eforum-list-group-item {
-	padding: 20px 2px 1px 30px;
+	padding: 10px 2px 1px 10px;
 }
 
 .eforum-item-group-text {
@@ -23,7 +23,8 @@ body {
 
 .eforum-item-group-head-text {
 	color: #333;
-	margin-top: 18px;
+	margin-top: 8px;
+	margin-bottom: -1px;
 }
 
 .eforum-view-article-tile {
@@ -55,4 +56,9 @@ body {
 .articleListHeadPortrait {
 	padding-left: 3px;
 	padding-right: 3px;
+	width: 7.33333333%;
+}
+
+.efm-article-list-jh {
+	margin-top: 6px;
 }

@@ -15,6 +15,7 @@ app.controller('headerController', function($scope, $location, $cookies, userSer
         promise.then(function(result) {
             if (result.data.success) {
             	$cookies.remove('username');
+            	$cookies.remove('userId');
             	refreshUserName();
             	$location.path("/login");
             } else {
@@ -41,12 +42,15 @@ app.controller('headerController', function($scope, $location, $cookies, userSer
 	
 	function refreshUserName(){
 		var userName = $cookies.get("username");
+		var userId = $cookies.get("userId");
 		if(undefined != userName && null != userName){
 			$scope.visible = false;
 			$scope.username = userName;
+			$scope.userId = userId;
 		}else{
 			$scope.visible = true;
 			$scope.username = null;
+			$scope.userId = null;
 		}
 	};
 	refreshUserName();

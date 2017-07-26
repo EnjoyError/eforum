@@ -76,11 +76,10 @@ public class UserController extends BaseController {
 		return new ResultJson(true, "上传成功");
 	}
 
-	@RequestMapping(value = "/user/downloadheadPortrait/*", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/downloadheadPortrait/{userId:.*}", method = RequestMethod.GET)
 	@Transactional
-	public void downloadheadPortrait(HttpServletResponse response) {
-		Subject subject = SecurityUtils.getSubject();
-		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
+	public void downloadheadPortrait(@PathVariable("userId") Long userId,HttpServletResponse response) {
+		User user = userService.findUserById(userId);
 		userService.downloadheadPortrait(user, response);
 	}
 }
