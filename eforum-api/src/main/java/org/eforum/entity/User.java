@@ -33,6 +33,76 @@ public class User extends BaseEntity {
 	@Column(name = "HEAD_PORTRAIT_FILE_NAME")
 	private String headPortraitFileName;
 
+	/**
+	 * 真实姓名
+	 */
+	@Column(name = "REAL_NAME")
+	private String realName;
+
+	/**
+	 * 手机号码
+	 */
+	@Column(name = "MOBILE_NUMBER")
+	private String mobileNumber;
+
+	/**
+	 * 地址
+	 */
+	@Column(name = "ADDRESS")
+	private String address;
+
+	/**
+	 * 个性签名
+	 */
+	@Column(name = "PERSONALIZED_SIGNATURE")
+	private String personalizedSignature;
+
+	/**
+	 * 性别
+	 */
+	@Column(name = "GENDER")
+	private String gender;
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPersonalizedSignature() {
+		return personalizedSignature;
+	}
+
+	public void setPersonalizedSignature(String personalizedSignature) {
+		this.personalizedSignature = personalizedSignature;
+	}
+
 	public String getHeadPortraitFileName() {
 		return headPortraitFileName;
 	}

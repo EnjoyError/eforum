@@ -8,7 +8,7 @@
 				<h3 class="panel-title">个人信息</h3>
 			</div>
 			<div class="panel-body">
-				<form class="form-horizontal col-md-6 col-md-offset-3">
+				<div class="form-horizontal col-md-6 col-md-offset-3">
 					<fieldset>
 						<div class="row">
 							<div class="control-group col-md-5">
@@ -16,7 +16,7 @@
 								<!-- Text input-->
 								<label class="control-label" for="input01">姓名</label>
 								<div class="controls">
-									<input placeholder="在这里输入姓名" class="input-xlarge" type="text">
+									<input placeholder="在这里输入姓名" class="input-xlarge" value="{{userInfo.realName}}" type="text">
 									<p class="help-block"></p>
 								</div>
 							</div>
@@ -26,7 +26,7 @@
 								<!-- Text input-->
 								<label class="control-label" for="input01">手机</label>
 								<div class="controls">
-									<input placeholder="在这里输入手机" class="input-xlarge" type="text">
+									<input placeholder="在这里输入手机" value="{{userInfo.mobileNumber}}" class="input-xlarge" type="text">
 									<p class="help-block"></p>
 								</div>
 							</div>
@@ -38,7 +38,7 @@
 								<!-- Text input-->
 								<label class="control-label" for="input01">地址</label>
 								<div class="controls">
-									<input placeholder="在这里输入地址" class="input-xlarge" type="text">
+									<input placeholder="在这里输入地址" value="{{userInfo.address}}" class="input-xlarge" type="text">
 									<p class="help-block"></p>
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 								<!-- Text input-->
 								<label class="control-label" for="input01">邮箱</label>
 								<div class="controls">
-									<input placeholder="在这里输入邮箱" class="input-xlarge" type="text">
+									<input placeholder="在这里输入邮箱" value="{{userInfo.email}}" class="input-xlarge" type="text">
 									<p class="help-block"></p>
 								</div>
 							</div>
@@ -58,7 +58,7 @@
 
 								<label class="control-label" for="input01">签名</label>
 								<div class="controls">
-									<input placeholder="在这里输入签名" class="input-xlarge" type="text">
+									<input placeholder="在这里输入签名" value="{{userInfo.personalizedSignature}}" class="input-xlarge" type="text">
 									<p class="help-block"></p>
 								</div>
 							</div>
@@ -66,11 +66,11 @@
 								<label class="control-label">性别</label>
 								<div class="controls row">
 									<label class="radio col-md-4 col-md-offset-2">
-        								<input value="男" name="gender" checked="checked" type="radio">
+        								<input value="man" ng-model="userInfo.gender" name="gender"  type="radio">
         								<p>男</p>
       								</label>
 									<label class="radio col-md-4">
-        								<input value="女" name="gender" type="radio">
+        								<input value="woman" ng-model="userInfo.gender" name="gender" type="radio">
         								<p>女</p>
       								</label>
 								</div>
@@ -83,12 +83,12 @@
 
 							<!-- Button -->
 							<div class="controls">
-								<button class="btn btn-default">保存</button>
+								<button class="btn btn-default" ng-click="saveUserInfo()">保存</button>
 							</div>
 						</div>
 
 					</fieldset>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>

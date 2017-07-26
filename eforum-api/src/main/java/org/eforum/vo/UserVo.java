@@ -11,6 +11,42 @@ public class UserVo {
 	private String email;
 	private String password;
 	private boolean rememberMe;
+	private String realName;
+	private String mobileNumber;
+	private String address;
+	private String personalizedSignature;
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPersonalizedSignature() {
+		return personalizedSignature;
+	}
+
+	public void setPersonalizedSignature(String personalizedSignature) {
+		this.personalizedSignature = personalizedSignature;
+	}
 
 	public String getName() {
 		return name;

@@ -10,6 +10,7 @@ require('./js/service/articleService');
 require('./js/service/userService');
 require('./js/service/replyService');
 require('./js/service/fileService');
+require('./js/service/personalInformationService');
 
 // 加载angular自定义指令
 require('./js/directive/headerDirective');
