@@ -1,0 +1,95 @@
+<div class="row">
+	<div class="col-md-2">
+		<sidebar></sidebar>
+	</div>
+	<div class="col-md-10">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">个人信息</h3>
+			</div>
+			<div class="panel-body">
+				<div class="form-horizontal col-md-6 col-md-offset-3">
+					<fieldset>
+						<div class="row">
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">姓名</label>
+								<div class="controls">
+									<input placeholder="在这里输入姓名" class="input-xlarge" value="{{userInfo.realName}}" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">手机</label>
+								<div class="controls">
+									<input placeholder="在这里输入手机" value="{{userInfo.mobileNumber}}" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">地址</label>
+								<div class="controls">
+									<input placeholder="在这里输入地址" value="{{userInfo.address}}" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+
+							<div class="control-group col-md-5">
+
+								<!-- Text input-->
+								<label class="control-label" for="input01">邮箱</label>
+								<div class="controls">
+									<input placeholder="在这里输入邮箱" value="{{userInfo.email}}" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="control-group col-md-5">
+
+								<label class="control-label" for="input01">签名</label>
+								<div class="controls">
+									<input placeholder="在这里输入签名" value="{{userInfo.personalizedSignature}}" class="input-xlarge" type="text">
+									<p class="help-block"></p>
+								</div>
+							</div>
+							<div class="control-group col-md-5">
+								<label class="control-label">性别</label>
+								<div class="controls row">
+									<label class="radio col-md-4 col-md-offset-2">
+        								<input value="man" ng-model="userInfo.gender" name="gender"  type="radio">
+        								<p>男</p>
+      								</label>
+									<label class="radio col-md-4">
+        								<input value="woman" ng-model="userInfo.gender" name="gender" type="radio">
+        								<p>女</p>
+      								</label>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="control-group  col-md-offset-5">
+							<label class="control-label"></label>
+
+							<!-- Button -->
+							<div class="controls">
+								<button class="btn btn-default" ng-click="saveUserInfo()">保存</button>
+							</div>
+						</div>
+
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

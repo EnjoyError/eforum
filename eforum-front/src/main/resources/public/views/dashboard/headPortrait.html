@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="col-md-2">
+		<sidebar></sidebar>
+	</div>
+	<div class="col-md-10">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">上传头像</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-8" ng-click="viewArticle(x.id)">
+						<div>选择文件 裁剪合适的大小然后点击上传: <input class="btn btn-default" type="file" id="fileInput" /></div>
+						<button class="btn btn-default" ng-click="uploadImage()">上传</button>
+						<div class="cropArea">
+							<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<br>
+						<div>效果:</div>
+						<div><img ng-src="{{myCroppedImage}}" /></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

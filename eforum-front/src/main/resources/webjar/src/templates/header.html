@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="headerController">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -10,12 +10,19 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-left">
-				<li class="active"><a href="#/">首页</a></li>
-				<li><a href="#/about">关于</a></li>
+				<li class="{{main}}"><a href="#/">首页</a></li>
+				<li class="{{about}}"><a href="#/about">关于</a></li>
+				<li class="{{articleList}}"><a href="#/articleList">论坛</a></li>
 			</ul>
-			<form class="navbar-form navbar-right">
+			<form class="navbar-form navbar-right" ng-show="visible" >
 				<button type="submit" class="btn btn-default" ng-click="login()">登录</button>
 				<button type="submit" class="btn btn-default" ng-click="reg()">注册</button>
+			</form>
+			<form class="navbar-form navbar-right" ng-hide="visible" >
+				<img alt="{{username}}" src="/user/downloadheadPortrait/{{userId}}" class="img-circle myHeadPortrait">
+				<button type="submit" class="btn btn-default" ng-click="toEditArticlePage()">发帖</button>
+				<button type="submit" class="btn btn-default" ng-click="myCenter()">个人中心</button>
+				<button type="submit" class="btn btn-default" ng-click="logout()">注销</button>
 			</form>
 		</div>
 	</div>

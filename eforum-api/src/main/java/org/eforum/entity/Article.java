@@ -2,17 +2,21 @@ package org.eforum.entity;
 
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 文章
  */
-@Entity(name = "article")
-public class Article {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
-	private Long id;
+@Entity(name = "Article")
+@Table(name = "ARTICLE")
+public class Article extends BaseEntity {
 	/**
 	 * 用户主键
 	 */
@@ -32,26 +36,50 @@ public class Article {
 	/**
 	 * 文章内容
 	 */
-	@Column
+	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String content;
-	/**
-	 * 创建时间
-	 */
-	@Column(name = "create_time")
-	@Temporal(TemporalType.DATE)
-	private Date createTime;
 	/**
 	 * 权重
 	 */
 	@Column
 	private Integer weight;
-	
-	public Long getId() {
-		return id;
+
+	/** 最后修改时间，包括评论，当有新的评论时，该时间也会更新 */
+	@Column(name = "LAST_UPDATE_TIME_FOR_ALL")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastUpdateTimeForAll;
+
+	/** 置顶等级,越大等级越高 */
+	@Column(name = "TOP_GRADE")
+	private Integer topGrade = 0;
+
+	/** 是否精华 */
+	@Column(name = "IS_ESSENCE")
+	private Boolean isEssence = Boolean.FALSE;
+
+	public Boolean getIsEssence() {
+		return isEssence;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIsEssence(Boolean isEssence) {
+		this.isEssence = isEssence;
+	}
+
+	public Integer getTopGrade() {
+		return topGrade;
+	}
+
+	public void setTopGrade(Integer topGrade) {
+		this.topGrade = topGrade;
+	}
+
+	public Date getLastUpdateTimeForAll() {
+		return lastUpdateTimeForAll;
+	}
+
+	public void setLastUpdateTimeForAll(Date lastUpdateTimeForAll) {
+		this.lastUpdateTimeForAll = lastUpdateTimeForAll;
 	}
 
 	public String getTitle() {
@@ -78,14 +106,6 @@ public class Article {
 		this.content = content;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
 	public Integer getWeight() {
 		return weight;
 	}
@@ -101,5 +121,5 @@ public class Article {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 }

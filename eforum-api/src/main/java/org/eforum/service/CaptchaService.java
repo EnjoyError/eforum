@@ -2,8 +2,6 @@ package org.eforum.service;
 
 import org.eforum.exception.ServiceException;
 
-import java.io.IOException;
-
 public interface CaptchaService {
     /**
      * @return 验证码图片二进制数组

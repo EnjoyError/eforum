@@ -8,11 +8,11 @@ app.controller('regController', function($scope, $location, userService) {
 	$scope.reg = function() {
         var promise = userService.addUser($scope.name, $scope.email, $scope.password);
         promise.then(function(result) {
-            if (result.success) {
+            if (result.data.success) {
                 alert('注册成功');
                 $location.path('/login');
             } else {
-                alert(result.message);
+                alert(result.data.message);
             }
         }, function(result) {
         });

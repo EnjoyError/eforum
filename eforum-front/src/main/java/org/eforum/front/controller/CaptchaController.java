@@ -2,6 +2,7 @@ package org.eforum.front.controller;
 
 import org.eforum.service.CaptchaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ public class CaptchaController extends BaseController {
     private CaptchaService captchaService;
 
     @RequestMapping(value = "/captcha", method = RequestMethod.GET)
+    @Transactional
     public void captcha(HttpServletResponse response) throws Exception {
         response.setHeader("Cache-Control", "no-store");
         response.setHeader("Pragma", "no-cache");

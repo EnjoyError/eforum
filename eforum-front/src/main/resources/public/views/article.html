@@ -1,40 +1,34 @@
-<div class="col-md-9">
-	<div class="panel panel-default">
-	    <div class="panel-body">
-			<h2 class="text-center">{{ article.title }}</h2>
-			<p class="lead">
-			{{ article.content }}
-			</p>
-	    </div>
-	</div>
-	
-	<div>
-		<ul class="list-group">
-		    <li class="list-group-item" ng-repeat="comment in commentList">
-		    	<span>{{ comment.user.name }}</span>
-		    	<p>{{ comment.content }}</p>
-			</li>
-			<li class="list-group-item">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="评论" />
-					<button type="submit" class="btn btn-default">发送</button>
+<div>
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="eforum-view-article-tile panel-heading">
+				<div class="row">
+					<div class="col-xs-10">
+						<p hidden>{{article.id}}</p>
+						<h2>{{article.title}}</h2>
+					</div>
+					<div class="col-xs-2">
+						<h2>
+							<img ng-if="article.topGrade > 0" alt="精华" src="article/image/zdt.png">
+							<img ng-if="article.isEssence" alt="精华" src="article/image/jht.png">
+						</h2>
+					</div>
 				</div>
-			</li>
-		</ul>
-    </div>
-
-	<div ng-if="pageCount > 0">
-		<ul class="pagination">
-			<li ng-class="{disabled: currPageIndex == 0}"><a ng-click="previous()">&laquo;</a></li>
-			<li ng-repeat="page in pageList"
-				ng-class="{active: isActivePage(page)}">
-				<a ng-click="selectPage(page)">{{ page }}</a>
-			</li>
-			<li ng-class="{disabled: currPageIndex == pageCount - 1}"><a ng-click="next()">&raquo;</a></li>
-		</ul>
+				<div class="eforum-item-group-text row topic">
+					<p class="col-xs-2" class="list-group-item-text">作者 {{article.createUserName}}</p>
+					<p class="col-xs-8" class="list-group-item-text">发布时间 {{article.createTime|date:"yyyy-MM-dd HH:mm:ss"}}</p>
+					<p class="col-xs-2" class="list-group-item-text">{{replyCount}} 条回复</p>
+				</div>
+			</div>
+			<div>
+				<div class="panel-body view-article-content"
+					data-ng-bind-html="article.content"></div>
+			</div>
+		</div>
+		<br> <br>
+		<reply></reply>
 	</div>
 </div>
-
 <div class="col-md-3">
 	<div class="list-group">
 		<a href="#/" class="list-group-item active">

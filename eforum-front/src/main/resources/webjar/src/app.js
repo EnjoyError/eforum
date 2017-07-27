@@ -1,6 +1,13 @@
 var angular = require('angular');
 require('angular-route');
-var app = angular.module('app', ['ngRoute']);
+require('angular-cookies');
+require('./paging/tm.pagination');
+require('./crop/ng-img-crop');
+var app = angular.module('app', ['ngRoute','ngCookies','tm.pagination', 'ngImgCrop']);
+//angularjs 1.6.0 以上版本需要配置,否则路由无法正常使用
+app.config(["$locationProvider",function($locationProvider){
+	$locationProvider.hashPrefix("");
+}]);
 
 app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
 	// 禁用route缓存
@@ -20,9 +27,13 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 		templateUrl: 'views/about.html',
 		controller: 'aboutController'
 	});
-	$routeProvider.when('/article/:id', {
+	$routeProvider.when('/article', {
 		templateUrl: 'views/article.html',
 		controller: 'articleController'
+	});
+	$routeProvider.when('/pubArticle', {
+		templateUrl: 'views/editArticle.html',
+		controller: 'pubArticleController'
 	});
 	$routeProvider.when('/login', {
 		templateUrl: 'views/login.html',
@@ -41,9 +52,17 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 		templateUrl: 'views/dashboard/favorite.html',
 		controller: 'favoriteController'
 	});
-	$routeProvider.when('/dashboard/password', {
-		templateUrl: 'views/dashboard/password.html',
-		controller: 'passwordController'
+	$routeProvider.when('/dashboard/personalInformation', {
+		templateUrl: 'views/dashboard/personalInformation.html',
+		controller: 'personalInformationController'
+	});
+	$routeProvider.when('/dashboard/headPortrait', {
+		templateUrl: 'views/dashboard/headPortrait.html',
+		controller: 'headPortraitController'
+	});
+	$routeProvider.when('/articleList', {
+		templateUrl: 'views/articleList.html',
+		controller: 'articleListController'
 	});
 }]);
 
@@ -51,6 +70,36 @@ app.run(function($rootScope) {
 	// 路由监听事件 
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
 	});
+});
+
+//自定义过滤器，用来对帖子列表时间进行转换
+app.filter('myDate', function($filter) { //可以注入依赖
+    return function(lastUpdateTimeForAll,currentTime) {
+    	var subTime = currentTime - lastUpdateTimeForAll;
+    	var day20  = 20*24*60*60*1000;	//20天
+    	var day1 = 24*60*60*1000;		//1天
+    	var hour1 = 60*60*1000;			//1小时
+    	var min1 = 60*1000;				//1分钟
+    	var viewTime = "";				//需要显示的时间
+    	if(subTime >= day20){
+    		viewTime = $filter('date')(lastUpdateTimeForAll, "yyyy-MM-dd hh:mm:ss"); 
+    		return viewTime;
+    	}
+    	if(subTime >= day1){
+    		viewTime = Math.floor(subTime/day1);
+    		return  viewTime + " 天前"
+    	}
+    	if(subTime >= hour1){
+    		viewTime = Math.floor(subTime/hour1);
+    		return  viewTime + " 小时前"
+    	}
+    	if(subTime >= min1){
+    		viewTime = Math.floor(subTime/min1);
+    		return  viewTime + " 分钟前"
+    	}
+    	viewTime = "刚刚";
+        return viewTime;
+    }
 });
 
 module.exports = app;

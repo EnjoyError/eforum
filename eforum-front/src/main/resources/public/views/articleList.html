@@ -1,0 +1,52 @@
+<div class="col-md-9">
+	<a class="list-group-item active">
+		eforum元老区
+	</a>
+	<div ng-repeat="x in articleList" class="eforum-list-group-item list-group-item">
+		<img class="col-xs-1 img-circle articleListHeadPortrait" alt="{{x.createUserName}}" src="/user/downloadheadPortrait/{{x.createUserId}}">
+		<div class="col-xs-11">
+			<div class="row">
+				<a class="col-xs-10" ng-click="viewArticle(x.id)">
+					<h4 class="eforum-item-group-head-text list-group-item-heading">
+							{{x.title}}
+					</h4>
+				</a>
+				<div class="col-xs-2 efm-article-list-jh">
+					<img ng-if="x.topGrade > 0" alt="置顶" src="article/image/zdt.png">
+					<img ng-if="x.isEssence" alt="精华" src="article/image/jht.png">
+				</div>
+			</div>
+			<div class="eforum-item-group-text row topic">
+				<p class="col-xs-2 list-group-item-text">
+					创建者 {{x.createUserName}}
+				</p>
+				<p class="col-xs-4 list-group-item-text">
+					更新于 {{x.lastUpdateTimeForAll|myDate:x.currentTime}}
+				</p>
+				<p class="col-xs-4 list-group-item-text">
+					创建于 {{x.createTime|date:"yyyy-MM-dd HH:mm:ss"}}
+				</p>
+				<p class="col-xs-2 list-group-item-text">
+					{{x.replyCount}} 条回复
+				</p>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+	</div>
+	<tm-pagination conf="paginationConf"></tm-pagination>
+</div>
+
+<div class="col-md-3">
+	<div class="list-group">
+		<a href="#/" class="list-group-item active">
+			<h4 class="list-group-item-heading">推荐文章</h4>
+		</a>
+		<a href="#/article/{{ article.id }}" class="list-group-item" ng-repeat="article in suggestionArticleList">
+			<p class="list-group-item-text">
+				{{ article.title }}
+			</p>
+		</a>
+	</div>
+</div>
