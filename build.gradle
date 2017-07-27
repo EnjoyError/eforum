@@ -22,7 +22,6 @@ subprojects {
     apply plugin: 'war'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
-    apply plugin: 'org.springframework.boot'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
