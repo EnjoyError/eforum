@@ -5,8 +5,9 @@ app.service('personalInformationService', function($http) {
     var rest = new RestTemplate($http);
 
 	this.editUserInfo = function(scope) {
-	    return rest.post('/user', {
-	        realName: scope.userInfo.name,
+	    return rest.post('/user/saveUser', {
+	    	id : scope.userInfo.id,
+	        realName: scope.userInfo.realName,
 	        email: scope.userInfo.email,
 	        mobileNumber: scope.userInfo.mobileNumber,
 	        address: scope.userInfo.address,
@@ -18,8 +19,8 @@ app.service('personalInformationService', function($http) {
 
 
 	this.loadUserInfoToScope = function(scope) {
-		promise = rest.post('/user', {
-			userId : scope.userId
+		promise = rest.post('/user/loadUserInfo', {
+			id : scope.userId
 		});
 		promise.then(function(result) {
 			if (result.data.success) {

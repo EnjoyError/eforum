@@ -1,5 +1,6 @@
 package org.eforum.util;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +45,15 @@ public class ConvertUtil {
 			list.add(convertEntityToVo(entity, clazz));
 		}
 		return list;
+	}
+
+	public static final void copyProperties(Object srcObj, Object toObj) {
+		try {
+			BeanUtils.copyProperties(toObj, srcObj);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 }

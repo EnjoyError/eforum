@@ -7,8 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface UserService {
-	@Transactional
-	User addUser(User user);
+	User saveUser(User user);
 
 	User findUserById(Long id);
 

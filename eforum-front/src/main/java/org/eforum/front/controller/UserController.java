@@ -9,9 +9,11 @@ import org.apache.shiro.subject.Subject;
 import org.eforum.constant.Constants;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
+import org.eforum.front.resolvers.AutoLoad;
 import org.eforum.front.vo.UserVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
+import org.eforum.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +40,7 @@ public class UserController extends BaseController {
 			throw new ServiceException("保存用户信息出错", e);
 		}
 		user.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-		userService.addUser(user);
+		userService.saveUser(user);
 
 		return new ResultJson(true, "保存用户信息成功");
 	}
@@ -78,8 +80,24 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "/user/downloadheadPortrait/{userId:.*}", method = RequestMethod.GET)
 	@Transactional
-	public void downloadheadPortrait(@PathVariable("userId") Long userId,HttpServletResponse response) {
+	public void downloadheadPortrait(@PathVariable("userId") Long userId, HttpServletResponse response) {
 		User user = userService.findUserById(userId);
 		userService.downloadheadPortrait(user, response);
+	}
+
+	@RequestMapping(value = "/user/loadUserInfo")
+	@Transactional
+	public Object loadUserInfo(@RequestBody User user) {
+		user = userService.findUserById(user.getId());
+		return new ResultJson(true, user);
+	}
+
+	@RequestMapping(value = "/user/saveUser")
+	@Transactional
+	public Object saveUser(@AutoLoad User user) {
+		User saveUser = userService.findUserById(user.getId());
+		ConvertUtil.copyProperties(user, saveUser);
+		userService.saveUser(saveUser);
+		return new ResultJson(true, "保存成功");
 	}
 }

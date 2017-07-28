@@ -44,7 +44,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
-	public User addUser(User user) {
+	public User saveUser(User user) {
 		String username = user.getName();
 		String email = user.getEmail();
 		if (StringUtils.isNullOrEmpty(email)) {
