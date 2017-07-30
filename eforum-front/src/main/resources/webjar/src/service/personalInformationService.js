@@ -1,5 +1,5 @@
 var app = require('../app');
-var RestTemplate = require('../rest/restTemplate');
+var RestTemplate = require('./restTemplate');
 
 app.service('personalInformationService', function($http) {
     var rest = new RestTemplate($http);

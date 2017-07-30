@@ -62,3 +62,10 @@ body {
 .efm-article-list-jh {
 	margin-top: 6px;
 }
+
+.replyListHeadPortrait {
+	padding-left: 3px;
+	padding-right: 3px;
+	width: 7.33333333%;
+	margin-top: 12px;
+}

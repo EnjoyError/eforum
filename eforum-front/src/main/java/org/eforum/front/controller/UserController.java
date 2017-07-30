@@ -13,7 +13,6 @@ import org.eforum.front.resolvers.AutoLoad;
 import org.eforum.front.vo.UserVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
-import org.eforum.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -95,9 +94,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/user/saveUser")
 	@Transactional
 	public Object saveUser(@AutoLoad User user) {
-		User saveUser = userService.findUserById(user.getId());
-		ConvertUtil.copyProperties(user, saveUser);
-		userService.saveUser(saveUser);
+		userService.saveUser(user);
 		return new ResultJson(true, "保存成功");
 	}
 }

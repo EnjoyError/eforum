@@ -1,7 +1,13 @@
 package org.eforum.util;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -43,6 +49,23 @@ public class FileUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	public static void writeFileToResponse(File file, HttpServletResponse response) {
+		try {
+			InputStream is = new FileInputStream(file);
+			OutputStream os = new BufferedOutputStream(response.getOutputStream());
+			byte[] data = new byte[1024];
+			int length;
+			while ((length = is.read(data)) != -1) {
+				os.write(data, 0, length);
+			}
+			is.close();
+			os.flush();
+			os.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

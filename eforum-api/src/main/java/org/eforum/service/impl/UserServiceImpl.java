@@ -1,10 +1,6 @@
 package org.eforum.service.impl;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +11,7 @@ import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
 import org.eforum.service.FileService;
 import org.eforum.service.UserService;
+import org.eforum.util.FileUtil;
 import org.eforum.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,12 +51,12 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 			throw new ServiceException("用户名必填!");
 		}
 		User existUser = findUserByEmail(email);
-		if (null != existUser) {
+		if (null != existUser && (user.isNew() || !user.getId().equals(existUser.getId()))) {
 			throw new ServiceException("该email已被使用!");
 		}
 		existUser = findUserByName(username);
 
-		if (null != existUser) {
+		if (null != existUser && (user.isNew() || !user.getId().equals(existUser.getId()))) {
 			throw new ServiceException("该用户名已被使用!");
 		}
 		dao.save(user, user);
@@ -108,20 +105,11 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 
 	@Override
 	public void downloadheadPortrait(User user, HttpServletResponse response) {
-		File file = fileService.getFile(Constants.HEAD_PORTRAIT_DIR, user.getHeadPortraitFileName());
-		try {
-			InputStream is = new FileInputStream(file);
-			OutputStream os = new BufferedOutputStream(response.getOutputStream());
-			byte[] data = new byte[1024];
-			int length;
-			while ((length = is.read(data)) != -1) {
-				os.write(data, 0, length);
-			}
-			is.close();
-			os.flush();
-			os.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		String headPortraitFileName = user.getHeadPortraitFileName();
+		if (StringUtils.isNullOrEmpty(headPortraitFileName)) {
+			headPortraitFileName = Constants.ANONYMOUS_HEAD_PORTRAIT_FILE_NAME;
 		}
+		File file = fileService.getFile(Constants.HEAD_PORTRAIT_DIR, headPortraitFileName);
+		FileUtil.writeFileToResponse(file, response);
 	}
 }
