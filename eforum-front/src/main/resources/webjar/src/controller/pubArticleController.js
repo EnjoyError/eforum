@@ -37,7 +37,10 @@ app.controller('pubArticleController', function($scope, $location, articleServic
             	var imageUrls = result.message;
             	for (i in imageUrls) {
 					$('#summernote').summernote('insertImage',
-							imageUrls[i],'img');
+							imageUrls[i],function(img){
+						img.attr('data-filename', "img");
+						img.attr('enlarge-pic', "");
+					});
 				}
             } else {
             	console.log(result.message);

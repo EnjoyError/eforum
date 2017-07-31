@@ -18,6 +18,7 @@ require('./directive/footerDirective');
 require('./directive/articleItemDirective');
 require('./directive/sidebarDirective');
 require('./directive/replyDirective');
+require('./directive/imageDirective');
 
 // 加载angular控制器
 require('./controller/appController');

@@ -69,3 +69,58 @@ body {
 	width: 7.33333333%;
 	margin-top: 12px;
 }
+
+.mask {
+	display: none;
+}
+
+.mask-box {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 80;
+	opacity: 0.5;
+	background: #000;
+}
+
+.big-pic-wrap {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -460px;
+	margin-top: -300px;
+	width: 920px;
+	height: 620px;
+	padding: 10px;
+	z-index: 90;
+	background: #fff;
+}
+
+.bigPic {
+	width: 900px;
+	height: 600px;
+}
+.close-pic {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	border-radius: 50% !important;
+	background: #393A3C;
+	text-align: center;
+	line-height: 40px;
+}
+
+.close-pic:hover {
+	background: #D43F27;
+}
+
+.close-pic>i {
+	font-size: 25px;
+	color: #fff;
+}
