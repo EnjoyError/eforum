@@ -1,14 +1,15 @@
 var app = require('../app');
 
-app.controller('articleController', function($scope, $sce, $routeParams,replyService, articleService) {
+app.controller('articleController', function($scope, $sce, $compile, $routeParams,replyService, articleService) {
 	var id = $routeParams.id;
 	$scope.articleId = id;
 	var promise = articleService.getArticleById(id);
 	promise.then(function(result) {
         if (result.data.success) {
         	var article = result.data.message;
-        	article.content = $sce.trustAsHtml(article.content);
         	$scope.article = article;
+        	var contentDom = $compile(article.content)($scope);
+        	contentDom.appendTo("[data-ng-bind-html='content']");
         } else {
             alert(result.data.message);
         }

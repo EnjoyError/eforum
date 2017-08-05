@@ -11,6 +11,7 @@ require('./service/userService');
 require('./service/replyService');
 require('./service/fileService');
 require('./service/personalInformationService');
+require('./util/commonUtil');
 
 // 加载angular自定义指令
 require('./directive/headerDirective');

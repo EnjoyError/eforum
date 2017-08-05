@@ -89,18 +89,18 @@ body {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-left: -460px;
-	margin-top: -300px;
-	width: 920px;
-	height: 620px;
+	margin-left: -400px;
+	margin-top: -200px;
+	width: 720px;
+	height: 420px;
 	padding: 10px;
 	z-index: 90;
 	background: #fff;
 }
 
 .bigPic {
-	width: 900px;
-	height: 600px;
+	width: 720px;
+	height: 420px;
 }
 .close-pic {
 	position: absolute;
