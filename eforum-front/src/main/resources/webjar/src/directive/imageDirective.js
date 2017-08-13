@@ -27,9 +27,18 @@ app.directive('enlargePic',function(util){//enlargePic指令名称，写在需�
                 if(width > 720){
                 	width = 720;
                 }
-                bigPic.height(widthAndHeight.height);
-                bigPic.width(widthAndHeight.width);
+                var subHeight = (420 - height)/2;
+                subHeight = (subHeight/420)*100;
+                subHeight = subHeight + '%'
+                height = height + 'px';
+                width = width + 'px';
+                bigPic.style.height = height;
+                bigPic.style.width = width;
+                bigPic.style.top = subHeight;
                 bigPic.src = img.src;
+                
+                var maskBox = angular.element(document.querySelector(".mask-box"))[0];
+                maskBox.style.height =  document.body.scrollHeight + 120 + 'px';
             })    
         }    
     }    
