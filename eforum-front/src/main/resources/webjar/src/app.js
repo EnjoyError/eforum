@@ -20,8 +20,7 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 	
 	$routeProvider.otherwise({redirectTo: '/'});
 	$routeProvider.when('/', {
-		templateUrl: 'views/main.html',
-		controller: 'mainController'
+		templateUrl: 'views/main.html'
 	});
 	$routeProvider.when('/about', {
 		templateUrl: 'views/about.html',

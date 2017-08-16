@@ -24,7 +24,6 @@ require('./directive/imageDirective');
 // 加载angular控制器
 require('./controller/appController');
 require('./controller/headerController');
-require('./controller/mainController');
 require('./controller/aboutController')
 require('./controller/loginController');
 require('./controller/regController');

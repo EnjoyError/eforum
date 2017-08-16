@@ -70,7 +70,7 @@ app.controller('headerController', function($scope, $location, $cookies, userSer
 			}
 		}
 	);
-	
+
 	function cleanActive($scope){
 		$scope.main = "";
 		$scope.about = "";
