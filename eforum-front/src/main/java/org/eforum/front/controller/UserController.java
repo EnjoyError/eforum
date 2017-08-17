@@ -10,9 +10,9 @@ import org.eforum.constant.Constants;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
 import org.eforum.front.resolvers.AutoLoad;
-import org.eforum.front.vo.UserVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.UserService;
+import org.eforum.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +38,7 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			throw new ServiceException("保存用户信息出错", e);
 		}
-		user.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-		userService.saveUser(user);
+		userService.createUser(user);
 
 		return new ResultJson(true, "保存用户信息成功");
 	}
@@ -59,11 +58,13 @@ public class UserController extends BaseController {
 	@ApiOperation(value = "用户接口", notes = "修改密码", code = 200, produces = "application/json")
 	@RequestMapping(value = "/user/changePassword", method = RequestMethod.POST)
 	@Transactional
-	public Object changePassword(String newPassword) {
+	public Object changePassword(@AutoLoad UserVo userVo) {
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getSession().getAttribute(Constants.CURRENT_USER_IN_SESSION);
-		newPassword = DigestUtils.md5Hex(newPassword);
-		userService.changePassword(user, newPassword);
+		if(!user.getId().equals(userVo.getId())){
+			throw new ServiceException("非法操作!");
+		}
+		userService.changePassword(userVo);
 		return new ResultJson(true, "修改密码成功");
 	}
 

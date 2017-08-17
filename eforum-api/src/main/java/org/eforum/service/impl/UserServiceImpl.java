@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.eforum.constant.Constants;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
@@ -13,6 +14,7 @@ import org.eforum.service.FileService;
 import org.eforum.service.UserService;
 import org.eforum.util.FileUtil;
 import org.eforum.util.StringUtils;
+import org.eforum.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +65,28 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		return user;
 	}
 
+    @Override
+    public User createUser(User user) {
+        validateUsername(user.getName());
+        validatePassword(user.getPassword());
+        user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+        saveUser(user);
+        return user;
+    }
+
+    /**
+	 * 校验用户名
+	 * @param username
+	 */
+	private void validateUsername(String username){
+		if(StringUtils.isNullOrEmpty(username)){
+			throw new ServiceException("用户名不能是空的!");
+		}
+		if(username.length() > 12 || username.length() < 4){
+			throw new ServiceException("用户名长度只能在4到12之间！");
+		}
+	}
+
 	@Override
 	public User findLoginUser(String username, String password) {
 		String hql = "obj.name = :name AND obj.password = :password";
@@ -76,12 +100,31 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		return user;
 	}
 
-	@Override
-	public void changePassword(User user, String newPassword) {
-		if (StringUtils.isNullOrEmpty(newPassword)) {
-			throw new ServiceException("新密码不能为空!");
+	/**
+	 * 校验密码
+	 * @param password
+	 */
+	private void validatePassword(String password){
+		if (StringUtils.isNullOrEmpty(password)) {
+			throw new ServiceException("密码不能为空!");
 		}
-		user = dao.get(User.class, user.getId());
+		if(password.length() > 16 || password.length() < 8){
+			throw new ServiceException("密码长度只能在8到16之间！");
+		}
+	}
+
+	@Override
+	public void changePassword(UserVo userVo) {
+		User user = dao.get(User.class,userVo.getId());
+		userVo.setOldPassword(DigestUtils.md5Hex(userVo.getOldPassword()));
+		String pageOldPassword = userVo.getOldPassword();
+		String oldPassword = user.getPassword();
+		if(!oldPassword.equals(pageOldPassword)){
+			throw new ServiceException("旧密码输入不正确!");
+		}
+		String newPassword = userVo.getPassword();
+		validatePassword(newPassword);
+		newPassword = DigestUtils.md5Hex(newPassword);
 		user.setPassword(newPassword);
 		dao.save(user);
 	}

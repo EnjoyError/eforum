@@ -96,8 +96,7 @@ public class MyArgumentsResolver implements HandlerMethodArgumentResolver {
 				fieldValue = Double.valueOf(String.valueOf(fieldValue));
 			} else if (fieldClass == Boolean.class || fieldClass == boolean.class) {
 				fieldValue = Boolean.valueOf(String.valueOf(fieldValue));
-			}
-			if (fieldClass == String.class) {
+			} else if (fieldClass == String.class) {
 				fieldValue = String.valueOf(fieldValue);
 			} else {
 				fieldValue = getValue(fieldClass, (Map) fieldValue);

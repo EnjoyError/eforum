@@ -3,11 +3,14 @@ package org.eforum.service;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eforum.entity.User;
+import org.eforum.vo.UserVo;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface UserService {
 	User saveUser(User user);
+
+	User createUser(User user);
 
 	User findUserById(Long id);
 
@@ -23,7 +26,7 @@ public interface UserService {
 	 * @param user
 	 * @param newPassword
 	 */
-	void changePassword(User user, String newPassword);
+	void changePassword(UserVo userVo);
 
 	/**
 	 * 上传用户头像

@@ -7,6 +7,7 @@ package org.eforum.vo;
  *
  */
 public class UserVo {
+	private Long id;
 	private String name;
 	private String email;
 	private String password;
@@ -15,6 +16,23 @@ public class UserVo {
 	private String mobileNumber;
 	private String address;
 	private String personalizedSignature;
+	private String oldPassword;
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getRealName() {
 		return realName;

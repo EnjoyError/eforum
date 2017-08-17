@@ -17,4 +17,29 @@ app.service('util', function() {
 		}
 		return { width:nWidth, height:nHeight }
 	}
+
+    /**
+     * 获取页面高度
+     */
+	this.getPageHeight = function(){
+        return document.body.scrollHeight + 180 + 'px';
+	}
+
+    /**
+	 * 关闭弹出面板
+     */
+	this.closePopBox = function(){
+        var eles = angular.element(document.querySelectorAll(".popBoxContent"));
+        angular.forEach(eles,function(ele){
+        	ele.style.display = "none";
+		});
+        angular.element(document.querySelector(".popBoxPage"))[0].style.display = "none";
+	}
+
+    /**
+	 * 打开弹出面板
+     */
+	this.openPopBox = function(){
+        angular.element(document.querySelector(".popBoxPage"))[0].style.display = "block";
+	}
 });
