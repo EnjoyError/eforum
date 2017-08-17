@@ -1,6 +1,6 @@
 eforum - 飞一般的BBS
 =========================
-![Author](https://img.shields.io/badge/Author-e%E7%A5%9E%7CMing-brightgreen.svg)
+![Author](https://img.shields.io/badge/Author-e%E7%A5%9E%7CSpring-brightgreen.svg)
 ![Porwer](https://img.shields.io/badge/Powered%20by-SpringBoot-red.svg)
 ![Version](https://img.shields.io/badge/Version-0.1-blue.svg)
 * eforum是一个类似BBS的系统。如果你经常泡论坛，那么应该很熟悉。
