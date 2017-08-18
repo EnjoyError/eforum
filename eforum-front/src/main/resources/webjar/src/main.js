@@ -20,6 +20,9 @@ require('./directive/articleItemDirective');
 require('./directive/sidebarDirective');
 require('./directive/replyDirective');
 require('./directive/imageDirective');
+require('./directive/editPasswordDirective');
+require('./directive/editPersonalInformationDirective');
+require('./directive/popBoxDirective');
 
 // 加载angular控制器
 require('./controller/appController');

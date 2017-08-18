@@ -1,20 +1,23 @@
 var app = require('../app');
 var angular = require('angular');
-app.controller('personalInformationController', function($scope,$cookies,personalInformationService) {
+app.controller('personalInformationController', function(util,$scope,$cookies,personalInformationService) {
 	$scope.saveUserInfo = function(){
-        var promise = personalInformationService.editUserInfo($scope);
-        promise.then(function(result) {
-            if (result.data.success) {
-            	alert("保存成功");
-            } else {
-                alert(result.data.message);
-            }
-        }, function(result) {
-        	alert("执行到这里" + result);
-        },function(result){
-        	alert("执行到这里   1" + result);
-        });
+        personalInformationService.editUserInfo($scope);
 	}
 	$scope.userId = $cookies.get("userId");
 	personalInformationService.loadUserInfoToScope($scope);
+
+	$scope.toChangePasswordPage = function(){
+	    angular.element(document.querySelector("#editPasswordPage"))[0].style.display = "block";
+        util.openPopBox();
+    }
+
+    $scope.savePassword = function(){
+        personalInformationService.changePassword($scope);
+    }
+
+    $scope.toEditPersonalInformationPage = function(){
+        angular.element(document.querySelector("#editPersonalInformationPage"))[0].style.display = "block";
+        util.openPopBox();
+    }
 });

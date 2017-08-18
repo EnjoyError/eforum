@@ -125,3 +125,61 @@ body {
 	font-size: 25px;
 	color: #fff;
 }
+
+/** popBoxPage */
+.popBoxPage{
+	display: none;
+}
+
+.mask-popBoxPage{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 20000px;
+	height: 20000px;
+	z-index: 88880;
+	opacity: 0.5;
+	background: #000;
+}
+/** popBoxPageEnd */
+
+.editPersonalInformation{
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	margin-left: -300px;
+	margin-top: -220px;
+	width: 580px;
+	height: 300px;
+	z-index: 88881;
+	background: #fff;
+	text-align: center;
+}
+
+.editPasswordFrom{
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	margin-left: -300px;
+	margin-top: -200px;
+	width: 580px;
+	height: 250px;
+	z-index: 88881;
+	background: #fff;
+	text-align: center;
+}
+
+.editPersonalInformationPageFieldset{
+	margin-left: 45px;
+	margin-right: 45px;
+}
+
+.editPersonalInformationPageFieldsetLab{
+	text-align: right;
+	padding-right: 4px;
+	padding-top: 8px;
+}
+
+.editPersonalInformationPageFieldsetInput{
+	padding-left: 1px;
+}

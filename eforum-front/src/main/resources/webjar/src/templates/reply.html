@@ -8,13 +8,13 @@
 		</div>
 		<br> <br>
 		<div class="eforum-view-article-view-reply" ng-repeat="x in replys" >
-			<img class="col-xs-1 img-circle replyListHeadPortrait" alt="{{x.createUserName}}" src="/user/downloadheadPortrait/{{x.createUserId}}">
+			<img class="col-xs-1 img-circle replyListHeadPortrait" alt="{{x.createUserName}}" ng-src={{'/user/downloadheadPortrait/'+x.createUserId}}>
 			<div class="col-xs-11 eforum-view-article-view-reply-panel panel">
 				<div class="eforum-view-article-tile panel-heading">
 					<div
 						class="eforum-view-article-view-reply-head eforum-item-group-text row topic">
-						<p class="col-xs-2" class="list-group-item-text">{{x.createUserName}}</p>
-						<p class="col-xs-10" class="list-group-item-text">回复于
+						<p style="white-space:nowrap; text-overflow:ellipsis; overflow:hidden;"  class="col-xs-2 list-group-item-text">{{x.createUserName}}</p>
+						<p class="col-xs-10 list-group-item-text">回复于
 							{{x.createTime|date:"yyyy-MM-dd HH:mm:ss"}}</p>
 					</div>
 				</div>

@@ -38,7 +38,7 @@ app.directive('enlargePic',function(util){//enlargePic指令名称，写在需�
                 bigPic.src = img.src;
                 
                 var maskBox = angular.element(document.querySelector(".mask-box"))[0];
-                maskBox.style.height =  document.body.scrollHeight + 120 + 'px';
+                maskBox.style.height =  util.getPageHeight();
             })    
         }    
     }    

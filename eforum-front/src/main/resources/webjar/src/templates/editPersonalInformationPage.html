@@ -1,0 +1,71 @@
+<div ng-controller="personalInformationController" style="display: none;"  id="editPersonalInformationPage" class="popBoxContent editPersonalInformation row">
+    <fieldset class="editPersonalInformationPageFieldset">
+        <div id="legend" class="">
+            <legend class="">个人信息修改</legend>
+        </div>
+
+        <div>
+
+            <div class="row">
+                <!-- Text input-->
+                <label class="col-xs-2 control-label editPersonalInformationPageFieldsetLab"  for="input01">真实姓名</label>
+                <div class="col-xs-4 controls editPersonalInformationPageFieldsetInput"  >
+                    <input   ng-model="userInfo.realName" class="input-xlarge" type="text" required>
+                </div>
+
+                <!-- Text input-->
+                <label class="col-xs-2 control-label editPersonalInformationPageFieldsetLab"  for="input01">性别</label>
+                <div class="row col-xs-4 controls editPersonalInformationPageFieldsetInput">
+                    <label class="radio col-md-4 col-md-offset-2">
+                        <input value="man" ng-model="userInfo.gender" name="gender"  type="radio">
+                        <p>男</p>
+                    </label>
+                    <label class="radio col-md-4" style="margin-top: 10px">
+                        <input value="woman" ng-model="userInfo.gender" name="gender" type="radio">
+                        <p>女</p>
+                    </label>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <!-- Text input-->
+                <label class="col-xs-2 control-label editPersonalInformationPageFieldsetLab"  for="input01">邮箱</label>
+                <div class="col-xs-4 controls editPersonalInformationPageFieldsetInput" >
+                    <input   ng-model="userInfo.email" class="input-xlarge" type="text" required>
+                </div>
+
+                <!-- Text input-->
+                <label class="col-xs-2 control-label editPersonalInformationPageFieldsetLab"  for="input01">手机号码</label>
+                <div class="col-xs-4 controls editPersonalInformationPageFieldsetInput" >
+                    <input  ng-model="userInfo.mobileNumber" class="input-xlarge" type="text" required>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <label class="col-xs-2 control-label editPersonalInformationPageFieldsetLab" for="input01">地址</label>
+                <div class="controls col-xs-4 editPersonalInformationPageFieldsetInput">
+                    <textarea ng-model="userInfo.address" class="form-control" rows="1"></textarea>
+                </div>
+
+                <label class="col-xs-2 control-label editPersonalInformationPageFieldsetLab" for="input01">个性签名</label>
+                <div class="controls col-xs-4 editPersonalInformationPageFieldsetInput">
+                    <textarea ng-model="userInfo.personalizedSignature" class="form-control" rows="1"></textarea>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <label class="col-xs-3 control-label"></label>
+                <div class="col-xs-7 controls">
+                    <button class="btn btn-default" ng-click="saveUserInfo()">保存</button>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+    <span close-for-pop-box class="close-pic"><i class="fa fa-close"></i></span>
+</div>
