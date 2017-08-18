@@ -183,3 +183,30 @@ body {
 .editPersonalInformationPageFieldsetInput{
 	padding-left: 1px;
 }
+
+#eForumTableAlert{
+	top: 40%;
+	left: 50%;
+	padding: 10px;
+	position: fixed;
+	border-radius: 5px;
+	background-color: #efefef;
+	transform:translate(-50%,-50%);
+	-moz-transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	box-shadow: 0px 0px 20px #888888;
+	display: none;
+}
+#eForumTableAlert div{
+	min-width:160px;
+	min-height:40px;
+	max-width: 200px;
+	overflow-y: auto;
+	max-height: 120px;
+	text-align: center;
+	word-wrap:break-word;
+	vertical-align:middle;
+}
+#eForumTableAlert p{
+	margin: 14px auto 14px auto
+}

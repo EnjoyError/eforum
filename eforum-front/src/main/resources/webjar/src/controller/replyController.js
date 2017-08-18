@@ -1,13 +1,13 @@
 var app = require('../app');
 
-app.controller('replyController', function($scope, $sce, $window, $routeParams, replyService, articleService) {
+app.controller('replyController', function($scope, $sce, $window, $routeParams, replyService, articleService, util) {
 	$scope.commitReply = function(){
 		var replyContent = $('#summernote').summernote('code');
 		var articleId = $scope.$parent.articleId;
 		var promise = replyService.commitReply(articleId,replyContent);
 		promise.then(function(result) {
             if (result.data.success) {
-            	alert("回复成功");
+            	util.alert("回复成功");
             	refreshReply($scope,$sce);
             	var replyContent = $('#summernote').summernote('code',"");
             } else {
