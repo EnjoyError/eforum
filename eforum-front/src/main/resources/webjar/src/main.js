@@ -23,6 +23,7 @@ require('./directive/imageDirective');
 require('./directive/editPasswordDirective');
 require('./directive/editPersonalInformationDirective');
 require('./directive/popBoxDirective');
+require('./directive/eForumAlertDirective');
 
 // 加载angular控制器
 require('./controller/appController');

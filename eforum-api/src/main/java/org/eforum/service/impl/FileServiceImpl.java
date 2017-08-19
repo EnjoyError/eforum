@@ -119,7 +119,7 @@ public class FileServiceImpl implements FileService {
 		filePath = filePath + File.separator + fileName;
 		File file = new File(filePath);
 		if (!file.exists()) {
-			throw new ServiceException("未找到该文件[" + fileName + "]");
+			throw new ServiceException("未找到该文件[" + filePath + "]");
 		}
 		return file;
 	}
