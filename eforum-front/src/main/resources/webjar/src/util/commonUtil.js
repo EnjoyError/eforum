@@ -49,10 +49,9 @@ app.service('util', function() {
     this.alert = function (message){
         message = message||"error";
         //创建弹出内容
-        angular.element(document.querySelector("#eForumTableAlertHide div p")).eq(0).html(message);
-        angular.element(document.querySelector("#eForumTableAlertHide")).css("display","block");
-        alert("asdfas");
+        angular.element(document.querySelector("#eforumAlert div p")).eq(0).html(message);
+        angular.element(document.querySelector("#eforumAlert")).css("display","block");
         //2秒后隐藏
-        setTimeout('angular.element(document.querySelector("#eForumTableAlertHide")).css("display","none");', 2000);
+        setTimeout('angular.element(document.querySelector("#eforumAlert")).css("display","none");', 1500);
     }
 });

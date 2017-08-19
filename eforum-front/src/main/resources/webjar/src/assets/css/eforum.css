@@ -184,12 +184,26 @@ body {
 	padding-left: 1px;
 }
 
-#eForumTableAlert{
+/*
+eforum自定义弹框css
+ */
+
+@keyframes eforumAlertHiden
+{
+	from {display: block;}
+	to {display: none;}
+}
+
+#eforumAlert{
 	top: 40%;
 	left: 50%;
 	padding: 10px;
 	position: fixed;
 	border-radius: 5px;
+	animation: eforumAlertHiden 2s;
+	-moz-animation: eforumAlertHiden 2s;	/* Firefox */
+	-webkit-animation: eforumAlertHiden 2s;	/* Safari 和 Chrome */
+	-o-animation: eforumAlertHiden 2s;	/* Opera */
 	background-color: #efefef;
 	transform:translate(-50%,-50%);
 	-moz-transform: translate(-50%,-50%);
@@ -197,7 +211,8 @@ body {
 	box-shadow: 0px 0px 20px #888888;
 	display: none;
 }
-#eForumTableAlert div{
+
+#eforumAlert div{
 	min-width:160px;
 	min-height:40px;
 	max-width: 200px;
@@ -207,6 +222,6 @@ body {
 	word-wrap:break-word;
 	vertical-align:middle;
 }
-#eForumTableAlert p{
+#eforumAlert p{
 	margin: 14px auto 14px auto
 }
