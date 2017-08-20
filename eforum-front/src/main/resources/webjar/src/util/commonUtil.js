@@ -46,16 +46,5 @@ CommonUtil.fn.openPopBox = function () {
     angular.element(document.querySelector(".popBoxPage"))[0].style.display = "block";
 }
 
-/**
- * eforum弹框alert
- */
-CommonUtil.fn.alert = function (message) {
-    message = message || "error";
-    //创建弹出内容
-    angular.element(document.querySelector("#eforumAlert div p")).eq(0).html(message);
-    angular.element(document.querySelector("#eforumAlert")).css("display", "block");
-    //2秒后隐藏
-    setTimeout('angular.element(document.querySelector("#eforumAlert")).css("display","none");', 1500);
-}
 
 module.exports = CommonUtil;

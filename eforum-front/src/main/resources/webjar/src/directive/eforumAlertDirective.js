@@ -1,5 +1,5 @@
 var app = require('../app');
-var efap = require('../templates/eForumAlertPage.html');
+var efap = require('../templates/eforumAlertPage.html');
 
 app.directive('eforumAlert', function() {
     return {
