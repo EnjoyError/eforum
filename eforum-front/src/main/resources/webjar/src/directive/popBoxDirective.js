@@ -9,7 +9,7 @@ app.directive('popBoxDirective',function(){
 	} 
 });
 
-app.directive('closeForPopBox',function(util){
+app.directive('closeForPopBox',function(){
     return{    
         restrict: "AE",
         link: function(scope,elem){    

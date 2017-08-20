@@ -1,6 +1,6 @@
 var app = require('../app');
 
-app.controller('replyController', function($scope, $sce, $window, $routeParams, replyService, articleService, util) {
+app.controller('replyController', function($scope, $sce, $window, $routeParams, replyService, articleService) {
 	$scope.commitReply = function(){
 		var replyContent = $('#summernote').summernote('code');
 		var articleId = $scope.$parent.articleId;
