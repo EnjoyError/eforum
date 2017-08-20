@@ -1,6 +1,6 @@
 var app = require('../app');
 var angular = require('angular');
-app.controller('personalInformationController', function(util,$scope,$cookies,personalInformationService) {
+app.controller('personalInformationController', function($scope,$cookies,personalInformationService) {
 	$scope.saveUserInfo = function(){
         personalInformationService.editUserInfo($scope);
 	}

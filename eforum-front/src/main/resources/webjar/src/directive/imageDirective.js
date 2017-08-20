@@ -10,7 +10,7 @@ app.directive('imageDirective',function(){
 });
 
 
-app.directive('enlargePic',function(util){//enlargePic指令名称，写在需要用到的地方img中即可实现放大图片  
+app.directive('enlargePic',function(){//enlargePic指令名称，写在需要用到的地方img中即可实现放大图片
     return{    
         restrict: "AE",    
         link: function(scope,elem){    
@@ -44,7 +44,7 @@ app.directive('enlargePic',function(util){//enlargePic指令名称，写在需�
     }    
 });
 
-app.directive('closePic',function(util){    
+app.directive('closePic',function(){
     return{    
         restrict: "AE",    
         link: function(scope,elem){    

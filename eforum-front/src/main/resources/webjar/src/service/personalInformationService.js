@@ -1,7 +1,7 @@
 var app = require('../app');
 var RestTemplate = require('./restTemplate');
 
-app.service('personalInformationService', function($http,$window,util) {
+app.service('personalInformationService', function($http,$window) {
     var rest = new RestTemplate($http);
 
 	this.editUserInfo = function(scope) {
