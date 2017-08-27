@@ -49,11 +49,11 @@ public class ShiroConfiguration {
     public ShiroFilterFactoryBean shiroFilter(WebSecurityManager securityManager) {
         LOG.info("配置shiro过滤器");
 
-        List<String> definitions = new ArrayList<>();
+        List<String> definitions = new ArrayList<String>();
         definitions.add("/dashboard/** = access");
         definitions.add("/** = anon");
 
-        Map<String, Filter> filters = new HashMap<>();
+        Map<String, Filter> filters = new HashMap<String, Filter>();
         filters.put("access", new FrontAccessControlFilter());
 
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
