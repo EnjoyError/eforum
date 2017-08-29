@@ -1,5 +1,0 @@
-rootProject.name = 'eforum'
-
-include 'eforum-api'
-include 'eforum-front'
-include 'eforum-mgt'

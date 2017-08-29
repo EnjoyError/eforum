@@ -13,6 +13,6 @@ app.service('fileService', function($http) {
 	}
 	
 	this.uploadHeadPortrait = function(base64Str){
-		return rest.postForForm('user/uploadHeadPortrait',{base64Str});
+		return rest.postForForm('user/uploadHeadPortrait',{base64Str:base64Str});
 	}
 });

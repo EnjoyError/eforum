@@ -7,7 +7,7 @@ app.controller('replyController', function($scope, $sce, $window, $routeParams, 
 		var promise = replyService.commitReply(articleId,replyContent);
 		promise.then(function(result) {
             if (result.data.success) {
-            	util.alert("回复成功");
+                modal.alert("回复成功");
             	refreshReply($scope,$sce);
             	var replyContent = $('#summernote').summernote('code',"");
             } else {
