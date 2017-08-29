@@ -1,10 +1,9 @@
 package org.eforum.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * 用户
@@ -26,7 +25,6 @@ public class User extends BaseEntity {
 	 * 登录密码
 	 */
 	@Column
-	@JSONField(serialize = false)
 	private String password;
 
 	/** 头像文件名。例如 1000.jpg */
