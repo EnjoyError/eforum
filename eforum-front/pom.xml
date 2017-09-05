@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.sackr</groupId>
         <artifactId>eforum</artifactId>
-        <version>1</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>eforum-front</artifactId>
@@ -14,16 +14,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>om.sackr</groupId>
+            <groupId>com.sackr</groupId>
             <artifactId>eforum-api</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>om.sackr</groupId>
+            <groupId>com.sackr</groupId>
             <artifactId>eforum-model</artifactId>
-        </dependency>
+            <version>1.0.0</version></dependency>
         <dependency>
-            <groupId>om.sackr</groupId>
+            <groupId>com.sackr</groupId>
             <artifactId>eforum-common</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>
@@ -117,10 +119,37 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>org.eforum.FrontApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!--如果想在没有web.xml文件的情况下构建WAR，请设置为false。-->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>

@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.eforum.entity.Article;
 import org.eforum.produces.PageVo;
 import org.eforum.vo.ArticleVo;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ArticleService {
+	@Transactional
 	PageVo<ArticleVo> listArticle(int pageNumber, int pageSize);
 
 	Article findArticleById(Long id);

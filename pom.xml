@@ -4,7 +4,7 @@
 
     <groupId>com.sackr</groupId>
     <artifactId>eforum</artifactId>
-    <version>1</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>eforum</name>
     <url>http://maven.apache.org</url>
@@ -31,6 +31,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>1.4.3.RELEASE</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>logback-classic</artifactId>
+                        <groupId>ch.qos.logback</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -92,6 +98,12 @@
                 <groupId>com.octo.captcha</groupId>
                 <artifactId>jcaptcha-all</artifactId>
                 <version>1.0-RC6</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
@@ -138,4 +150,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 </project>

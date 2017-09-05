@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.sackr</groupId>
         <artifactId>eforum</artifactId>
-        <version>1</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>eforum-api</artifactId>
@@ -14,25 +14,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>om.sackr</groupId>
+            <groupId>com.sackr</groupId>
             <artifactId>eforum-model</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>om.sackr</groupId>
+            <groupId>com.sackr</groupId>
             <artifactId>eforum-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>om.sackr</groupId>
-            <artifactId>eforum-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>om.sackr</groupId>
-            <artifactId>eforum-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>om.sackr</groupId>
-            <artifactId>eforum-common</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>
