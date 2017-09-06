@@ -33,7 +33,6 @@ public class ArticleController extends BaseController {
 
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
-	@Transactional
 	public Object listArticle(Integer pageNumber, Integer pageSize) {
 		PageVo<ArticleVo> pageVo = articleService.listArticle(pageNumber, pageSize);
 		replyService.refreshReplyCount(pageVo.getData());

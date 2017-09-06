@@ -1,6 +1,7 @@
 package org.eforum.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 /**
  * 管理员

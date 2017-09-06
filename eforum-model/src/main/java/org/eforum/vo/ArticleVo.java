@@ -2,8 +2,6 @@ package org.eforum.vo;
 
 import java.util.Date;
 
-import org.eforum.entity.User;
-
 /**
  * 帖子Vo
  * 
