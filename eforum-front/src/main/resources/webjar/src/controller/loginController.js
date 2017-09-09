@@ -6,8 +6,7 @@ app.controller('loginController', function($scope, $location, userService, $cook
     $scope.rememberMe = '';
 
 	$scope.login = function() {
-        var promise = userService.login($scope.name, $scope.password, $scope.rememberMe);
-        promise.then(function(result) {
+        userService.login($scope.name, $scope.password, $scope.rememberMe,function(result) {
             if (result.data.success) {
             	var msg = {
             			isLogin:true,
@@ -16,12 +15,8 @@ app.controller('loginController', function($scope, $location, userService, $cook
             	$scope.$emit("loginAndLogoutForUp",msg);
                 $location.path('/');
             } else {
-                alert(result.data.message);
+                modal.showMsg(result.data.message);
             }
-        }, function(result) {
-        	alert("执行到这里" + result);
-        },function(result){
-        	alert("执行到这里   1" + result);
         });
 	}
 });

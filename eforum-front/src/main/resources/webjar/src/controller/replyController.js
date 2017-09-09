@@ -4,37 +4,27 @@ app.controller('replyController', function($scope, $sce, $window, $routeParams, 
 	$scope.commitReply = function(){
 		var replyContent = $('#summernote').summernote('code');
 		var articleId = $scope.$parent.articleId;
-		var promise = replyService.commitReply(articleId,replyContent);
-		promise.then(function(result) {
+		replyService.commitReply(articleId,replyContent,function(result) {
             if (result.data.success) {
                 modal.alert("回复成功");
-            	refreshReply($scope,$sce);
-            	var replyContent = $('#summernote').summernote('code',"");
+                $('#summernote').summernote('code',"");
+                refreshReply($scope,$sce);
             } else {
-                alert(result.data.message);
+                modal.showMsg(result.data.message);
             }
-        }, function(result) {
-        	alert("执行到这里" + result);
-        },function(result){
-        	alert("执行到这里   1" + result);
         });
 	}
 	
 	var refreshReply = function($scope,$sce){
-		var promise = replyService.getReplyByArticleId($scope.$parent.articleId);
-		promise.then(function(result) {
+		replyService.getReplyByArticleId($scope.$parent.articleId,function(result) {
 	        if (result.data.success) {
 	        	$scope.replys = result.data.message;
 	        	angular.forEach($scope.replys,function(reply){
 	        		reply.content = $sce.trustAsHtml(reply.content);
 	        	});
 	        } else {
-	            alert(result.data.message);
+                modal.showMsg(result.data.message);
 	        }
-	    }, function(result) {
-	    	alert("执行到这里" + result);
-	    },function(result){
-	    	alert("执行到这里   1" + result);
 	    });
 	}
 	
@@ -63,7 +53,7 @@ app.controller('replyController', function($scope, $sce, $window, $routeParams, 
             	console.log(result.message);
             }
 		},function(result){
-			alert("执行到这里" + result);
+            modal.showMsg("请求失败 " + result);
 		});
 	}
 	

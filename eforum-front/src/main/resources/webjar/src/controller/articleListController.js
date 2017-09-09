@@ -11,8 +11,7 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
 		var pageIndex = $scope.paginationConf.currentPage;
 		var pageSize = $scope.paginationConf.itemsPerPage;
 		
-		var promise = articleService.listArticle(pageIndex,pageSize);
-		promise.then(function(result) {
+		articleService.listArticle(pageIndex,pageSize,function(result) {
 	        if (result.data.success) {
 	        	var message = result.data.message;
 	        	// 配置分页基本参数
@@ -22,12 +21,8 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
 	        	$scope.paginationConf.pagesLength = message.pageCount,
 	        	$scope.articleList = articleService.parseArticleList(message);
 	        } else {
-	            alert(result.data.message);
+                modal.showMsg(result.data.message);
 	        }
-	    }, function(result) {
-	    	alert("执行到这里" + result);
-	    },function(result){
-	    	alert("执行到这里   1" + result);
 	    });
 	}
 	

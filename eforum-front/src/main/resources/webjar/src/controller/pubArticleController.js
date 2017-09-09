@@ -5,20 +5,14 @@ app.controller('pubArticleController', function($scope, $location, articleServic
 	$scope.publish = function(){
 		var articleContent = $('#summernote').summernote('code');
 		var articleTile = $('#articleTile').val();
-		var promise = articleService.publishArticle(articleTile,articleContent);
-		promise.then(function(result) {
+		articleService.publishArticle(articleTile,articleContent,function(result) {
             if (result.data.success) {
-            	alert("发布成功");
+                modal.alert("发布成功");
             	$location.path("/articleList");
             } else {
-                alert(result.data.message);
+                modal.showMsg(result.data.message);
             }
-        }, function(result) {
-        	alert("执行到这里" + result);
-        },function(result){
-        	alert("执行到这里   1" + result);
         });
-		
 	};
 	$('#summernote').summernote({
 		lang : 'zh-CN',
@@ -46,7 +40,7 @@ app.controller('pubArticleController', function($scope, $location, articleServic
             	console.log(result.message);
             }
 		},function(result){
-			alert("执行到这里" + result);
+            modal.showMsg("请求失败 " + result);
 		});
 	};
 

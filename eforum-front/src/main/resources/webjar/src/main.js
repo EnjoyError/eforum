@@ -33,8 +33,6 @@ require('./controller/aboutController')
 require('./controller/loginController');
 require('./controller/regController');
 require('./controller/articleController');
-require('./controller/messageController');
-require('./controller/favoriteController');
 require('./controller/personalInformationController');
 require('./controller/headPortraitController');
 require('./controller/articleListController');

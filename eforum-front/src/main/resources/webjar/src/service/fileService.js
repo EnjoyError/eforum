@@ -12,7 +12,7 @@ app.service('fileService', function($http) {
 		rest.uploadFile('article/uploadImages',fd,successCallback,errorCallback);
 	}
 	
-	this.uploadHeadPortrait = function(base64Str){
-		return rest.postForForm('user/uploadHeadPortrait',{base64Str:base64Str});
+	this.uploadHeadPortrait = function(base64Str,successCallback){
+		rest.postForForm('user/uploadHeadPortrait',{base64Str:base64Str},successCallback);
 	}
 });

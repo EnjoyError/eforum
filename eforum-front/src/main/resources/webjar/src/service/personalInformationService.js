@@ -5,7 +5,7 @@ app.service('personalInformationService', function($http,$window) {
     var rest = new RestTemplate($http);
 
 	this.editUserInfo = function(scope) {
-	    var promise = rest.post('/user/saveUser', {
+	    rest.post('/user/saveUser', {
 	    	id : scope.userInfo.id,
 	        realName: scope.userInfo.realName,
 	        email: scope.userInfo.email,
@@ -13,19 +13,14 @@ app.service('personalInformationService', function($http,$window) {
 	        address: scope.userInfo.address,
 	        gender : scope.userInfo.gender,
 	        personalizedSignature: scope.userInfo.personalizedSignature
-	    });
-        promise.then(function(result) {
+	    },function(result) {
             if (result.data.success) {
-                alert("保存成功");
+                modal.alert("保存成功");
                 util.closePopBox();
                 $window.location.reload();
             } else {
-                alert(result.data.message);
+                modal.showMsg(result.data.message);
             }
-        }, function(result) {
-            alert("执行到这里" + result);
-        },function(result){
-            alert("执行到这里   1" + result);
         });
 	}
 	
@@ -36,42 +31,32 @@ app.service('personalInformationService', function($http,$window) {
             console.log("userId is null");
             return ;
 		}
-		var promise = rest.post('/user/loadUserInfo', {
+		rest.post('/user/loadUserInfo', {
 			id : scope.userId
-		});
-		promise.then(function(result) {
+		},function(result) {
 			if (result.data.success) {
 				scope.userInfo = result.data.message;
 			} else {
-				alert(result.data.message);
+                modal.showMsg(result.data.message);
 			}
-		}, function(result) {
-			alert("执行到这里" + result);
-		}, function(result) {
-			alert("执行到这里   1" + result);
 		});
 	}
 
 
 	this.changePassword = function(scope){
-        var promise = rest.post('/user/changePassword', {
+        rest.post('/user/changePassword', {
             id : scope.userId,
 			oldPassword : scope.editUser.oldPassword,
 			password : scope.editUser.newPassword
 
-        });
-        promise.then(function(result) {
+        },function(result) {
             if (result.data.success) {
-                alert("修改成功");
+                modal.alert("修改成功");
                 scope.editUser = null;
                 util.closePopBox();
             } else {
-                alert(result.data.message);
+                modal.showMsg(result.data.message);
             }
-        }, function(result) {
-            alert("执行到这里" + result);
-        }, function(result) {
-            alert("执行到这里   1" + result);
         });
 	}
 });

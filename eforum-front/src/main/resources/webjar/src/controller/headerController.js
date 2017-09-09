@@ -11,20 +11,15 @@ app.controller('headerController', function($scope, $location, $cookies, userSer
 	};
 	
 	$scope.logout = function() {
-        var promise = userService.logout();
-        promise.then(function(result) {
+        userService.logout(function(result) {
             if (result.data.success) {
             	$cookies.remove('username');
             	$cookies.remove('userId');
             	refreshUserName();
             	$location.path("/login");
             } else {
-                alert(result.data.message);
+                modal.showMsg(result.data.message);
             }
-        }, function(result) {
-        	alert("执行到这里" + result);
-        },function(result){
-        	alert("执行到这里   1" + result);
         });
 	};
 	

@@ -21,18 +21,13 @@ app.controller('headPortraitController', function($scope,fileService,$window) {
 			handleFileSelect);
 	
 	function sendFile(base64Data){
-		var promise = fileService.uploadHeadPortrait(base64Data);
-		promise.then(function(result) {
+		fileService.uploadHeadPortrait(base64Data,function(result) {
 	        if (result.data.success) {
-	        	alert("上传成功");
+                modal.alert("上传成功");
 	        	$window.location.reload();
 	        } else {
-	            alert(result.data.message);
+                modal.showMsg(result.data.message);
 	        }
-	    }, function(result) {
-	    	alert("执行到这里" + result);
-	    },function(result){
-	    	alert("执行到这里   1" + result);
 	    });
 	}
    

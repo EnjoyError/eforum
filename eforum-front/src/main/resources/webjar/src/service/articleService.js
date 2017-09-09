@@ -4,35 +4,35 @@ var RestTemplate = require('./restTemplate');
 app.service('articleService', function($http) {
     var rest = new RestTemplate($http);
 
-	this.listArticle = function(pageNumber, pageSize) {
-	    return rest.get('/article/getArticleList', {
+	this.listArticle = function(pageNumber, pageSize, successCallback) {
+	    rest.get('/article/getArticleList', {
 	        pageNumber: pageNumber,
             pageSize: pageSize
-	    });
+	    }, successCallback);
 	}
 
-	this.getArticleById = function(id) {
-	    return rest.get('/article/' + id);
+	this.getArticleById = function(id, successCallback) {
+	    rest.get('/article/' + id, successCallback);
 	}
 
-	this.listSuggestionArticle = function() {
-	    return rest.get('/article/suggestion', {
+	this.listSuggestionArticle = function(successCallback) {
+	    rest.get('/article/suggestion', {
 	        pageSize: 5
-	    });
+	    }, successCallback);
 	}
 
-	this.listComment = function(articleId, pageNumber, pageSize) {
-	    return rest.get('/article/' + articleId + '/comment', {
+	this.listComment = function(articleId, pageNumber, pageSize, successCallback) {
+	    rest.get('/article/' + articleId + '/comment', {
 	        pageNumber: pageNumber,
             pageSize: pageSize
-	    });
+	    }, successCallback);
 	}
 	
-	this.publishArticle = function(articleTile,articleContent){
-		return rest.post('/article/publish', {
+	this.publishArticle = function(articleTile,articleContent, successCallback){
+		rest.post('/article/publish', {
 			title: articleTile,
 			content: articleContent
-	    });
+	    }, successCallback);
 	}
 	
 	this.parseArticleList = function(articleList){
