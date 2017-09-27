@@ -1,9 +1,6 @@
 var app = require('../app');
-var RestTemplate = require('./restTemplate');
 
-app.service('replyService', function($http) {
-    var rest = new RestTemplate($http);
-    
+app.service('replyService', function($http,restService) {
     this.commitReply = function(articleId,replyContent, successCallBack){
     	if(null == replyContent){
             modal.showMsg("帖子内容不能为空！");
@@ -11,7 +8,7 @@ app.service('replyService', function($http) {
     	if(articleId == null){
             modal.showMsg("必须基于某个帖子下面才能操作回复！");
     	}
-    	rest.postForForm('/reply/commitReply', {
+    	restService.postForForm('/reply/commitReply', {
     		articleId : articleId,
     		replyContent: replyContent
 	    },successCallBack);
@@ -21,7 +18,7 @@ app.service('replyService', function($http) {
 		if (null == articleId) {
             modal.showMsg("帖子id不能为空！");
 		}
-		rest.postForForm('/reply/getReplyByArticleId', {
+		restService.postForForm('/reply/getReplyByArticleId', {
 			articleId : articleId
 		}, successCallBack);
 	}
@@ -30,7 +27,7 @@ app.service('replyService', function($http) {
 		if (null == articleId) {
             modal.showMsg("帖子id不能为空！");
 		}
-		rest.postForForm('/reply/getReplyCountByArticleId', {
+		restService.postForForm('/reply/getReplyCountByArticleId', {
 			articleId : articleId
 		}, successCallBack);
 	}

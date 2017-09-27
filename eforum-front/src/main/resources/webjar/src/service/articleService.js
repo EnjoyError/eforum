@@ -1,35 +1,33 @@
 var app = require('../app');
-var RestTemplate = require('./restTemplate');
 
-app.service('articleService', function($http) {
-    var rest = new RestTemplate($http);
+app.service('articleService', function($http,restService) {
 
 	this.listArticle = function(pageNumber, pageSize, successCallback) {
-	    rest.get('/article/getArticleList', {
+	    restService.get('/article/getArticleList', {
 	        pageNumber: pageNumber,
             pageSize: pageSize
 	    }, successCallback);
 	}
 
 	this.getArticleById = function(id, successCallback) {
-	    rest.get('/article/' + id, successCallback);
+	    restService.get('/article/' + id, null, successCallback);
 	}
 
 	this.listSuggestionArticle = function(successCallback) {
-	    rest.get('/article/suggestion', {
+	    restService.get('/article/suggestion', {
 	        pageSize: 5
 	    }, successCallback);
 	}
 
 	this.listComment = function(articleId, pageNumber, pageSize, successCallback) {
-	    rest.get('/article/' + articleId + '/comment', {
+	    restService.get('/article/' + articleId + '/comment', {
 	        pageNumber: pageNumber,
             pageSize: pageSize
 	    }, successCallback);
 	}
 	
 	this.publishArticle = function(articleTile,articleContent, successCallback){
-		rest.post('/article/publish', {
+		restService.post('/article/publish', {
 			title: articleTile,
 			content: articleContent
 	    }, successCallback);
@@ -47,6 +45,6 @@ app.service('articleService', function($http) {
         for (var i=0; i<images.length; i++) {
             fd.append("images", images[i]);
         }
-		rest.uploadFile('article/uploadImages',fd,successCallback,errorCallback);
+		restService.uploadFile('article/uploadImages',fd,successCallback,errorCallback);
 	}
 });

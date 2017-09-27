@@ -1,11 +1,9 @@
 var app = require('../app');
-var RestTemplate = require('./restTemplate');
 
-app.service('personalInformationService', function($http,$window) {
-    var rest = new RestTemplate($http);
+app.service('personalInformationService', function($http,$window,restService, $cookies) {
 
 	this.editUserInfo = function(scope) {
-	    rest.post('/user/saveUser', {
+	    restService.post('/user/saveUser', {
 	    	id : scope.userInfo.id,
 	        realName: scope.userInfo.realName,
 	        email: scope.userInfo.email,
@@ -27,25 +25,19 @@ app.service('personalInformationService', function($http,$window) {
 
 
 	this.loadUserInfoToScope = function(scope) {
-		if(null == scope.userId || "" == scope.userId){
-            console.log("userId is null");
-            return ;
-		}
-		rest.post('/user/loadUserInfo', {
-			id : scope.userId
-		},function(result) {
+		restService.post('/user/loadCurrentUserInfo',null,function(result) {
 			if (result.data.success) {
 				scope.userInfo = result.data.message;
 			} else {
-                modal.showMsg(result.data.message);
+				modal.showMsg(result.data.message);
 			}
 		});
 	}
 
 
 	this.changePassword = function(scope){
-        rest.post('/user/changePassword', {
-            id : scope.userId,
+        restService.post('/user/changePassword', {
+            id : $cookies.get("userId"),
 			oldPassword : scope.editUser.oldPassword,
 			password : scope.editUser.newPassword
 

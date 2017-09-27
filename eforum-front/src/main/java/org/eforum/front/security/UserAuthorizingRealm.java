@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 @Configurable
 public class UserAuthorizingRealm extends AuthorizingRealm {
@@ -24,6 +27,17 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		String username = (String) getAvailablePrincipal(principalCollection);
+		System.out.println(username);
+		//权限
+		Set<String> s = new HashSet<String>();
+		s.add("printer:print");
+		s.add("document:read]");
+		authorizationInfo.setStringPermissions(s);
+		//角色
+		Set<String> r = new HashSet<String>();
+		r.add("admin");
+		authorizationInfo.setRoles(r);
 		return authorizationInfo;
 	}
 

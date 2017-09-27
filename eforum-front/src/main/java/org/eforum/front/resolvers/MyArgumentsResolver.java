@@ -70,7 +70,7 @@ public class MyArgumentsResolver implements HandlerMethodArgumentResolver {
 		Object param = paramClass.newInstance();
 		if (param instanceof BaseEntity) {
 			String idStr = String.valueOf(map.get("id"));
-			if (!StringUtils.isNullOrEmpty(idStr)) {
+			if (!StringUtils.isNullOrEmpty(idStr) && !"null".equals(idStr)) {
 				Long id = Long.valueOf(idStr);
 				param = dao.get(paramClass, id);
 				if (null == param) {

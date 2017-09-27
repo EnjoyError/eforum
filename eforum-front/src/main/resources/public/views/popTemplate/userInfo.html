@@ -1,0 +1,32 @@
+<div class="popover">
+    <div class="arrow" style="top: 50%;"></div>
+    <div class="panel panel-default"  style="margin-bottom: 0px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">用户信息</h3>
+        </div>
+        <div class="panel-body container" style="width:270px;">
+            <div class="row">
+                <div class="col-md-4"><p>用户名</p></div>
+                <div class="col-md-8" style="word-wrap:break-word;word-break:break-all;"><p>{{userInfo.name}}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><p>真实姓名</p></div>
+                <div class="col-md-8" style="word-wrap:break-word;word-break:break-all;"><p>{{userInfo.realName}}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><p>邮箱</p></div>
+                <div class="col-md-8" style="word-wrap:break-word;word-break:break-all;"><p>{{userInfo.email}}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><p>性别</p></div>
+                <div ng-if="userInfo.gender == 'woman'" class="col-md-8" style="word-wrap:break-word;word-break:break-all;"><p>女</p></div>
+                <div ng-if="userInfo.gender == 'man'" class="col-md-8" style="word-wrap:break-word;word-break:break-all;"><p>男</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><p>地址</p></div>
+                <div class="col-md-8" style="word-wrap:break-word;word-break:break-all;"><p>{{userInfo.address}}</p></div>
+            </div>
+        </div>
+
+    </div>
+</div>

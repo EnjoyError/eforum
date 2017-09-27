@@ -3,7 +3,11 @@ require('angular-route');
 require('angular-cookies');
 require('./lib/paging/tm.pagination');
 require('./lib/crop/ng-img-crop');
-var app = angular.module('app', ['ngRoute','ngCookies','tm.pagination', 'ngImgCrop']);
+require('angular-strap');	//angularStrap
+require('angular-animate');	//angular动画，angularStrap需要该插件
+require('angular-motion');	//引入css，angularStrap需要
+require('angular-sanitize');
+var app = angular.module('app', ['ngRoute','ngCookies','tm.pagination', 'ngImgCrop', 'mgcrea.ngStrap', 'ngAnimate', 'ngSanitize']);
 //angularjs 1.6.0 以上版本需要配置,否则路由无法正常使用
 app.config(["$locationProvider",function($locationProvider){
 	$locationProvider.hashPrefix("");

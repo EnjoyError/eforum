@@ -2,6 +2,7 @@
 require('./assets/css/bootstrap.css');
 require('./assets/css/eforum.css');
 require('./lib/crop/ng-img-crop.css');
+require('./assets/css/angular-strap.libs.min.css');
 
 // 启动angular应用
 require('./app');
@@ -11,6 +12,10 @@ require('./service/userService');
 require('./service/replyService');
 require('./service/fileService');
 require('./service/personalInformationService');
+require('./service/filterService');
+require('./service/restService');
+require('./service/notificationService');
+
 
 
 // 加载angular自定义指令
@@ -34,6 +39,8 @@ require('./controller/loginController');
 require('./controller/regController');
 require('./controller/articleController');
 require('./controller/personalInformationController');
+require('./controller/editPersonalInformationController');
+require('./controller/editPasswordController');
 require('./controller/headPortraitController');
 require('./controller/articleListController');
 require('./controller/pubArticleController');

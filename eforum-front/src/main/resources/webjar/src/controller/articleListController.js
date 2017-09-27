@@ -1,6 +1,6 @@
 var app = require('../app');
 
-app.controller('articleListController', function($scope,$sce,$location,articleService) {
+app.controller('articleListController', function($scope,$sce,$location,articleService,userService) {
 	$scope.viewArticle = function(id){
 		 $location.path('/article').search({
          	id : id
@@ -38,4 +38,18 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
 	
 	//首次触发查询
     getArticleList();
+
+
+    $scope.writeUserInfoToDataContent = function($tooltip){
+		var userId = $tooltip.$scope.$parent.$parent.x.createUserId;
+        var articleId = $tooltip.$scope.$parent.$parent.x.id;
+        userService.findUser(userId,articleId, function(result){
+            if (result.data.success) {
+                var message = result.data.message;
+                $tooltip.$scope.userInfo = message;
+            } else {
+                modal.showMsg(result.data.message);
+            }
+		});
+	}
 });

@@ -1,26 +1,31 @@
 var app = require('../app');
-var RestTemplate = require('./restTemplate');
 
-app.service('userService', function($http) {
-    var rest = new RestTemplate($http);
+app.service('userService', function($http,restService) {
 
 	this.login = function(name, password, rememberMe, successCallBack) {
-	    rest.post('/login', {
+	    restService.post('/login', {
 	        name: name,
             password: password,
             rememberMe: rememberMe
 	    }, successCallBack);
-	}
+	};
 
 	this.logout = function(successCallBack) {
-	    rest.post('/logout',null, successCallBack);
-	}
+	    restService.post('/logout',null, successCallBack);
+	};
 
 	this.addUser = function(name, email, password, successCallBack) {
-	    rest.post('/user', {
+	    restService.post('/user', {
 	        name: name,
 	        email: email,
 	        password: password
 	    },successCallBack);
-	}
+	};
+
+	this.findUser = function(userId, articleId, successCallBack){
+        restService.post('/user/findUser', {
+            userId: userId,
+            articleId: articleId
+        },successCallBack);
+	};
 });

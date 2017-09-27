@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.eforum.entity.Article;
 import org.eforum.produces.PageVo;
 import org.eforum.produces.ResultJson;
@@ -31,6 +33,7 @@ public class ArticleController extends BaseController {
 	@Autowired
 	private ReplyService replyService;
 
+
 	@ApiOperation(value = "文章接口", notes = "获取文章列表", code = 200, produces = "application/json")
 	@RequestMapping(value = "/article/getArticleList", method = RequestMethod.GET)
 	public Object listArticle(Integer pageNumber, Integer pageSize) {
@@ -57,6 +60,7 @@ public class ArticleController extends BaseController {
 	@ApiOperation(value = "文章接口", notes = "发布帖子", produces = "application/json")
 	@RequestMapping(value = "/article/publish")
 	@Transactional
+	@RequiresAuthentication
 	public Object publishArticle(@RequestBody ArticleVo articleVo) {
 		Article article = ConvertUtil.convertVoToEntity(articleVo, Article.class);
 		article = articleService.saveOrUpdate(article);
@@ -66,6 +70,7 @@ public class ArticleController extends BaseController {
 	@ApiOperation(value = "文章接口", notes = "上传图片", produces = "application/json")
 	@RequestMapping(value = "/article/uploadImages")
 	@Transactional
+	@RequiresAuthentication
 	public Object uploadImages(@RequestParam("images") MultipartFile[] images) {
 		List<String> imageRequertPaths = articleService.saveImagesOfArticle(images);
 		return new ResultJson(true, imageRequertPaths);
