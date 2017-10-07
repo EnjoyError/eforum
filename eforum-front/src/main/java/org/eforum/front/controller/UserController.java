@@ -120,6 +120,7 @@ public class UserController extends BaseController {
 		if(null == user || null == article || !user.getId().equals(article.getCreateUserId())){
 			throw new ServiceException("非法操作");
 		}
+		user.setPassword(null);
 		return new ResultJson(true, user);
 	}
 }

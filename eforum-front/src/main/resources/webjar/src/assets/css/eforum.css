@@ -229,3 +229,14 @@ eforum自定义弹框css
 #eforumAlert p{
 	margin: 14px auto 14px auto
 }
+/** eforum自定义弹框 end*/
+
+/** controlPanel end*/
+.controlPanelH4{
+	margin-top: 20px;
+	border-top-width: 1px;
+	border-top-style: ridge;
+	padding-top: 5px;
+	margin-bottom: 10px;
+}
+/** controlPanel end*/

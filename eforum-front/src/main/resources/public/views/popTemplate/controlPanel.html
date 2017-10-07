@@ -1,0 +1,49 @@
+<div class="aside right am-fade-and-slide-right" tabindex="-1" role="dialog" style="z-index: 1250; display: block; width: 25%;">
+    <div class="aside-dialog">
+        <div class="aside-content">
+            <div class="aside-header" ng-show="title">
+                <button type="button" class="close" ng-click="$hide()">×</button>
+                <h4 class="aside-title" ng-bind-html="title">Title</h4></div>
+            <div class="aside-body">
+                Hello Aside<br>This is a multiline message!
+                <br>
+                <div>
+                    <h4 class="controlPanelH4">个人信息</h4>
+                </div>
+                <div>
+                    <p>当前状态:  在线</p>
+                    <p>积分：  100000</p>
+                    <p>等级：   3</p>
+                </div>
+                <div>
+                    <h4 class="controlPanelH4">通知</h4>
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h6 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseOne">
+                                   来自 Sackr 的消息
+                                </a>
+                                <button type="button" class="close">×</button>
+                            </h6>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                 这是一个消息面板内容
+                            </div>
+                            <div>
+                                <textarea class="form-control" placeholder="填写回复内容" style="resize: none;" rows="3"></textarea>
+                            </div>
+                            <div class="panel-footer"><button>回复</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="aside-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
