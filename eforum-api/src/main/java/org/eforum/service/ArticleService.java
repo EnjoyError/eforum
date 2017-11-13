@@ -25,6 +25,7 @@ public interface ArticleService {
 	 * @param article
 	 * @return
 	 */
+	@Transactional
 	Article saveOrUpdate(Article article);
 
 	/**

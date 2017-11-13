@@ -63,6 +63,7 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "/update")
     @RequiresAuthentication
+    @Transactional
     public Object update(@AutoLoad Article article) {
         articleService.saveOrUpdate(article);
         return new ResultJson(true , "保存成功");

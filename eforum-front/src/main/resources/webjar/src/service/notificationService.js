@@ -17,6 +17,19 @@ app.service('notificationService', function () {
     };
 
     /**
+     * 注销消息回调函数,即取消订阅者
+     * @param messageId
+     */
+    this.unRegisterCallBack = function(messageId){
+        if(this.isAlreadyRegisterCallBack(messageId)){
+            delete messageMap[messageId];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * 判断是否已经注册过消息订阅者
      * @param messageId
      * @returns {boolean}

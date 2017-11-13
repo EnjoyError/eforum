@@ -1,4 +1,4 @@
-<div class="modal ng-scope center am-fade-and-scale" tabindex="-1" role="dialog" aria-hidden="true"
+<div  ng-controller="operationArticleController" class="modal ng-scope center am-fade-and-scale" tabindex="-1" role="dialog" aria-hidden="true"
      style="z-index: 1050; display: block;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -17,7 +17,7 @@
                 </div>
                 <p class="col-xs-2">是否置顶：</p>
                 <div class="switch col-xs-2">
-                    <input type="checkbox" ng-model="isZD"/>
+                    <input type="checkbox" id="isZD"  ng-model="isZD"/>
                 </div>
             </div>
             <div class="modal-footer">

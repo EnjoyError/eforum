@@ -6,7 +6,11 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
 		 $location.path('/article').search({
          	id : id
          });
-	}
+	};
+
+    notificationService.registerCallBack("REFRESH_ARTICLE_LIST", function(){
+    	getArticleList();
+	});
 
 	function getArticleList() {
 		var pageIndex = $scope.paginationConf.currentPage;
