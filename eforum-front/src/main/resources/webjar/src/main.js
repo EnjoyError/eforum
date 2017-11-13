@@ -3,6 +3,15 @@ require('./assets/css/bootstrap.css');
 require('./assets/css/eforum.css');
 require('./lib/crop/ng-img-crop.css');
 require('./assets/css/angular-strap.libs.min.css');
+require('./lib/plugin/bootstrap-switch/css/bootstrap3/bootstrap-switch.css');
+require('./lib/summer/summernote.css');
+
+
+//引入公共js
+require('bootstrap');
+require('./lib/plugin/bootstrap-switch/js/bootstrap-switch');
+require('./lib/summer/summer');
+require('./lib/summer/summernote-zh-CN');
 
 // 启动angular应用
 require('./app');
@@ -15,6 +24,7 @@ require('./service/personalInformationService');
 require('./service/filterService');
 require('./service/restService');
 require('./service/notificationService');
+require('./service/operationArticleService');
 
 
 
@@ -45,6 +55,7 @@ require('./controller/headPortraitController');
 require('./controller/articleListController');
 require('./controller/pubArticleController');
 require('./controller/replyController');
+require('./controller/operationArticleController');
 
 // 帮助工具
 require('./util/commonUtil');

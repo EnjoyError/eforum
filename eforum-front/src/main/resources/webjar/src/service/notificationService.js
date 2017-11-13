@@ -10,14 +10,26 @@ app.service('notificationService', function () {
      * @param callBackFunction 回调函数
      */
     this.registerCallBack = function (messageId, callBackFunction) {
+        if(this.isAlreadyRegisterCallBack(messageId)){
+            throw "消息[" + messageId + "]已经注册过回调函数了，不允许重复注册!";
+        }
+        messageMap[messageId] = callBackFunction;
+    };
+
+    /**
+     * 判断是否已经注册过消息订阅者
+     * @param messageId
+     * @returns {boolean}
+     */
+    this.isAlreadyRegisterCallBack = function(messageId){
         for (var prop in messageMap) {
             if (messageMap.hasOwnProperty(prop)) {
                 if (prop == messageId) {
-                    throw "消息[" + messageId + "]已经注册过回调函数了，不允许重复注册!";
+                    return true;
                 }
             }
         }
-        messageMap[messageId] = callBackFunction;
+        return false;
     }
 
     /**
@@ -33,5 +45,5 @@ app.service('notificationService', function () {
                 }
             }
         }
-    }
+    };
 });

@@ -1,5 +1,5 @@
 var app = require('../app');
-
+var $ = require('jquery');
 app.controller('replyController', function($scope, $sce, $window, $routeParams, replyService, articleService) {
 	$scope.commitReply = function(){
 		var replyContent = $('#summernote').summernote('code');
@@ -29,6 +29,7 @@ app.controller('replyController', function($scope, $sce, $window, $routeParams, 
 	}
 	
 	refreshReply($scope,$sce);
+
 	
 	$('#summernote').summernote({
 		lang : 'zh-CN',

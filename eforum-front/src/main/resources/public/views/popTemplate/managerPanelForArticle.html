@@ -10,9 +10,18 @@
                     帖子管理
                 </h4>
             </div>
-            <div class="modal-body">我是内容</div>
+            <div class="modal-body row">
+                <p class="col-xs-2 col-xs-offset-2">是否精华：</p>
+                <div class="switch col-xs-2">
+                    <input type="checkbox" id="isJH" ng-model="isJH" />
+                </div>
+                <p class="col-xs-2">是否置顶：</p>
+                <div class="switch col-xs-2">
+                    <input type="checkbox" ng-model="isZD"/>
+                </div>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+                <button type="button" class="btn btn-default" ng-click="save()">保存</button>
             </div>
         </div>
     </div>

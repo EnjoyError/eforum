@@ -17,7 +17,7 @@ module.exports = {
     		{test: /\.css$/, loader: 'style-loader!css-loader'},
     		{test: /\.html$/, loader: 'html-loader'},
     		{test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'},
-    		{test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, loader: "file-loader"}
+    		{test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, loader: "file-loader?name=[name].[ext]&publicPath=dist/"}
     	]
     },
     plugins: [

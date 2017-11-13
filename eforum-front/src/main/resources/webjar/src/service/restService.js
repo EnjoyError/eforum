@@ -1,5 +1,5 @@
 var app = require('../app');
-
+var $ = require('jquery');
 app.service('restService', function($http,filterService) {
 
     this.get = function(url, params,successCallback) {

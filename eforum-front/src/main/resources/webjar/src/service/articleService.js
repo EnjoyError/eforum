@@ -46,5 +46,9 @@ app.service('articleService', function($http,restService) {
             fd.append("images", images[i]);
         }
 		restService.uploadFile('article/uploadImages',fd,successCallback,errorCallback);
+	};
+
+	this.update = function(article, successCallback){
+		restService.post('/article/update', article, successCallback);
 	}
 });

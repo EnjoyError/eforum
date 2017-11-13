@@ -1,6 +1,7 @@
 var app = require('../app');
+var $ = require('jquery');
 
-app.controller('articleListController', function($scope,$sce,$location,articleService,userService) {
+app.controller('articleListController', function($scope,$sce,$location,articleService,userService,notificationService) {
 	$scope.viewArticle = function(id){
 		 $location.path('/article').search({
          	id : id
@@ -51,5 +52,16 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
                 modal.showMsg(result.data.message);
             }
 		});
-	}
+	};
+
+    $scope.onShow = function($modal){
+        $('.switch input').bootstrapSwitch({
+            size : 'mini',
+            onColor : 'success',
+            onText : '是',
+			offText : '否'
+		});
+        $modal.$id
+        notificationService.pubNotification("OPERATION_ARTICLE", $modal.$id);
+    };
 });
