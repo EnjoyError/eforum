@@ -23,6 +23,7 @@ function Modal() {
 
 Modal.fn = Modal.prototype;
 
+Modal.fn.$ = require('jquery');
 
 /**
  * eforum弹框alert
@@ -31,8 +32,8 @@ Modal.fn.alert = function (message,sec) {
     message = message || "error";
     sec = sec || 1500;
     //创建弹出内容
-    angular.element(document.querySelector("#eforumAlert div p")).eq(0).html(message);
-    angular.element(document.querySelector("#eforumAlert")).css("display", "block");
+    this.$(document.querySelector("#eforumAlert div p")).eq(0).html(message);
+    this.$(document.querySelector("#eforumAlert")).css("display", "block");
     //sec秒后隐藏
     setTimeout('angular.element(document.querySelector("#eforumAlert")).css("display","none");', sec);
 }
@@ -55,7 +56,7 @@ Modal.fn.alert = function (message,sec) {
             }
  */
 Modal.fn.showModal = function(options){
-    var eforum_modal = angular.element(document.querySelector("#eforum-modal"));
+    var eforum_modal = this.$(document.querySelector("#eforum-modal"));
     var ops = {
         msg: "提示内容",
         title: "操作提示",
@@ -108,7 +109,7 @@ Modal.fn.showMsg = function(message,sec) {
         title : "提示",
         btnOk : "确定"
     }
-    var eforum_modal = angular.element(document.querySelector("#eforum-modal"));
+    var eforum_modal = this.$(document.querySelector("#eforum-modal"));
     eforum_modal.html(this.ahtml);  // 复原
     eforum_modal.find('.ok').removeClass('btn-success').addClass('btn-primary');
     eforum_modal.find('.cancel').hide();
@@ -138,7 +139,7 @@ Modal.fn.showMsg = function(message,sec) {
  返回值:点击确定返回ture 否则返回false
  */
 Modal.fn.showConfirm = function(options) {
-    var eforum_modal = angular.element(document.querySelector("#eforum-modal"));
+    var eforum_modal = this.$(document.querySelector("#eforum-modal"));
     eforum_modal.html(this.ahtml); // 复原
     eforum_modal.find('.ok').removeClass('btn-primary').addClass('btn-success');
     eforum_modal.find('.cancel').show();
@@ -161,7 +162,7 @@ Modal.fn.showConfirm = function(options) {
             }
  */
 Modal.fn.showPrompt = function(options) {
-    var eforum_modal = angular.element(document.querySelector("#eforum-modal"));
+    var eforum_modal = this.$(document.querySelector("#eforum-modal"));
     eforum_modal.html(this.ahtml); // 复原
     eforum_modal.find('.ok').removeClass('btn-primary').addClass('btn-success');
     eforum_modal.find('p').hide();

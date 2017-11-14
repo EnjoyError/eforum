@@ -1,5 +1,5 @@
 var app = require('../app');
-
+var $ = require('jquery');
 app.controller('articleController', function($scope, $sce, $compile, $routeParams,replyService, articleService) {
 	var id = $routeParams.id;
 	$scope.articleId = id;
@@ -7,8 +7,8 @@ app.controller('articleController', function($scope, $sce, $compile, $routeParam
         if (result.data.success) {
         	var article = result.data.message;
         	$scope.article = article;
-        	var contentDom = $compile(article.content)($scope);
-        	contentDom.append("[data-ng-bind-html='content']");
+        	var contentDom = $($compile(article.content)($scope));
+        	contentDom.appendTo("[data-ng-bind-html='content']");
         } else {
             modal.showMsg(result.data.message);
         }

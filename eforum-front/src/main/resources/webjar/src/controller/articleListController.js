@@ -8,6 +8,7 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
          });
 	};
 
+	notificationService.unRegisterCallBack("REFRESH_ARTICLE_LIST");
     notificationService.registerCallBack("REFRESH_ARTICLE_LIST", function(){
     	getArticleList();
 	});
