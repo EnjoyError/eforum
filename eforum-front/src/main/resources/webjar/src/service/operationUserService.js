@@ -1,6 +1,6 @@
 var app = require('../app');
 var $ = require('jquery');
-app.service('operationArticleService', function($http,notificationService,articleService, $route) {
+app.service('operationUserService', function($http,notificationService,articleService, $route) {
 
     /**
      * 注册点击编辑帖子的回调函数
@@ -44,6 +44,7 @@ app.service('operationArticleService', function($http,notificationService,articl
                 modal.alert('保存成功');
                 notificationService.pubNotification("REFRESH_ARTICLE_LIST");
                 $scope.$hide();
+                //$route.reload();
             } else {
                 modal.showMsg(result.data.message);
             }

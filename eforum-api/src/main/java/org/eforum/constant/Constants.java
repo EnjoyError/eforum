@@ -19,4 +19,6 @@ public interface Constants {
 	public static final String CURRENT_USER_IN_SESSION = "currentUser";
 	/** 匿名头像 */
 	public static final String ANONYMOUS_HEAD_PORTRAIT_FILE_NAME = "anonymous.png";
+	/** 禁言角色名 */
+	public static final String USER_IS_JY = "USER_IS_JY";
 }

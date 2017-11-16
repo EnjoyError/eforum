@@ -111,6 +111,13 @@ public class UserController extends BaseController {
 		return new ResultJson(true, "保存成功");
 	}
 
+	@RequestMapping(value = "/user/userIsJy")
+	@Transactional
+	public Object userIsJy(@AutoLoad User user) {
+		Boolean isJy = userService.userIsJy(user);
+		return new ResultJson(true, isJy);
+	}
+
 	@RequestMapping(value = "/user/findUser")
 	public Object findUser(@RequestBody Map map){
 		Long userId = Long.valueOf(String.valueOf(map.get("userId")));
@@ -122,5 +129,19 @@ public class UserController extends BaseController {
 		}
 		user.setPassword(null);
 		return new ResultJson(true, user);
+	}
+
+	@RequestMapping(value = "/user/shutupOrReleaseUser")
+	@Transactional
+	@RequiresAuthentication
+	public Object shutupOrReleaseUser(@RequestBody Map<String, Object> map){
+		Long userId = Long.valueOf(String.valueOf(map.get("userId")));
+		String isJy = String.valueOf(map.get("isJy"));
+		if("1".equals(isJy)){
+			userService.shutupUser(userId);
+		} else {
+			userService.ReleaseShutup(userId);
+		}
+		return new ResultJson(true, "保存成功");
 	}
 }

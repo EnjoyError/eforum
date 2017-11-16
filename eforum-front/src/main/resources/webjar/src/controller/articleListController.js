@@ -59,14 +59,13 @@ app.controller('articleListController', function($scope,$sce,$location,articleSe
 		});
 	};
 
-    $scope.onShow = function($modal){
+    $scope.openArticleManagerPanel = function($modal){
         $('.switch input').bootstrapSwitch({
             size : 'mini',
             onColor : 'success',
             onText : '是',
 			offText : '否'
 		});
-        $modal.$id
         notificationService.pubNotification("OPERATION_ARTICLE", $modal.$id);
     };
 });

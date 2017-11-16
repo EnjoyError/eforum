@@ -161,4 +161,15 @@ public class CommonDaoImpl implements CommonDao {
 		pageVo.setPageCount(pageCount);
 		return pageVo;
 	}
+
+	public List<? extends BaseEntity> findByHql(Class<?> clazz, String whereSub, String paramKey, Object paramValue) {
+		String hql = "FROM " + clazz.getSimpleName() + " obj WHERE " + whereSub;
+		List<BaseEntity> entitys = (List<BaseEntity>) findByHql(hql, paramKey, paramValue);
+		return entitys;
+	}
+
+	@Override
+	public <T extends BaseEntity> void delete(T entity) {
+		entityManager.remove(entity);
+	}
 }
