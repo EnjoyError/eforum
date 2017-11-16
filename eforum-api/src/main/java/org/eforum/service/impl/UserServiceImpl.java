@@ -2,13 +2,16 @@ package org.eforum.service.impl;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.eforum.constant.Constants;
+import org.eforum.entity.Role;
 import org.eforum.entity.User;
+import org.eforum.entity.relation.UserRoleRelation;
 import org.eforum.exception.ServiceException;
 import org.eforum.service.FileService;
 import org.eforum.service.UserService;
@@ -22,48 +25,48 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
-	@Autowired
-	private FileService fileService;
+    @Autowired
+    private FileService fileService;
 
-	@Override
-	public User findUserById(Long id) {
-		return dao.get(User.class, id);
-	}
+    @Override
+    public User findUserById(Long id) {
+        return dao.get(User.class, id);
+    }
 
-	@Override
-	public User findUserByName(String username) {
-		String hql = "obj.name = :name";
-		return dao.findUniqueByHql(User.class, hql, "name", username);
-	}
+    @Override
+    public User findUserByName(String username) {
+        String hql = "obj.name = :name";
+        return dao.findUniqueByHql(User.class, hql, "name", username);
+    }
 
-	@Override
-	public User findUserByEmail(String email) {
-		String hql = "obj.email = :email";
-		return dao.findUniqueByHql(User.class, hql, "email", email);
-	}
+    @Override
+    public User findUserByEmail(String email) {
+        String hql = "obj.email = :email";
+        return dao.findUniqueByHql(User.class, hql, "email", email);
+    }
 
-	@Override
-	public User saveUser(User user) {
-		String username = user.getName();
-		String email = user.getEmail();
-		if (StringUtils.isNullOrEmpty(email)) {
-			throw new ServiceException("邮箱必填！");
-		}
-		if (StringUtils.isNullOrEmpty(username)) {
-			throw new ServiceException("用户名必填!");
-		}
-		User existUser = findUserByEmail(email);
-		if (null != existUser && (user.isNew() || !user.getId().equals(existUser.getId()))) {
-			throw new ServiceException("该email已被使用!");
-		}
-		existUser = findUserByName(username);
+    @Override
+    public User saveUser(User user) {
+        String username = user.getName();
+        String email = user.getEmail();
+        if (StringUtils.isNullOrEmpty(email)) {
+            throw new ServiceException("邮箱必填！");
+        }
+        if (StringUtils.isNullOrEmpty(username)) {
+            throw new ServiceException("用户名必填!");
+        }
+        User existUser = findUserByEmail(email);
+        if (null != existUser && (user.isNew() || !user.getId().equals(existUser.getId()))) {
+            throw new ServiceException("该email已被使用!");
+        }
+        existUser = findUserByName(username);
 
-		if (null != existUser && (user.isNew() || !user.getId().equals(existUser.getId()))) {
-			throw new ServiceException("该用户名已被使用!");
-		}
-		dao.save(user, user);
-		return user;
-	}
+        if (null != existUser && (user.isNew() || !user.getId().equals(existUser.getId()))) {
+            throw new ServiceException("该用户名已被使用!");
+        }
+        dao.save(user, user);
+        return user;
+    }
 
     @Override
     public User createUser(User user) {
@@ -75,84 +78,116 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     }
 
     /**
-	 * 校验用户名
-	 * @param username
-	 */
-	private void validateUsername(String username){
-		if(StringUtils.isNullOrEmpty(username)){
-			throw new ServiceException("用户名不能是空的!");
-		}
-		if(username.length() > 12 || username.length() < 4){
-			throw new ServiceException("用户名长度只能在4到12之间！");
-		}
-	}
+     * 校验用户名
+     *
+     * @param username
+     */
+    private void validateUsername(String username) {
+        if (StringUtils.isNullOrEmpty(username)) {
+            throw new ServiceException("用户名不能是空的!");
+        }
+        if (username.length() > 12 || username.length() < 4) {
+            throw new ServiceException("用户名长度只能在4到12之间！");
+        }
+    }
 
-	@Override
-	public User findLoginUser(String username, String password) {
-		String hql = "obj.name = :name AND obj.password = :password";
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("name", username);
-		map.put("password", password);
-		User user = dao.findUniqueByHql(User.class, hql, map);
-		if (null == user) {
-			throw new ServiceException("密码错误或用户名不存在");
-		}
-		return user;
-	}
 
-	/**
-	 * 校验密码
-	 * @param password
-	 */
-	private void validatePassword(String password){
-		if (StringUtils.isNullOrEmpty(password)) {
-			throw new ServiceException("密码不能为空!");
-		}
-		if(password.length() > 16 || password.length() < 8){
-			throw new ServiceException("密码长度只能在8到16之间！");
-		}
-	}
+    /**
+     * 校验密码
+     *
+     * @param password
+     */
+    private void validatePassword(String password) {
+        if (StringUtils.isNullOrEmpty(password)) {
+            throw new ServiceException("密码不能为空!");
+        }
+        if (password.length() > 16 || password.length() < 8) {
+            throw new ServiceException("密码长度只能在8到16之间！");
+        }
+    }
 
-	@Override
-	public void changePassword(UserVo userVo) {
-		User user = dao.get(User.class,userVo.getId());
-		userVo.setOldPassword(DigestUtils.md5Hex(userVo.getOldPassword()));
-		String pageOldPassword = userVo.getOldPassword();
-		String oldPassword = user.getPassword();
-		if(!oldPassword.equals(pageOldPassword)){
-			throw new ServiceException("旧密码输入不正确!");
-		}
-		String newPassword = userVo.getPassword();
-		validatePassword(newPassword);
-		newPassword = DigestUtils.md5Hex(newPassword);
-		user.setPassword(newPassword);
-		dao.save(user);
-	}
+    @Override
+    public void changePassword(UserVo userVo) {
+        User user = dao.get(User.class, userVo.getId());
+        userVo.setOldPassword(DigestUtils.md5Hex(userVo.getOldPassword()));
+        String pageOldPassword = userVo.getOldPassword();
+        String oldPassword = user.getPassword();
+        if (!oldPassword.equals(pageOldPassword)) {
+            throw new ServiceException("旧密码输入不正确!");
+        }
+        String newPassword = userVo.getPassword();
+        validatePassword(newPassword);
+        newPassword = DigestUtils.md5Hex(newPassword);
+        user.setPassword(newPassword);
+        dao.save(user);
+    }
 
-	@Override
-	public void uploadHeadPortrait(User user, String base64Str) {
-		String fileExtensionName = base64Str.substring(base64Str.indexOf("/") + 1, base64Str.indexOf(";"));
-		String path = fileService.getFileSavePath(Constants.HEAD_PORTRAIT_DIR) + File.separator + user.getId() + "."
-				+ fileExtensionName;
-		fileService.deleteFileIfExist(path);
-		fileService.mkDirIfNoExist(Constants.HEAD_PORTRAIT_DIR);
-		base64Str = base64Str.substring(base64Str.indexOf(",") + 1);
-		boolean hasSaved = fileService.saveBase64ImageFile(base64Str, path);
-		if (hasSaved) {
-			user.setHeadPortraitFileName(user.getId() + "." + fileExtensionName);
-			dao.save(user);
-		} else {
-			throw new ServiceException("上传头像失败!");
-		}
-	}
+    @Override
+    public void uploadHeadPortrait(User user, String base64Str) {
+        String fileExtensionName = base64Str.substring(base64Str.indexOf("/") + 1, base64Str.indexOf(";"));
+        String path = fileService.getFileSavePath(Constants.HEAD_PORTRAIT_DIR) + File.separator + user.getId() + "."
+                + fileExtensionName;
+        fileService.deleteFileIfExist(path);
+        fileService.mkDirIfNoExist(Constants.HEAD_PORTRAIT_DIR);
+        base64Str = base64Str.substring(base64Str.indexOf(",") + 1);
+        boolean hasSaved = fileService.saveBase64ImageFile(base64Str, path);
+        if (hasSaved) {
+            user.setHeadPortraitFileName(user.getId() + "." + fileExtensionName);
+            dao.save(user);
+        } else {
+            throw new ServiceException("上传头像失败!");
+        }
+    }
 
-	@Override
-	public void downloadheadPortrait(User user, HttpServletResponse response) {
-		String headPortraitFileName = user.getHeadPortraitFileName();
-		if (StringUtils.isNullOrEmpty(headPortraitFileName)) {
-			headPortraitFileName = Constants.ANONYMOUS_HEAD_PORTRAIT_FILE_NAME;
-		}
-		File file = fileService.getFile(Constants.HEAD_PORTRAIT_DIR, headPortraitFileName);
-		FileUtil.writeFileToResponse(file, response);
-	}
+    @Override
+    public void downloadheadPortrait(User user, HttpServletResponse response) {
+        String headPortraitFileName = user.getHeadPortraitFileName();
+        if (StringUtils.isNullOrEmpty(headPortraitFileName)) {
+            headPortraitFileName = Constants.ANONYMOUS_HEAD_PORTRAIT_FILE_NAME;
+        }
+        File file = fileService.getFile(Constants.HEAD_PORTRAIT_DIR, headPortraitFileName);
+        FileUtil.writeFileToResponse(file, response);
+    }
+
+    public Boolean userIsJy(User user) {
+        String hql = "obj.id IN (SELECT urr.role.id FROM UserRoleRelation urr WHERE urr.user.id = :userId)";
+        List<Role> roles = (List<Role>) dao.findByHql(Role.class, hql, "userId", user.getId());
+        for (Role role : roles) {
+            if (Constants.USER_IS_JY.equals(role.getCode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void shutupUser(Long userId) {
+        User user = dao.get(User.class, userId);
+        if (userIsJy(user)) {
+            return;
+        }
+        String hql = "obj.code = :code";
+        Role role = dao.findUniqueByHql(Role.class, hql, "code", Constants.USER_IS_JY);
+        if (null == role) {
+            throw new ServiceException("系统未维护【" + Constants.USER_IS_JY + "】角色，请联系相关人员维护");
+        }
+        UserRoleRelation urr = new UserRoleRelation();
+        urr.setUser(user);
+        urr.setRole(role);
+        dao.save(urr);
+    }
+
+    public void ReleaseShutup(Long userId) {
+        User user = dao.get(User.class, userId);
+        if (!userIsJy(user)) {
+            return;
+        }
+        String hql = "FROM UserRoleRelation urr WHERE urr.user.id = :userId AND urr.role.code = :code";
+        Map<String, Object> map = new HashMap<String, Object>(2);
+        map.put("userId", userId);
+        map.put("code", Constants.USER_IS_JY);
+        UserRoleRelation urr = (UserRoleRelation)dao.findUniqueByHql(hql,map);
+        if(null != urr ){
+            dao.delete(urr);
+        }
+    }
 }

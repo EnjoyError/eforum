@@ -56,6 +56,8 @@ require('./controller/articleListController');
 require('./controller/pubArticleController');
 require('./controller/replyController');
 require('./controller/operationArticleController');
+require('./controller/userInfoController');
+require('./controller/operationUserController');
 
 // 帮助工具
 require('./util/commonUtil');

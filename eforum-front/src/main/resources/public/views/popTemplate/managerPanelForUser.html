@@ -1,4 +1,4 @@
-<div class="modal ng-scope center am-fade-and-scale" tabindex="-1" role="dialog" aria-hidden="true"
+<div class="modal ng-scope center am-fade-and-scale" ng-controller="operationUserController" tabindex="-1" role="dialog" aria-hidden="true"
      style="z-index: 1050; display: block;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -10,9 +10,14 @@
                     用户管理
                 </h4>
             </div>
-            <div class="modal-body">操作</div>
+            <div class="modal-body row">
+                <p class="col-xs-2 col-xs-offset-3">是否禁言：</p>
+                <div class="switch col-xs-2">
+                    <input type="checkbox" id="isJY" ng-model="isJY" />
+                </div>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+                <button type="button" class="btn btn-default" ng-click="save()">保存</button>
             </div>
         </div>
     </div>
