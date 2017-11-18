@@ -1,5 +1,5 @@
-
 var app = require('../app');
+var $ = require('jquery');
 
 app.controller('pubArticleController', function($scope, $location, articleService) {
 	$scope.publish = function(){
