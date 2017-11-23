@@ -16,6 +16,7 @@ require('./lib/summer/summernote-zh-CN');
 // 启动angular应用
 require('./app');
 
+require('./service/globalService');
 require('./service/articleService');
 require('./service/userService');
 require('./service/replyService');

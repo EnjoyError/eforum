@@ -69,9 +69,14 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 	});
 }]);
 
-app.run(function($rootScope) {
+app.run(function($rootScope, globalService) {
 	// 路由监听事件 
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
+		if(current && next && "views/article.html" == current.$$route.templateUrl && "views/articleList.html" == next.$$route.templateUrl){
+            globalService.isFromArticleToList = true;
+		} else {
+            globalService.isFromArticleToList = false;
+		}
 	});
 });
 
