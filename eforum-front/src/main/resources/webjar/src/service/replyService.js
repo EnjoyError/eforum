@@ -14,12 +14,14 @@ app.service('replyService', function($http,restService) {
 	    },successCallBack);
     }
 
-	this.getReplyByArticleId = function(articleId, successCallBack) {
+	this.getReplyByArticleId = function(articleId, pageNum, pageSize, successCallBack) {
 		if (null == articleId) {
             modal.showMsg("帖子id不能为空！");
 		}
 		restService.postForForm('/reply/getReplyByArticleId', {
-			articleId : articleId
+			articleId : articleId,
+			pageNum : pageNum,
+			pageSize : pageSize
 		}, successCallBack);
 	}
 	

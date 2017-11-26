@@ -3,6 +3,7 @@ package org.eforum.front.controller;
 import java.util.List;
 
 import org.eforum.entity.Reply;
+import org.eforum.produces.PageVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,9 @@ public class ReplyController extends BaseController {
 
 	@RequestMapping("/getReplyByArticleId")
 	@Transactional
-	public Object getReplyByArticleId(@RequestParam(value = "articleId") Long articleId) {
-		List<Reply> replys = replyService.getReplyByArticleId(articleId);
-		return new ResultJson(true, replys);
+	public Object getReplyByArticleId(Long articleId, Integer pageNum, Integer pageSize) {
+		PageVo<Reply> replyPage = replyService.getReplyByArticleId(articleId, pageNum, pageSize);
+		return new ResultJson(true, replyPage);
 	}
 
 	@RequestMapping("/getReplyCountByArticleId")

@@ -9,6 +9,7 @@ import org.eforum.entity.Article;
 import org.eforum.entity.Reply;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
+import org.eforum.produces.PageVo;
 import org.eforum.service.ArticleService;
 import org.eforum.service.ReplyService;
 import org.eforum.util.StringUtils;
@@ -48,14 +49,13 @@ public class ReplyServiceImpl extends BaseServiceImpl implements ReplyService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Reply> getReplyByArticleId(Long articleId) {
+	public PageVo<Reply> getReplyByArticleId(Long articleId, Integer pageNum, Integer pageSize) {
 		if (null == articleId) {
 			throw new ServiceException("帖子ID不能为空！");
 		}
-		String hql = "FROM Reply reply WHERE reply.article.id = :id ORDER BY reply.createTime DESC";
-		List<Reply> replys = (List<Reply>) dao.findByHql(hql, "id", articleId);
-		return replys;
+		String hql = "FROM Reply reply WHERE reply.article.id = '" + articleId + "' ORDER BY reply.createTime DESC";
+		PageVo<Reply> replyPage = dao.pagingQueryAndPackage(hql,pageNum,pageSize,Reply.class);
+		return replyPage;
 	}
 
 	@Override

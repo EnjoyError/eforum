@@ -23,11 +23,11 @@ app.controller('articleListController', function ($scope, $sce, $location, artic
             if (result.data.success) {
                 var message = result.data.message;
                 // 配置分页基本参数
-                $scope.paginationConf.currentPage = message.pageIndex,
-                    $scope.paginationConf.totalItems = message.dataCount,
-                    $scope.paginationConf.itemsPerPage = message.pageSize,
-                    $scope.paginationConf.pagesLength = message.pageCount,
-                    $scope.articleList = articleService.parseArticleList(message);
+                $scope.paginationConf.currentPage = message.pageIndex;
+                $scope.paginationConf.totalItems = message.dataCount;
+                $scope.paginationConf.itemsPerPage = message.pageSize;
+                $scope.paginationConf.pagesLength = message.pageCount;
+                $scope.articleList = articleService.parseArticleList(message);
             } else {
                 modal.showMsg(result.data.message);
             }
