@@ -8,7 +8,7 @@ require('./lib/summer/summernote.css');
 
 
 //引入公共js
-require('bootstrap');
+require('./lib/bootstrap/js/bootstrap');
 require('./lib/plugin/bootstrap-switch/js/bootstrap-switch');
 require('./lib/summer/summer');
 require('./lib/summer/summernote-zh-CN');
