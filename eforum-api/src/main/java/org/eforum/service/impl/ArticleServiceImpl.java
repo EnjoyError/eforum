@@ -110,4 +110,5 @@ public class ArticleServiceImpl extends BaseServiceImpl implements ArticleServic
 		map.put("id", articleId);
 		dao.execute(hql, map);
 	}
+
 }

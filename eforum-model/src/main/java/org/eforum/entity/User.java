@@ -11,125 +11,139 @@ import javax.persistence.Table;
 @Entity(name = "User")
 @Table(name = "USER")
 public class User extends BaseEntity {
-	/**
-	 * 登录账号
-	 */
-	@Column
-	private String name;
-	/**
-	 * 电子邮箱
-	 */
-	@Column
-	private String email;
-	/**
-	 * 登录密码
-	 */
-	@Column
-	private String password;
+    /**
+     * 登录账号
+     */
+    @Column
+    private String name;
+    /**
+     * 电子邮箱
+     */
+    @Column
+    private String email;
+    /**
+     * 登录密码
+     */
+    @Column
+    private String password;
 
-	/** 头像文件名。例如 1000.jpg */
-	@Column(name = "HEAD_PORTRAIT_FILE_NAME")
-	private String headPortraitFileName;
+    /**
+     * 头像文件名。例如 1000.jpg
+     */
+    @Column(name = "HEAD_PORTRAIT_FILE_NAME")
+    private String headPortraitFileName;
 
-	/**
-	 * 真实姓名
-	 */
-	@Column(name = "REAL_NAME")
-	private String realName;
+    /**
+     * 真实姓名
+     */
+    @Column(name = "REAL_NAME")
+    private String realName;
 
-	/**
-	 * 手机号码
-	 */
-	@Column(name = "MOBILE_NUMBER")
-	private String mobileNumber;
+    /**
+     * 手机号码
+     */
+    @Column(name = "MOBILE_NUMBER")
+    private String mobileNumber;
 
-	/**
-	 * 地址
-	 */
-	@Column(name = "ADDRESS")
-	private String address;
+    /**
+     * 地址
+     */
+    @Column(name = "ADDRESS")
+    private String address;
 
-	/**
-	 * 个性签名
-	 */
-	@Column(name = "PERSONALIZED_SIGNATURE")
-	private String personalizedSignature;
+    /**
+     * 个性签名
+     */
+    @Column(name = "PERSONALIZED_SIGNATURE")
+    private String personalizedSignature;
 
-	/**
-	 * 性别
-	 */
-	@Column(name = "GENDER")
-	private String gender;
+    /**
+     * 性别
+     */
+    @Column(name = "GENDER")
+    private String gender;
 
-	public String getGender() {
-		return gender;
-	}
+    /** 是否禁言*/
+    @Column(name = "BE_SHUTUP")
+    private Boolean beShutup = Boolean.FALSE;
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public Boolean getBeShutup() {
+        return beShutup;
+    }
 
-	public String getRealName() {
-		return realName;
-	}
+    public void setBeShutup(Boolean beShutup) {
+        this.beShutup = beShutup;
+    }
 
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
+    public String getRealName() {
+        return realName;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
 
-	public String getPersonalizedSignature() {
-		return personalizedSignature;
-	}
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
 
-	public void setPersonalizedSignature(String personalizedSignature) {
-		this.personalizedSignature = personalizedSignature;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getHeadPortraitFileName() {
-		return headPortraitFileName;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setHeadPortraitFileName(String headPortraitFileName) {
-		this.headPortraitFileName = headPortraitFileName;
-	}
+    public String getPersonalizedSignature() {
+        return personalizedSignature;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setPersonalizedSignature(String personalizedSignature) {
+        this.personalizedSignature = personalizedSignature;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getHeadPortraitFileName() {
+        return headPortraitFileName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setHeadPortraitFileName(String headPortraitFileName) {
+        this.headPortraitFileName = headPortraitFileName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

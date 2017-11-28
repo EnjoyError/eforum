@@ -8,7 +8,7 @@
 		</div>
 		<br> <br>
 		<div class="eforum-view-article-view-reply" ng-repeat="x in replys" >
-			<img class="col-xs-1 img-circle replyListHeadPortrait" alt="{{x.createUserName}}" ng-src={{'/user/downloadheadPortrait/'+x.createUserId}}>
+			<img data-delay='0,0' data-trigger="click" style="cursor: pointer;" data-animation="am-flip-x" bs-On-Before-Show="writeUserInfoToDataContent" data-template-url="views/popTemplate/userInfo.html" data-auto-close="1" bs-popover class="col-xs-1 img-circle replyListHeadPortrait" alt="{{x.createUserName}}" ng-src={{'/user/downloadheadPortrait/'+x.createUserId}}>
 			<div class="col-xs-11 eforum-view-article-view-reply-panel panel">
 				<div class="eforum-view-article-tile panel-heading">
 					<div

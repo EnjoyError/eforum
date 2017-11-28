@@ -10,12 +10,14 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.eforum.entity.User;
+import org.eforum.service.SecurityService;
 import org.eforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -23,6 +25,8 @@ import java.util.Set;
 public class UserAuthorizingRealm extends AuthorizingRealm {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private SecurityService securityService;
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -35,8 +39,9 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
 		s.add("document:read]");
 		authorizationInfo.setStringPermissions(s);
 		//角色
+		List<String> roleCodes = securityService.getRoleCodeByUsername(username);
 		Set<String> r = new HashSet<String>();
-		r.add("admin");
+		r.addAll(roleCodes);
 		authorizationInfo.setRoles(r);
 		return authorizationInfo;
 	}

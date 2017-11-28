@@ -3,6 +3,9 @@ package org.eforum.front.controller;
 import java.util.List;
 
 import org.eforum.entity.Reply;
+import org.eforum.entity.User;
+import org.eforum.exception.ServiceException;
+import org.eforum.front.security.CurrentThreadContext;
 import org.eforum.produces.PageVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.ReplyService;
@@ -22,6 +25,10 @@ public class ReplyController extends BaseController {
 	@Transactional
 	public Object commitReply(@RequestParam(value = "articleId") Long articleId,
 			@RequestParam(value = "replyContent") String replyContent) {
+		User user = CurrentThreadContext.getCurrentUser();
+		if(null != user && user.getBeShutup()){
+			throw new ServiceException("您已被禁言，无法进行此操作!");
+		}
 		replyService.commitReply(articleId, replyContent);
 		return new ResultJson(true, "回复成功");
 	}

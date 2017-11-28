@@ -1,6 +1,6 @@
 var app = require('../app');
 var $ = require('jquery');
-app.controller('replyController', function ($scope, $sce, $window, $routeParams, replyService, articleService) {
+app.controller('replyController', function ($scope, $sce, $window, $routeParams, replyService, articleService, userService) {
     $scope.commitReply = function () {
         var replyContent = $('#summernote').summernote('code');
         var articleId = $scope.$parent.articleId;
@@ -74,6 +74,17 @@ app.controller('replyController', function ($scope, $sce, $window, $routeParams,
             modal.showMsg("请求失败 " + result);
         });
     };
-
+    $scope.writeUserInfoToDataContent = function ($tooltip) {
+        var userId = $tooltip.$scope.$parent.$parent.x.createUserId;
+        var articleId = $tooltip.$scope.$parent.$parent.x.id;
+        userService.findUser(userId, function (result) {
+            if (result.data.success) {
+                var message = result.data.message;
+                $tooltip.$scope.userInfo = message;
+            } else {
+                modal.showMsg(result.data.message);
+            }
+        });
+    };
 
 });

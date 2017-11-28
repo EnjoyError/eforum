@@ -150,14 +150,11 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     }
 
     public Boolean userIsJy(User user) {
-        String hql = "obj.id IN (SELECT urr.role.id FROM UserRoleRelation urr WHERE urr.user.id = :userId)";
-        List<Role> roles = (List<Role>) dao.findByHql(Role.class, hql, "userId", user.getId());
-        for (Role role : roles) {
-            if (Constants.USER_IS_JY.equals(role.getCode())) {
-                return true;
-            }
+        if(null == user.getBeShutup() || !user.getBeShutup()){
+            return false;
+        } else {
+            return true;
         }
-        return false;
     }
 
     public void shutupUser(Long userId) {
@@ -165,15 +162,8 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
         if (userIsJy(user)) {
             return;
         }
-        String hql = "obj.code = :code";
-        Role role = dao.findUniqueByHql(Role.class, hql, "code", Constants.USER_IS_JY);
-        if (null == role) {
-            throw new ServiceException("系统未维护【" + Constants.USER_IS_JY + "】角色，请联系相关人员维护");
-        }
-        UserRoleRelation urr = new UserRoleRelation();
-        urr.setUser(user);
-        urr.setRole(role);
-        dao.save(urr);
+        user.setBeShutup(true);
+        dao.save(user);
     }
 
     public void ReleaseShutup(Long userId) {
@@ -181,13 +171,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
         if (!userIsJy(user)) {
             return;
         }
-        String hql = "FROM UserRoleRelation urr WHERE urr.user.id = :userId AND urr.role.code = :code";
-        Map<String, Object> map = new HashMap<String, Object>(2);
-        map.put("userId", userId);
-        map.put("code", Constants.USER_IS_JY);
-        UserRoleRelation urr = (UserRoleRelation)dao.findUniqueByHql(hql,map);
-        if(null != urr ){
-            dao.delete(urr);
-        }
+        user.setBeShutup(false);
+        dao.save(user);
     }
 }

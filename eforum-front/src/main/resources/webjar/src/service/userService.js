@@ -22,10 +22,9 @@ app.service('userService', function ($http, restService) {
         }, successCallBack);
     };
 
-    this.findUser = function (userId, articleId, successCallBack) {
+    this.findUser = function (userId, successCallBack) {
         restService.post('/user/findUser', {
-            userId: userId,
-            articleId: articleId
+            userId: userId
         }, successCallBack);
     };
 

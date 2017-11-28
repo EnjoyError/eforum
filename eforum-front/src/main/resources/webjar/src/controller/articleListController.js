@@ -51,7 +51,7 @@ app.controller('articleListController', function ($scope, $sce, $location, artic
     $scope.writeUserInfoToDataContent = function ($tooltip) {
         var userId = $tooltip.$scope.$parent.$parent.x.createUserId;
         var articleId = $tooltip.$scope.$parent.$parent.x.id;
-        userService.findUser(userId, articleId, function (result) {
+        userService.findUser(userId, function (result) {
             if (result.data.success) {
                 var message = result.data.message;
                 $tooltip.$scope.userInfo = message;

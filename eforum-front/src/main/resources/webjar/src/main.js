@@ -26,6 +26,7 @@ require('./service/filterService');
 require('./service/restService');
 require('./service/notificationService');
 require('./service/operationArticleService');
+require('./service/messageService')
 
 
 
@@ -59,6 +60,7 @@ require('./controller/replyController');
 require('./controller/operationArticleController');
 require('./controller/userInfoController');
 require('./controller/operationUserController');
+require('./controller/editMessageController');
 
 // 帮助工具
 require('./util/commonUtil');

@@ -51,4 +51,5 @@ public interface ArticleService {
 	 * @param lastUpdateTime
 	 */
 	void refreshLastUpdateTimeForAll(Long articleId, Date lastUpdateTime);
+
 }

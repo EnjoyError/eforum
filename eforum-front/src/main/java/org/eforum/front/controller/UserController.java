@@ -13,6 +13,7 @@ import org.eforum.entity.Article;
 import org.eforum.entity.User;
 import org.eforum.exception.ServiceException;
 import org.eforum.front.resolvers.AutoLoad;
+import org.eforum.front.security.CurrentThreadContext;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.ArticleService;
 import org.eforum.service.UserService;
@@ -121,12 +122,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/user/findUser")
 	public Object findUser(@RequestBody Map map){
 		Long userId = Long.valueOf(String.valueOf(map.get("userId")));
-		Long articleId = Long.valueOf(String.valueOf(map.get("articleId")));
 		User user = userService.findUserById(userId);
-		Article article = articleService.findArticleById(articleId);
-		if(null == user || null == article || !user.getId().equals(article.getCreateUserId())){
-			throw new ServiceException("非法操作");
-		}
 		user.setPassword(null);
 		return new ResultJson(true, user);
 	}
@@ -136,6 +132,10 @@ public class UserController extends BaseController {
 	@RequiresAuthentication
 	public Object shutupOrReleaseUser(@RequestBody Map<String, Object> map){
 		Long userId = Long.valueOf(String.valueOf(map.get("userId")));
+		User currentUser = CurrentThreadContext.getCurrentUser();
+		if(currentUser.getId().longValue() == userId.longValue()){
+			throw new ServiceException("不能对自己进行禁言操作！");
+		}
 		String isJy = String.valueOf(map.get("isJy"));
 		if("1".equals(isJy)){
 			userService.shutupUser(userId);

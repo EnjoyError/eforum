@@ -11,4 +11,9 @@ app.controller('userInfoController', function ($scope,notificationService) {
         });
         notificationService.pubNotification("OPERATION_USER", userId);
     };
+
+    $scope.openMessagePanel = function ($tooltip) {
+        var userId = $tooltip.$scope.$parent.$parent.userInfo.id;
+        notificationService.pubNotification("OPEN_MESSAGE_PANEL", userId);
+    };
 });

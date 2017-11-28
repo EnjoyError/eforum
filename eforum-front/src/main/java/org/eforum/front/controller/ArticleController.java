@@ -2,8 +2,11 @@ package org.eforum.front.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.eforum.entity.Article;
+import org.eforum.exception.ServiceException;
 import org.eforum.front.resolvers.AutoLoad;
+import org.eforum.front.security.CurrentThreadContext;
 import org.eforum.produces.PageVo;
 import org.eforum.produces.ResultJson;
 import org.eforum.service.ArticleService;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Service;
 import java.util.List;
 
 @RequestMapping(value = "/article")
@@ -56,6 +60,9 @@ public class ArticleController extends BaseController {
     @Transactional
     @RequiresAuthentication
     public Object publishArticle(@RequestBody ArticleVo articleVo) {
+        if(CurrentThreadContext.getCurrentUser().getBeShutup()){
+            throw new ServiceException("您已被禁言，无法进行此操作!");
+        }
         Article article = ConvertUtil.convertVoToEntity(articleVo, Article.class);
         article = articleService.saveOrUpdate(article);
         return new ResultJson(true, String.valueOf(article.getId()));
