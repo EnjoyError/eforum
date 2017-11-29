@@ -55,12 +55,16 @@ public class ShiroConfiguration {
         LOG.info("配置shiro过滤器");
 
         List<String> definitions = new ArrayList<String>();
-        definitions.add("/** = anon");
+        definitions.add("/article/image/** = anon");
+        definitions.add("/article/img/** = anon");
+        definitions.add("/dist/** = anon");
+        definitions.add("/views/** = anon");
+        definitions.add("/** = eFilter");
 
 
 
         Map<String, Filter> filters = new HashMap<String, Filter>();
-        filters.put("access", new FrontAccessControlFilter());
+        filters.put("eFilter", new FrontAccessControlFilter());
 
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);

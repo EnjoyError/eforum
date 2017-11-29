@@ -1,5 +1,4 @@
 var app = require('../app');
-var $ = require('jquery');
 
 app.controller('editMessageController', function ($scope, notificationService, messageService) {
     if (!notificationService.isAlreadyRegisterCallBack("OPEN_MESSAGE_PANEL")) {

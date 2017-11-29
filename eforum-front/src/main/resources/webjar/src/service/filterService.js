@@ -15,7 +15,7 @@ app.service('filterService', function ($cookies, notificationService) {
         if (!result.data) {
             return;
         }
-        if (result.data.code == "1000001") {
+        if (result.data.code == "999") {
             $cookies.remove('username');
             $cookies.remove('userId');
             notificationService.pubNotification("SESSION_INVALID");

@@ -13,4 +13,7 @@ public class StatusCode {
 	 * 内部服务器错误
 	 */
 	public static int SC_INTERNAL_SERVER_ERROR = 500;
+
+	/** SESSION超时*/
+	public static int SC_SESSION_TIME_OUT = 999;
 }
