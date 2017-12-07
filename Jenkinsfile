@@ -15,7 +15,7 @@ cd script/
     }
     stage('run') {
       steps {
-        sh 'cp /var/lib/jenkins/.m2/repository/com/sackr/eforum-front/1.0.0/eforum-front-1.0.0.war /var/lib/tomcat/webapps/eforum.war'
+        sh 'cp /var/lib/jenkins/.m2/repository/com/sackr/eforum-front/1.0.0/eforum-front-1.0.0.war /var/lib/tomcat/webapps/ROOT.war'
       }
     }
   }
