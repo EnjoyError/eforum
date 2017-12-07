@@ -5,10 +5,5 @@
 ```
 * 插入angular相关插件
 ```
- npm install angular angular-route angular-cookies
-```
-* 插入相关loader
-```
- npm install html-loader style-loader css-loader
- npm install url-loader sass-loader raw-loader file-loader
+ npm install angular angular-strap angular-animate angular-motion angular-sanitize jquery codemirror angular-route angular-cookies html-loader style-loader css-loader html-webpack-plugin url-loader sass-loader raw-loader file-loader
 ```
