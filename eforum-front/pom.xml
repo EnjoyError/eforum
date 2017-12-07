@@ -156,6 +156,8 @@
                 <directory>src/main/resources</directory>
                 <filtering>false</filtering>
                 <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
                     <include>public/</include>
                 </includes>
             </resource>
