@@ -1,5 +1,7 @@
 package org.eforum;
 
+import org.eforum.mail.Email;
+import org.eforum.mail.MailEntity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -8,11 +10,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
+
 @SpringBootApplication
 @EnableTransactionManagement(proxyTargetClass = true)
 public class FrontApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(FrontApplication.class, args);
+
+        MailEntity entity = new MailEntity("javalitterboy@qq.com","验证码");
+        entity.addFile("C:\\Users\\14183\\Desktop\\无标题y0.skp");
+        entity.addValue("username","javalitterboy");
+        entity.addValue("validcode","117254");
+        Email mail = new Email();
+        try {
+            mail.sendValidEmail(entity);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 	}
 	@Bean
     public Object testBean(PlatformTransactionManager platformTransactionManager){

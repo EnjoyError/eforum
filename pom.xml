@@ -38,6 +38,18 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!--springboot邮件-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
+                <version>1.4.3.RELEASE</version>
+            </dependency>
+            <!--邮件模板-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-velocity</artifactId>
+                <version>1.4.3.RELEASE</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
