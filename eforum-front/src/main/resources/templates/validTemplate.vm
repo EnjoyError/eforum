@@ -1,0 +1,42 @@
+<style>
+    *{
+        font-size:14px;
+    }
+</style>
+<table style="-webkit-font-smoothing: antialiased;font-family:'微软雅黑', 'Helvetica Neue', sans-serif, SimHei;padding:35px 50px;margin: 25px auto; background:rgb(247,246, 242); border-radius:5px" border="0" cellspacing="0" cellpadding="0" width="640" align="center">
+    <tbody>
+    <tr>
+        <td style="color:#000;"><img height="57px" src="cid:eforum"></td>
+    </tr>
+    <tr>
+        <td style="padding:0 20px">
+            <hr style="border:none;border-top:1px solid #ccc;">
+        </td>
+    </tr><tr>
+        <td style="padding: 20px 20px 20px 20px">Hi ${username},<br>
+            感谢您使用<a style="color:#5083c0;text-decoration:none" href="http://eforum.sackr.cn" target="_blank"> eforum bbs!</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 50px;color: white;" valign="middle">
+            <div style="padding:10px 20px;border-radius:5px;background: rgb(64, 69, 77);margin-left:20px;margin-right:20px;" onclick=copy("valid_code")>
+                验证码：<span style='cursor:text;' id="valid_code">${validcode}            </div>       </td>
+    </tr><tr>
+        <td style="padding: 20px 20px 20px 20px">
+            <p style="margin: 8px 0;">请勿回复此邮件，如果有疑问，请联系我们：<a style="color:#5083c0;text-decoration:none" href="mailto:support@coding.net" target="_blank">	support@stustyle.cn</a>
+            </p>
+            - eforum 团队
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:0 20px;">
+            <hr style="border:none;border-top:1px solid #ccc;">
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:0 20px;font-size:9pt; color:#b5b0b0">
+            <span style="float:left;">如果你没有注册过 eforum，请忽略此邮件。</span>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -131,6 +131,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.9.RELEASE</version>
                 <configuration>
                     <mainClass>org.eforum.FrontApplication</mainClass>
                 </configuration>
@@ -158,6 +159,8 @@
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
+                    <!--vm邮件模板文件-->
+                    <include>**/*.vm</include>
                     <include>public/</include>
                 </includes>
             </resource>
