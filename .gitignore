@@ -31,3 +31,4 @@
 eforum-api/target/
 eforum-front/target/
 *.iml
+eforum-model/target/
