@@ -24,9 +24,7 @@ public class EmailTest {
         entity.addValue("validcode","117254");
         try {
             email.sendValidEmail(entity);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }

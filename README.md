@@ -17,8 +17,7 @@ eforum - 飞一般的BBS
 
 * 将本项目fork至你自己的仓库，并在你的本机clone你自己fork后的仓库。
 * 在你的电脑安装下载好node.js后，并在`eforum\eforum-front\src\main\resources\webjar`目录下
->运行:`npm instal`用于相关依赖模块的安装。  
-运行:`npm install webpack -g`用于webpack的安装。  
+>运行:`npm instal`用于相关依赖模块的安装。   
 运行:`webpack`用于静态资源打包。
 * 在你的电脑安装下载好mysql后，修改`eforum\eforum-front\src\main\resources\application.properties`文件，设置你自己的数据库信息。
 * 最后运行`eforum\eforum-front\src\main\java\org\eforum\FrontApplication.java`文件。
