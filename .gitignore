@@ -32,3 +32,5 @@ eforum-api/target/
 eforum-front/target/
 *.iml
 eforum-model/target/
+eforum-front/src/main/resources/webjar/package-lock.json
+package-lock.json
